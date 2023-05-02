@@ -1,0 +1,6 @@
+=== Overview === 
+   FW algorithm is an all-pairs shortest path algorithm (APSP) algorithm. This means it can find the shortest path between all pairs of nodes.
+
+   The time complexity of the algorithm is O(v^3) which is ideal for graphs no larger than a couple hundred nodes.
+
+   The main idea behind the Floyd-Warshalls algorithm is to gradually build up all intermediate routes between nodes i and j to find the optimal path using dynamic programming.

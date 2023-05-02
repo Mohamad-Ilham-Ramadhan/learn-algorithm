@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="container">
+
+        <div class="generate-board">
+            <h3>Generate Board</h3>
+            <div>
+                <label for="x-length">
+                    X Length (max 30, min 2)
+                    <input type="number" id="x-length" max="30">
+                </label>
+                <label for="y-length">
+                    Y Length (max 30, min 2)
+                    <input type="number" id="y-length">
+                </label>
+                <button id="btn-generate">Generate</button>
+            </div>
+        </div>
+
+        <div class="info-wrapper">
+            <div id="start-info" class="info start-info">
+                <div class="wrapper">
+                    <div class="color"></div>
+                    <div>Start</div>
+                </div>
+            </div>
+            <div id="end-info" class="info end-info">
+                <div class="wrapper">
+                    <div class="color"></div>
+                    <div>End</div>
+                </div>
+            </div>
+            <div id="draw-wall" class="info draw-wall-info">
+                <div class="wrapper">
+                    <div class="color"></div>
+                    <div>Draw wall</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div><button id="start">Start</button></div>
+            <div><button id="clear">Clear</button></div>
+        </div>
+
+        <div id="board"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

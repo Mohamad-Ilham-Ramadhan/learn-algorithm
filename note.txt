@@ -1,0 +1,26 @@
+tobias ahlin
+
+- ada props di Flatline yang valuenya (callback) gak boleh berubah on the fly jadi kalo kita ngasih callback biasa nanti kalo ke - - - - - re-render component itu error akan terjadi. Jadi kita memakai ref.
+- Berarti ref itu gak berubah kalo ke re-render?
+- Apakah kita bisa pake useMemo() untuk callbacknya?
+
+============ Crossword Puzzle =========== 
+// crossword5 words5 fail tapi di hackerrank lulus semua test cases
+
+================== MOST COMMON ALGORITHM USED DURING SOFTWARE ENGINEER INTERVIEW =========================
+
+There are several algorithms that are commonly used during software engineer interviews, depending on the company and the position being applied for. Here are a few of the most commonly encountered algorithms:
+
+- Sorting algorithms: Sorting algorithms like quicksort, mergesort, and heapsort are often used in software engineer interviews. These algorithms are important because sorting is a fundamental operation in computer science and is used in many applications.
+
+- Search algorithms: Search algorithms like binary search and breadth-first search are also commonly used in interviews. These algorithms are important because searching is a fundamental operation in computer science and is used in many applications.
+
+- Dynamic programming algorithms: Dynamic programming algorithms like the Knapsack problem, the longest common subsequence problem, and the longest increasing subsequence problem are commonly encountered in interviews. These algorithms are important because they can solve complex optimization problems efficiently.
+
+- Graph algorithms: Graph algorithms like Dijkstra's algorithm, Bellman-Ford algorithm, and Floyd-Warshall algorithm are also commonly used in interviews. These algorithms are important because they can solve problems related to network routing, shortest paths, and connectivity.
+
+- Divide and conquer algorithms: Algorithms like the binary search, quicksort, and mergesort also fall under this category. These algorithms are important because they can solve problems efficiently by breaking them down into smaller subproblems.
+
+It's important to note that these are not the only algorithms that may be encountered in interviews, and the best way to prepare for an interview is to study a wide range of algorithms and data structures. In addition to algorithms, interviews may also cover topics like system design, object-oriented programming, and computer architecture.
+
+=========================================================================================================

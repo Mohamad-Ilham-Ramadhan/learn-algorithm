@@ -1,0 +1,121 @@
+=== Representing graph ===
+   - Adjacency matrix
+   [
+      [0, 3, 4, 2],
+      [3, 0, 5, 7],
+      [4, 5, 0, 1],
+      [2, 7, 1, 0],
+   ]
+   - Adjacency list 
+      A -> [{B: 4}, {C: 1} ]
+      B -> [ {C: 6} ]
+      C -> [{a: 1}, {B: 6}, {D: 7} ]
+      D -> []
+   - Edge list 
+      Seldom used because its lack of structure.
+      [[C,A,4], [A,C,1], [B,C,6], [C,D,7]]
+
+=== Common Graph Theory Problems ===
+
+   - Find the shortest path 
+      We can use Breadth first search (unweighted weights), Djikstra's algorithm, Bellman-Ford algorithm, Floyd-Warshalls algorithm, A* and many more.
+
+   - Connectivity 
+      "There is a path between node A and node B?"
+      Typical solution: use union find data structure or any search algorithm like DFS
+
+   - Negative cycle 
+      {
+         A: { B: 4},
+         B: { C: -6},
+         C: { A: 1}
+      }
+      if we cycle it will give us cost of negative weights and if we do endlessly the more negative we the result will be.
+
+      In the context of find the shortest path negative cycle is like a trap because we will cycle it endlessly.
+
+      Algorithms to detect negative cycles are: Bellman-Ford and Floyd-Warshalls.
+
+   - Strongly Connected Components (SCCs)
+      It can be thought of as self-contained cycles within a directed graph where every vertex in a given cycle can reacy every other vertex in the same cycle.
+
+      Algorithms: Tarjan's and Kosaraju's algorithm
+
+   - Traveling Salesman Problem 
+      "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visit each city exactly once and returns to the origin city.
+
+      The TSP problem is NP-Hard meaning it is a very computationally challenging problem. This is unfotunate because the TSP has severy very important application.
+
+      Algorithms: Held-Karp, branch and bound and many approximation algorithms
+
+   - Bridges / Cut Edge 
+      A bridge / cut edge is any edge in a graph whose removal increase the number of connected components.
+
+      Bridges are important in graph theory because they often hint at weak ponts, bottelnecks or vulnerabilities in a graph.
+
+      Algorithms: DFS
+
+   - Articulation points 
+      An articulation point / cut vertex is any node in a graph whose removal increase the number of connected components
+
+      Articulation points are important in graph theory because they often hint at weak ponts, bottelnecks or vulnerabilities in a graph.
+
+      Algorithms: DFS
+
+   - Minimum Spanning Tree / MSTs
+      It is a subset of the edges of a connected, edge-weighted graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.
+
+      MSTs are seen in many applications including: Designing a least cost network, circuit design, transportation network, and etc...
+
+      Algorithms: Kruskal's, Prim's, and Boruvka's algorithms
+
+   - Network Flow: max flow 
+      Q: With an infinite input source how much "flow" can we push through the network?
+
+      Suppose the edges are roads with cars, pipes with water or hallways with packed with people. Flow represents the volume of water allowed to flow through the pipes, the number of cars the roads can sustain in traffic, and the maximum amount of people that can navigate through the hallways.
+
+
+=== Graph Algorithm Technical Interview === 
+⌨️ (0:07:10) depth first and breadth first traversal
+⌨️ (0:29:13) has path - https://structy.net/problems/has-path
+⌨️ (0:42:11) undirected path - https://structy.net/problems/undirect...
+⌨️ (1:00:44) connected components count - https://structy.net/problems/connecte...
+⌨️ (1:13:29) largest component - https://structy.net/problems/largest-...
+⌨️ (1:24:03) shortest path - https://structy.net/problems/shortest...
+⌨️ (1:39:36) island count - https://structy.net/problems/island-c...
+⌨️ (1:58:52) minimum island - https://structy.net/problems/minimum-...
+⌨️ (2:12:05) outro
+
+=== [CHATGPT ANSWER] what are common graph interview problem? === 
+Graphs are a common topic in technical interviews, and there are several graph-related problems that interviewers may ask candidates to solve. Here are some of the most common graph interview problems:
+
+- Graph Traversal: The candidate may be asked to traverse a given graph in a specific order, such as breadth-first or depth-first search.
+
+- Shortest Path: The candidate may be asked to find the shortest path between two nodes in a graph, using Dijkstra's algorithm or the Bellman-Ford algorithm.
+
+- Minimum Spanning Tree: The candidate may be asked to find the minimum spanning tree of a graph, using Kruskal's or Prim's algorithm.
+
+- Topological Sorting: The candidate may be asked to perform a topological sort on a directed acyclic graph (DAG).
+
+- Strongly Connected Components: The candidate may be asked to find the strongly connected components (SCCs) of a directed graph, using Kosaraju's algorithm or Tarjan's algorithm.
+
+- Graph Coloring: The candidate may be asked to color the nodes of a graph such that no two adjacent nodes have the same color.
+
+- Maximum Flow: The candidate may be asked to find the maximum flow between two nodes in a graph, using the Ford-Fulkerson algorithm or the Edmonds-Karp algorithm.
+
+- Eulerian Path/Circuit: The candidate may be asked to find an Eulerian path or circuit in a graph, where an Eulerian path visits every edge exactly once, and an Eulerian circuit visits every vertex exactly once.
+
+- Hamiltonian Path/Cycle: The candidate may be asked to find a Hamiltonian path or cycle in a graph, where a Hamiltonian path visits every vertex exactly once, and a Hamiltonian cycle is a Hamiltonian path that starts and ends at the same vertex.
+
+- Bipartite Graph: The candidate may be asked to determine whether a given graph is bipartite, i.e., whether it can be partitioned into two sets of vertices such that no two vertices in the same set are adjacent.
+
+- Planarity Testing: The candidate may be asked to determine whether a given graph is planar, i.e., whether it can be drawn on a plane without any edges crossing.
+
+- Graph Isomorphism: The candidate may be asked to determine whether two given graphs are isomorphic, i.e., whether they have the same structure but different vertex labels.
+
+- Traveling Salesman Problem: The candidate may be asked to solve the traveling salesman problem, where the goal is to find the shortest possible route that visits every vertex exactly once and returns to the starting vertex.
+
+- Graph Partitioning: The candidate may be asked to partition a graph into two or more subsets of vertices, such that the edges between the subsets are minimized.
+
+These are just a few examples of the types of graph problems that can be asked in an interview. It's important to have a strong understanding of graph theory and algorithms in order to tackle these types of problems effectively.
+

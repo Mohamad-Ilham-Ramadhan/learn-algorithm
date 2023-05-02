@@ -1,0 +1,41 @@
+=== What are SCCs === 
+  
+   Strongly connected components can be thought of as self-contained cycles within a directed graph where every vertex in a given cycle can reach every other vertex in the same cycle. 
+
+=== Low-Link Value === 
+
+   The low-link value of a node is the smallest [lowest] node's id  reachable from that node when doing a DFS (including itself).
+
+   Important: Depending on where the DFS starts, and the order in which nodes/edges are visited, the low-link values for identifying SCCs could be wrong. In the context of Tarjan's SCC algorithm, we maintain an invariant that prevents SCCs to interfere with the low-link values of other SCCs.
+
+=== The Stack Invariant === 
+
+   To cope with the random traversal order of the DFS, Tarjan's algorithm maintains a set (often as a stack) of valid nodes from which to update low-link values from. 
+
+   Nodes are needed to the stack [set] of valid nodes as they're explored for the first time. 
+
+   Nodes are removed from the stack [set] each time a complete SCC is found.
+
+=== New low-link update condition === 
+
+   If u and v are nodes in a graph and we're currently exploring u then our new low-link update condition is that: 
+
+   To update node u's low-link value to node v's low-link value there has to be a path of edges from u to v and node v most be on the stack.
+
+=== Time complexity ===
+
+   Instead of finding low-link values after the fact we're going to update them "on the fly" durint the DFS so we can get linear O(V+E) time complexity.
+
+=== Tarjan's algorithm Overview === 
+
+   Mark id of each node as unvisited.
+
+   Start DFS. Upon visiting a node assign it an id and a low-link value. Also mark current nodes as visited and add them to a seen stack.
+
+   On DFS callback, if the previous node is on the stack then min the current node's low-link value with the last node's low-link value*.
+
+   After visiting all neighbors, if the current node started a connected component** then pop nodes off the stack until current node is reached
+
+   *This allows low-link values to propagate throughout cycles.
+   ** As we will see, a node started a connected component if its id equals its low link value.
+

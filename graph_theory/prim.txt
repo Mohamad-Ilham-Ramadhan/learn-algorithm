@@ -1,0 +1,27 @@
+=== Spanning Tree === 
+
+   A spanning tree is a subset of Graph G, which has all the vertices covered with minimum possible number of edges. Hence, a spanning tree does not have cycles and it cannot be disconnected.. By this definition, we can draw a conclusion that every connected and undirected Graph G has at least one spanning tree.
+
+=== Minimum Spanning Tree Overview === 
+
+   A minimum spanning tree (MST) or minimum weight spanning tree is a subset of the edges of a connected, edge-weighted undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.[1] That is, it is a spanning tree whose sum of edge weights is as small as possible.[2] More generally, any edge-weighted undirected graph (not necessarily connected) has a minimum spanning forest, which is a union of the minimum spanning trees for its connected components.
+
+=== Prim's MST Algorithm === 
+
+   Prim's is a greedy MST algorithm that works well on dense graphs. On these graphs, Prim's meets or improve on the time bounds of its popular rivals (Kruskal's & Boruvska's) algorithm.
+
+   However, when it comes to finding the minimum spanning forest on a disconnected graph, Prim's cannot do this as easily (the algorithm must be run on each connected component individually).
+
+   The lazy version of Prim's has a runtime of O(E * log(E)), but the eager version (which we will also look at) has a better runtime of O(E * log(V)).
+
+   - Lazy Prim's MST Overview - 
+
+      Maintain a min Priority Queue (PQ) that sorts edges based on min edge cost. This will be used to determine the next node to visit and the edge used to get there.
+
+      Start the algorithm on any node S. Mark S as visited and iterate over all edges of S, adding them to the PQ. 
+
+      While the PQ is not empty and a MST has not been formed, dequeue the next cheapest edge from the PQ. If the dequeued edge is outdated (meaning the node it points to has already been visited) then skip it and poll again. Otherwise, mark the current node as visited and add the selected edge to the MST. 
+
+      Iterate over the new current node's edges and add all its edges to the PQ. Do not add edges to the PQ which point to already visited nodes.
+
+      We can now stop Prim's since the MST is complete. We know the MST is complete because the number of edges in the tree is one less than the number of nodes in the graph()

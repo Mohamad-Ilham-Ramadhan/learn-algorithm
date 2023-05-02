@@ -1,0 +1,8 @@
+=== Overview ===
+   In graph theory, the Bellman-Ford (BF) algorithm is a single source shortest path (SSSP) algorithm. This means it can find the shortest path from one node to any other node.
+
+   However, BF is not ideal for most SSSP problems because it has a time complexity of O(EV). It is better to use Dijkstra's algorithm which is much faster. It is on the order of O( (E+V) log(V)) when using a binary heap priorit queue.
+
+   However, Dijkstra's algorithm can fail when the graph has negative edges weights. This is when BF becomes really handy because it can be used to detect negative cycles and determine where they occur.
+
+   Finding negative cycles can be useful in many types of applications. One particularly neat application arises in finance when performing an arbitrage between two or more markets.
