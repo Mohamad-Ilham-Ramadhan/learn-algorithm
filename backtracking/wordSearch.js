@@ -1,0 +1,94 @@
+// Backtracking technique 
+
+// Word Search problem 
+
+/*
+   Given an m * n grid of characters (board) and a string (word), return true if word exists in the grid. 
+
+   The word can be constructed from letters of sequential adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+*/
+
+// My solution maybe without backtracking algorithm (I'm not learned it yet, I'm straight solve backtracking problem)
+function wordSearch(board, word) {
+   let container = []; // 
+   let stack = []; // stack of neighbors cells [x,y]
+   // loop search the first letter 
+   for (let i = 0; i < board.length; i++) { // y
+      const row = board[i];
+      for (let j = 0; j < row.length; j++) { // x
+         const letter = row[j];
+         let nextIndex = 0; // word letter index to find
+         if (letter === word[0]) {
+            console.log(letter, 'DFS');
+            stack.push({ coor: [j, i], wordIndex: nextIndex, letter: word[0], visited: [[j, i]] });
+            // DFS
+            // if a neighbor is not the next sequence of previous letter
+            // collecting neighbors by its left, top, right, bottom
+            // if cells is not visited && the next sequence then add to the stack 
+            while (stack.length > 0) {
+               const { coor, wordIndex, letter, visited } = stack.pop();
+               // visited.push(coor);
+               container[wordIndex] = letter;
+               nextIndex = wordIndex + 1;
+               console.log('while', 'letter', letter, 'container', container);
+
+               if (container.join('') === word) return true;
+               // left
+               const leftCell = board[coor[1]][coor[0] - 1];
+               const leftCoor = [coor[0] - 1, coor[1]];
+               if (leftCell !== undefined) {
+                  if (!visited.find((c) => c[0] === leftCoor[0] && c[1] === leftCoor[1]) && word[nextIndex] === leftCell) {
+                     stack.push({ coor: leftCoor, wordIndex: nextIndex, letter: word[nextIndex], visited: [...visited, leftCoor] });
+                  }
+               }
+               // top
+               if (board[coor[1] - 1] !== undefined) {
+                  const topCell = board[coor[1] - 1][coor[0]];
+                  const topCoor = [coor[0], coor[1] - 1];
+                  if (topCell !== undefined) {
+                     if (!visited.find((c) => c[0] === topCoor[0] && c[1] === topCoor[1]) && word[nextIndex] === topCell) {
+                        stack.push({ coor: topCoor, wordIndex: nextIndex, letter: word[nextIndex], visited: [...visited, topCoor] });
+                     }
+                  }
+               }
+               // right
+               const rightCell = board[coor[1]][coor[0] + 1];
+               const rightCoor = [coor[0] + 1, coor[1]];
+               if (rightCell !== undefined) {
+                  if (!visited.find((c) => c[0] === rightCoor[0] && c[1] === rightCoor[1]) && word[nextIndex] === rightCell) {
+                     stack.push({ coor: rightCoor, wordIndex: nextIndex, letter: word[nextIndex], visited: [...visited, rightCoor] });
+                  }
+               }
+               // bottom
+               if (board[coor[1] + 1] !== undefined) {
+                  const bottomCell = board[coor[1] + 1][coor[0]];
+                  const bottomCoor = [coor[0], coor[1] + 1];
+                  if (bottomCell !== undefined) {
+                     if (!visited.find((c) => c[0] === bottomCoor[0] && c[1] === bottomCoor[1]) && word[nextIndex] === bottomCell) {
+                        stack.push({ coor: bottomCoor, wordIndex: nextIndex, letter: word[nextIndex], visited: [...visited, bottomCoor] });
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+   console.log('container', container);
+   return false;
+}
+const board = [
+   ['A', 'B', 'C', 'E'],
+   ['B', 'F', 'C', 'S'],
+   ['C', 'D', 'E', 'E'],
+]; const word = 'ABCCED';
+const board2 = [
+   ["C", "A", "A"],
+   ["A", "A", "A"],
+   ["B", "C", "D"]
+]; const word2 = 'AAB';
+const board3 = [
+   ["A", "B", "C", "E"],
+   ["S", "F", "E", "S"],
+   ["A", "D", "E", "E"]
+]; const word3 = 'ABCESEEEFS';
+console.log(wordSearch(board3, word3)); // true
