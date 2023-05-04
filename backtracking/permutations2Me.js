@@ -1,7 +1,7 @@
 // Backtracking algorithm/technique 
 
 /*
-   LeetCode problem: Permutations Unique
+   LeetCode problem: Permutations Unique or Permutations II
 
    Given a collection of numbers, (nums), that might contain duplicates, return all possible unique permutations in any order.
 
@@ -29,6 +29,7 @@
                     2 3  1 3  1  2
                     | |  | |  |  |
                     3 2  3 1  2  1
+      Then remove duplicates permutation
 */
 
 // Time Complexity: O(n!) the slowest time complexity.
