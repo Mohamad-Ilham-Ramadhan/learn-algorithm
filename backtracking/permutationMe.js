@@ -1,5 +1,7 @@
 // Backtracking algorithm/technique 
 
+
+
 /*
    LeetCode problem: Permutations 
 
@@ -28,7 +30,11 @@
                     3 2  3 1  2  1
 */
 
-// Time Complexity: O(n!) the slowest time complexity.
+/* 
+   Solution by me, I don't copy paste from chatGPT but accidentally it is same with solutin from chatGPT
+
+   Time Complexity: O(n!) the slowest time complexity.
+*/
 var permute = function (nums) {
    if (nums.length === 1) { return [nums]; }
    let result = [];
