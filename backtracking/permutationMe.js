@@ -34,6 +34,10 @@
    Solution by me, I don't copy paste from chatGPT but accidentally it is same with solutin from chatGPT
 
    Time Complexity: O(n!) the slowest time complexity.
+
+   LeetCode test:
+      runtime: 71 ms beats 63.50%
+      memory: 46.6 MB beats 8.33%
 */
 var permute = function (nums) {
    if (nums.length === 1) { return [nums]; }
