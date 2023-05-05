@@ -20,8 +20,8 @@
 */
 /*
    LeetCode submission:
-      Runtime: 80 ms, beats 65%
-      Memory: 43.4 MB, beats 71.64%
+      Runtime: 92 ms, beats 65%
+      Memory: 48.3 MB, beats 71.64%
 */
 
 function isAnagram(s,t) {
