@@ -9,7 +9,7 @@
 */
 
 /* 
-   Solution by NeetCode (of course it is use backtracking)
+   Solution by NeetCode (of course it is use backtracking) : https://www.youtube.com/watch?v=pfiQ_PS1g8E
    Time Complexity O(n * m * 4^word) 4^word = dfs()
    Why dfs() execution time complexity is 4^word because each character we call 4 dfs() which each call call 4 dfs() more, so it like a tree that each leaves is 4
 

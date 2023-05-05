@@ -19,7 +19,7 @@
       Input: nums = [1]
       Output: [[1]]
 
-   Solution (By NeetCode):
+   Solution (By NeetCode): https://www.youtube.com/watch?v=s7AvT7cGdSo
       Using Tree 
                         root
                       /  |  \

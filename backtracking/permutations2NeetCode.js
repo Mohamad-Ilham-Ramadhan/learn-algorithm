@@ -21,7 +21,7 @@
       Input: nums = [1]
       Output: [[1]]
 
-   Solution by NeetCode:
+   Solution by NeetCode: https://www.youtube.com/watch?v=qhBVWf0YafA
       Using hashmap to store the remaining of numbers 
       Time complexity = O(n!)
 
