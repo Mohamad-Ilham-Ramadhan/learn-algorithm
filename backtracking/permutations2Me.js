@@ -3,7 +3,7 @@
 /*
    LeetCode problem: Permutations II
 
-Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
+   Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
 
 
    Example 1:
@@ -24,8 +24,9 @@ Given a collection of numbers, nums, that might contain duplicates, return all p
    Solution (By NeetCode) then modified by me:
       Using Tree
          - if array.length === 1 then return the array
-         - place unique integers for node 
-         - then when get down, delete the number from the duplicates array
+         - place unique integers (unique array from duplicates array) for node 
+         - then when get down, delete from the duplicates array of node's number 
+         - recurse(deletedDuplicatesArray)
                         root [1, 1, 2]
                       /  |  
                       1  2    unique [1,2], non [1,1,2]
@@ -55,7 +56,6 @@ var permute = function (nums) {
    let result = [];
    let uniqueNums = nums.slice();
    for (let i = 0; i < uniqueNums.length; i++) {
-      console.log([...uniqueNums], uniqueNums[i]);
       const filtered = uniqueNums.filter(n => n !== uniqueNums[i]).concat(uniqueNums[i]);
       if (filtered.length === uniqueNums.length) { continue;}
       uniqueNums = filtered;

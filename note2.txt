@@ -63,4 +63,5 @@ It's important to note that these are not the only algorithms that may be encoun
 - Rachit Jain
 - Clément Mihailescu
 - byte by byte
-- 
+- Kevin Naughton Jr.
+- The Code Mate
