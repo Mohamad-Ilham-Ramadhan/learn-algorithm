@@ -66,7 +66,6 @@ function containsDuplicateTwoPointers(nums) {
    return false;
 }
 console.log('containsDuplicateTwoPointers', containsDuplicateTwoPointers([1,5,3,4,7]));
-
 /* 
    Brute force, time complexity is O(n^2)
    LeetCode submission: 
@@ -82,3 +81,4 @@ function containsDuplicateBruteForce(nums) {
    return false;
 }
 console.log('containsDuplicateBruteForce', containsDuplicateBruteForce([1,2,3,1]));
+
