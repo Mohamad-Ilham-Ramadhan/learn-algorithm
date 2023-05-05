@@ -41,7 +41,13 @@
    Angka 1 dibinary berarti ambil dari set. [PERHTIAN] urutan binary dari kanan ke kiri sedangkan set/array dari kiri ke kanan jadi sesuaikan indexnya
 */
 
-// My own solution not using backtracking because I don't have any idea.
+/* 
+   My own solution not using backtracking because I don't have any idea.
+
+   LeetCode submition:
+      Runtime: 61ms, beats 70%.
+      Memory: 44.3MB, beats 30.5%
+*/
 function subsets(nums) {
    let result = [];
    const subsetLength = Math.pow(2, nums.length);
