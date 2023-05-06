@@ -3,7 +3,7 @@
 
 
 /*
-   LeetCode problem: Permutations 
+   LeetCode problem: Permutations (medium)
 
    Given an array (nums) of distinct integers, returns all the posibble permutations. You can return an answer in any order.
 

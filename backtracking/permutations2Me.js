@@ -1,7 +1,7 @@
 // Backtracking algorithm/technique 
 
 /*
-   LeetCode problem: Permutations II
+   LeetCode problem: Permutations II (medium)
 
    Given a collection of numbers, nums, that might contain duplicates, return all possible unique permutations in any order.
 

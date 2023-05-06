@@ -1,7 +1,7 @@
 // Arrays & Hasing 
 
 /*
-   LeetCode Problems: Contains Duplicate : 
+   LeetCode Problems: Contains Duplicate (easy) : 
 
    Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
