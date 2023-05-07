@@ -1,5 +1,5 @@
 /*
-   LeetCode problem: Min Stack (medium)
+   LeetCode problem: Min Stack (medium-easy)
    
    Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
