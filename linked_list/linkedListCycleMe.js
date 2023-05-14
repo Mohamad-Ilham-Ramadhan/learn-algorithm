@@ -53,7 +53,7 @@ class ListNode {
 // I don't understand how to make O(1) memory here
 function linkedListCycle(head) {
    if (head === null) return false;
-   let pos = 0;
+   let pos = 0; // we don't need this actually
   let copy = head;
   while (copy.next) {
      if (copy.pos) return true;
