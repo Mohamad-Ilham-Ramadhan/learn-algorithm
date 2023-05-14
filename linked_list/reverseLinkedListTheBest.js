@@ -51,6 +51,10 @@ function reverseLinkedList(head) {
  
    return prev;
 }
+// temp = next.next => 2-> 3->4->5
+// next.next 2->1->null
+// prev  2->1->null
+// next = temp => 3->4->5
 const head1 = new ListNode(1, 
    new ListNode(2, 
       new ListNode(3, 
