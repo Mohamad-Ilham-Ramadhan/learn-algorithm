@@ -26,8 +26,8 @@
       - Both list1 and list2 are sorted in non-decreasing order.
 
    LeetCode submission:
-      Runtime: 66 ms, beats 65.36%
-      Memory: 43.7 MB, beats 90%
+      Runtime: 56 ms, beats 95.42%
+      Memory: 43.9 MB, beats 79.75%
 */
 
 class ListNode {
