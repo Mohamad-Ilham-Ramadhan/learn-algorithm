@@ -47,51 +47,28 @@ class ListNode {
     1->3->4
     1
 */
-
+// Solution by NeetCode
 function mergeTwoSortedList(list1, list2) {
-   // return;
-   if (list1 === null && list2 === null) return null;
-   let newList = {};
-   let next = newList; // for reference of newList tail's 
+   let dummy = new ListNode();
+   let tail = dummy 
 
-   // initial
-   // if (list2 === null) {
-   //    newList = list1;
-   //    next = newList;
-   //    list1 = list1.next;
-   // } else if (list1 === null) {
-   //    newList = list2;
-   //    next = newList;
-   //    list2 = list2.next;
-   // } else if (list1.val <= list2.val) { 
-   //    newList = list1;
-   //    next = newList;
-   //    list1 = list1.next;
-   // } else if (list2.val <= list1.val) {
-   //    newList = list2;
-   //    next = newList;
-   //    list2 = list2.next;
-   // }
-
-
-   while (list1 || list2) {
-      if (list2 === null ) {
-         next.next = list1;
+   while (list1 && list2) {
+      if (list1.val <= list2.val) {
+         tail.next = list1;
          list1 = list1.next;
-      } else if (list1 === null) {
-         next.next = list2;
-         list2 = list2.next;
-      } else if (list1.val <= list2.val) { 
-         next.next = list1;
-         list1 = list1.next;
-      } else if (list2.val <= list1.val) {
-         next.next = list2;
+      } else {
+         tail.next = list2;
          list2 = list2.next;
       }
-      next = next.next;
+      tail = tail.next;
    }
 
-   return newList;
+   if (list1) {
+      tail.next = list1;
+   } else {
+      tail.next = list2;
+   }
+   return dummy.next;
 }
 let list1 = new ListNode(1,
    new ListNode(2, 
