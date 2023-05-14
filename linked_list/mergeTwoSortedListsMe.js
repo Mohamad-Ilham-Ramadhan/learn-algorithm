@@ -52,26 +52,26 @@ function mergeTwoSortedList(list1, list2) {
    // return;
    if (list1 === null && list2 === null) return null;
    let newList = {};
-   let next; // for reference of newList tail's 
+   let next = newList; // for reference of newList tail's 
 
    // initial
-   if (list2 === null) {
-      newList = list1;
-      next = newList;
-      list1 = list1.next;
-   } else if (list1 === null) {
-      newList = list2;
-      next = newList;
-      list2 = list2.next;
-   } else if (list1.val <= list2.val) { 
-      newList = list1;
-      next = newList;
-      list1 = list1.next;
-   } else if (list2.val <= list1.val) {
-      newList = list2;
-      next = newList;
-      list2 = list2.next;
-   }
+   // if (list2 === null) {
+   //    newList = list1;
+   //    next = newList;
+   //    list1 = list1.next;
+   // } else if (list1 === null) {
+   //    newList = list2;
+   //    next = newList;
+   //    list2 = list2.next;
+   // } else if (list1.val <= list2.val) { 
+   //    newList = list1;
+   //    next = newList;
+   //    list1 = list1.next;
+   // } else if (list2.val <= list1.val) {
+   //    newList = list2;
+   //    next = newList;
+   //    list2 = list2.next;
+   // }
 
 
    while (list1 || list2) {
