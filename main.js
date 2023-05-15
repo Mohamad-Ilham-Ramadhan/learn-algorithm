@@ -22,15 +22,18 @@
       - The number of nodes in the list is in the range [1, 5 * 104].
       - 1 <= Node.val <= 1000
 
-   Solution:
-      using queue to store l1, l2, l3 ... 
-      using stack to store ln-1, ln-2, ln-3 ...
-      count the length of the list
-      set mid point where Ceil.((count - 2) / 2)
-      collect l1, l2, l3 ... when <= mid 
-      collect ln-1, ln-2, ln-3 ... when > mid 
-      reorder list;
-      set tail.next = null
+   Solution By NeetCode:
+      using two pointers (slow and fast), slow jumps one node at a time and fast jumps two nodes at a time.
+      when the fast is null or fast.next is null then stop, the slow pointer already points to the end node of the first part of the list and the next until the fast is the second part of the list.
+      Reverse the second part of the list.
+      then we can reorder the list 
+      1->2->3->4 
+      first list: 1->2 
+      second list: 3->4 
+      reversed second: 4->3
+      reorder list 
+      1->4->2->3
+
    
    LeetCode submission: 
       Runtime: 367 ms, beats 5.16%
@@ -43,58 +46,42 @@ class ListNode {
       this.next = (next === undefined ? null : next)
    }
 }
-// O(n * 3)
+// O(n)
 function reorderList(head) {
-   let queue = []; // for l1, l2, l3
-   let stack = []; // for ln-1, ln-2, ln-3
+   if (head.next === null) return head;
+   // divide
+   let slow = head; let fast = head.next;
+   while (fast) {
+      if (fast.next === null) break;
+      slow = slow.next;
+      fast = fast.next.next;
+   }
+   let first = head;
+   let second = slow.next;
+   slow.next = null;
 
-   let next = head;
-   let count = 0; // count of length of list
-   let tail;
+   let prev = null;
+   let next = second.next;
+   second.next = prev;
    while (next) {
-      console.log('counting list length')
-      if (next.next === null) {
-         tail = Object.assign(next);
-      }
-      next = next.next;
-      count++;
+      prev = next;
+      next = next.next
+      prev.next = second;
+      second = prev;
    }
-   const mid = Math.ceil((count - 2) / 2);
-   console.log(tail, count, mid);
-
-   // collecting l1,l2,l3... and ln-1, ln-2, ln-3...
-   next = head.next;
-   for (let i = 1; i <= count - 2; i++) {
-      console.log('collecting');
-      if (i <= mid) {
-         queue.push(next);
-      } else {
-         stack.push(next);
-      }
+   head = new ListNode(666);
+   next = head;
+   while (first || second) {
+      next.next = first;
+      first = first.next;
+      next = next.next;
+      next.next = second;
+      second = second?.next;
       next = next.next;
    }
-
-   // reordering list
-   head.next = tail;
-   next = tail;
-   console.log('head', head)
-   let x = 0; // x === 0 means queue else if x === 1 means stack
-   while (queue.length || stack.length) {
-      console.log('reordering')
-
-      if (x === 0) {
-         next.next = queue.shift();
-         x = 1;
-      } else {
-         next.next = stack.pop();
-         x = 0;
-      }
-      next = next.next;
-   }
-   next.next = null;
-   return head;
+   return head.next;
 }
-const head1 = new ListNode(1,
+let head1 = new ListNode(1,
    new ListNode(2,
       new ListNode(3,
          new ListNode(4)
@@ -104,16 +91,16 @@ const head1 = new ListNode(1,
 const head2 = new ListNode(1,
    new ListNode(2,
       new ListNode(3,
-         new ListNode(4, 
+         new ListNode(4,
             new ListNode(5)
          )
       )
    )
-); // 1->4->2->3
+); // 1->5->2->4->3
 const head3 = new ListNode(1,
    new ListNode(2,
       new ListNode(3,
-         new ListNode(4, 
+         new ListNode(4,
             new ListNode(5,
                new ListNode(6,
                   new ListNode(7)
@@ -132,4 +119,4 @@ const head6 = new ListNode(1,
       new ListNode(3)
    )
 );
-console.log(reorderList(head3));
+console.log(reorderList(head6));

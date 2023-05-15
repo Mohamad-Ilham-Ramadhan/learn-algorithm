@@ -1,3 +1,20 @@
 Lesson learned in solving LeetCode problems:
    - We can use Floyd's hare and tortoise algorithm to detect a cycle in linked list. So we can make time complexity to O(1) instead use a hashmap will be O(n) 
+   
    - Use tree and backtracking to find combinations of something like pair of parentheses.
+   
+   - We can use slow and fast pointers to determine the mid point of a linked list:
+      # initial position
+      1->2->3->4->5
+      s  f
+      # 2
+      1->2->3->4->5
+         s     f
+      # 3
+      1->2->3->4->5
+            s        f
+      # 4 both lists are:
+      1->2->3  and  4->5
+   
+   
+

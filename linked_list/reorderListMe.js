@@ -33,8 +33,12 @@
       set tail.next = null
    
    LeetCode submission: 
+      # by myself
       Runtime: 367 ms, beats 5.16%
       Memory: 50.5 MB, beats 27.10%
+      # implementation of NeetCode explanation
+      Runtime: 88 ms, beats 74.83%
+      Memory: 50.3 MB, beats 53.58%
 
 */
 class ListNode {
@@ -74,16 +78,22 @@ function reorderList(head) {
       next = next.next;
    }
 
+   // reverse the queue so we can use pop() instead for better time complexity 
+   let queueRev = [];
+   for (let i = count - 1; i >= queue.length; i--) {
+      queueRev.push(queue[i]);
+   }
+
    // reordering list
    head.next = tail;
    next = tail;
    console.log('head', head)
    let x = 0; // x === 0 means queue else if x === 1 means stack
-   while (queue.length || stack.length) {
+   while (queueRev.length || stack.length) {
       console.log('reordering')
 
       if (x === 0) {
-         next.next = queue.shift();
+         next.next = queueRev.pop();
          x = 1;
       } else {
          next.next = stack.pop();
@@ -93,6 +103,41 @@ function reorderList(head) {
    }
    next.next = null;
    return head;
+}
+// O(n)
+function neetCodeExplanation(head) {
+   if (head.next === null) return head;
+   // divide
+   let slow = head; let fast = head.next;
+   while (fast) {
+      if (fast.next === null) break;
+      slow = slow.next;
+      fast = fast.next.next;
+   }
+   let first = head;
+   let second = slow.next;
+   slow.next = null;
+
+   let prev = null;
+   let next = second.next;
+   second.next = prev;
+   while (next) {
+      prev = next;
+      next = next.next
+      prev.next = second;
+      second = prev;
+   }
+   head = new ListNode(666);
+   next = head;
+   while (first || second) {
+      next.next = first;
+      first = first.next;
+      next = next.next;
+      next.next = second;
+      second = second?.next;
+      next = next.next;
+   }
+   return head.next;
 }
 const head1 = new ListNode(1,
    new ListNode(2,
@@ -132,4 +177,4 @@ const head6 = new ListNode(1,
       new ListNode(3)
    )
 );
-console.log(reorderList(head3));
+console.log(reorderList(head5));
