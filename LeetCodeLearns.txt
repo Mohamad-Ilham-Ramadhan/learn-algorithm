@@ -16,5 +16,13 @@ Lesson learned in solving LeetCode problems:
       # 4 both lists are:
       1->2->3  and  4->5
    
+   - && operator in if statement is evaluated from left to right. If the left is false then the right will not evaluated.
+      var n = null;
+      if (n && n.next) <-- false 
+
+      n.next <-- will not be evaluated, even if this is a runtime error.
+
+      so the error will not occur.
    
+
 
