@@ -20,7 +20,7 @@
       Output: [1]
 
    Constraints:
-      - The number of nodes in the list is sz.
+      - The number of nodes in the list is `sz`.
       - 1 <= sz <= 30
       - 0 <= Node.val <= 100
       - 1 <= n <= sz
@@ -38,6 +38,8 @@ class ListNode {
       this.next = (next === undefined ? null : next);
    }
 }
+
+// time complexity O(sz * n)
 
 function removeNthFromEnd(head, n) {
    let current = head;
