@@ -55,23 +55,23 @@ class ListNode {
 
 function mergeSortList(list) {
    if (list.next === null) return list;
-   let slow = list; let fast = list.next;
+   let slow = list; let fast = list.next; // slow and fast pointers
 
    while (fast && fast.next) {
       slow = slow.next;
       fast = fast.next.next;
    }
-   let second = slow.next;
+   let second = slow.next; // list become the first half and second is the second half
    slow.next = null;
    console.log('first', list, 'second', second);
    return mergeList(mergeSortList(list), mergeSortList(second));
 }
 
 function mergeList(left, right) {
-   let leftNext = left;
-   let rightNext = right;
+   let leftNext = left; // leftNext is left list pointer
+   let rightNext = right; // rightNext is right list pointer
    let sortedList = new ListNode('initial');
-   let sortedNext = sortedList;
+   let sortedNext = sortedList; // sortedNext is sortedList pointer
 
 
    while (leftNext && rightNext) {
@@ -98,7 +98,7 @@ function mergeList(left, right) {
 }
 function mergeKsort(lists) {
    let newList = new ListNode('xxx');
-   let newListNext = newList;
+   let newListNext = newList; // newList pointer
    for (let i = 0; i < lists.length; i++) {
       let currentList = lists[i];
       while (currentList) {

@@ -24,5 +24,6 @@ Lesson learned in solving LeetCode problems:
 
       so the error will not occur.
    
+   - Merge sort: if we have already sorted arrays [[sorted], [sorted], [sorted]], we can just merge them.
 
 
