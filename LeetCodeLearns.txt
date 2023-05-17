@@ -25,5 +25,11 @@ Lesson learned in solving LeetCode problems:
       so the error will not occur.
    
    - Merge sort: if we have already sorted arrays [[sorted], [sorted], [sorted]], we can just merge them.
+   - Conditional matters:
+      - in inverting binary tree (recursion):
+         - if (root === null || (root.left === null && root.right === null)) return root;
+            Runtime: 68 ms, beats 12.5%
+         - if (root === null) return root;
+            Runtime: 53 ms, beats 85.15%
 
 
