@@ -45,7 +45,10 @@
       Attempt #3
       Runtime: 61 ms, beats 42.91%
       Memory: 41.9 MB, beats 88.3%
-       
+
+      Attempt #4
+      Runtime: 53 ms, beats 82.67%
+      Memory: 41.9 MB, beats 82.6%
 */
 /*
   Definition for a binary tree node.
@@ -61,7 +64,17 @@ class TreeNode {
 // depth first search
 function sameTree(p, q) {
 
-   // ATTEMPT #3
+   // Attempt #4
+      if (p?.val === q?.val) {
+         if (p === q) { // p === null && q === null
+            return true;
+         }
+         return sameTree(p?.left, q?.left) &&sameTree(p?.right, q?.right);
+      } 
+      return false;
+      
+
+   /* ATTEMPT #3
       if (p && q) {
          if (p.val !== q.val) {
             console.log('FALSE val');
@@ -75,7 +88,7 @@ function sameTree(p, q) {
       }  else {
          return true;
       }
-   // */
+   */
 
    /* ATTEMPT #2
       if (p && q) {
@@ -172,4 +185,4 @@ const q4 = null;
 // ----------------------------------------------------------------
 const p5 = null;
 const q5 = new TreeNode(5);
-console.log('RESULT: ', sameTree(p4, q4));
+console.log('RESULT: ', sameTree(p5, q5));
