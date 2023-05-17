@@ -33,22 +33,13 @@
       - The number of nodes in both trees is in the range [0, 100].
       - -104 <= Node.val <= 104
 
+
+   Solutions by NeetCode
+
    LeetCode submission:
-      Attempt #1
-      Runtime: 68 ms, beats 10.55%;
-      Memory: 44.1 MB, beats 5.9%;
-
-      Attempt #2
-      Runtime: 59 ms, beats 55.90%
-      Memory: 42.1 MB, beats 74.22%
-
-      Attempt #3
-      Runtime: 61 ms, beats 42.91%
-      Memory: 41.9 MB, beats 88.3%
-
-      Attempt #4
-      Runtime: 53 ms, beats 82.67%
-      Memory: 41.9 MB, beats 82.6%
+      Runtime: 50 ms, beats 91.79%
+      Memory: 41.6 MB, beats 97.49%
+       
 */
 /*
   Definition for a binary tree node.
@@ -66,6 +57,7 @@ function sameTree(p, q) {
    if (!p && !q) return true;
    if (!p || !q || p.val !== q.val ) return false;
    return (sameTree(p.left, q.left) && sameTree(p.right, q.right));
+
 }
 const p1 = new TreeNode(1,
    new TreeNode(2),
@@ -122,4 +114,4 @@ const q4 = null;
 // ----------------------------------------------------------------
 const p5 = null;
 const q5 = new TreeNode(5);
-console.log('RESULT: ', sameTree(p1, q1));
+console.log('RESULT: ', sameTree(p4, q4));
