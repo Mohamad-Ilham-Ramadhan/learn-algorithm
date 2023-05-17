@@ -33,6 +33,22 @@
       - The number of nodes in both trees is in the range [0, 100].
       - -104 <= Node.val <= 104
 
+
+   Solutions:
+      #1 
+         - travers using recursion p and q tree and store their node values in array 
+         - compare each values of both array if in the iteration find not equal values then return false
+         - return true;
+         
+         - Time complexity O(n) + O(k) 
+         - Space complexity O(n * 2)
+
+      #2 and #3
+         - using recursion and compare each node.val 
+         - return false if not equal 
+         - when both reach null then return true
+
+
    LeetCode submission:
       Attempt #1
       Runtime: 68 ms, beats 10.55%;
@@ -67,7 +83,7 @@ function sameTree(p, q) {
             console.log('FALSE val');
             return false
          };
-          return sameTree(p.left, q.left) &&sameTree(p.right, q.right);
+          return sameTree(p.left, q.left) && sameTree(p.right, q.right);
       } 
       if ((p === null && q) || (q === null && p)) {
          console.log('FALSE half null');
@@ -83,7 +99,7 @@ function sameTree(p, q) {
             console.log('FALSE val');
             return false
          };
-          return sameTree(p.left, q.left) &&sameTree(p.right, q.right);
+          return sameTree(p.left, q.left) && sameTree(p.right, q.right);
       } else if ((p === null && q) || (q === null && p)) {
          console.log('FALSE half null');
          return false;
