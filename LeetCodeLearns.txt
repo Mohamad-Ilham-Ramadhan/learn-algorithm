@@ -25,6 +25,7 @@ Lesson learned in solving LeetCode problems:
       so the error will not occur.
    
    - Merge sort: if we have already sorted arrays [[sorted], [sorted], [sorted]], we can just merge them.
+
    - Conditional matters:
       - in inverting binary tree (recursion):
          - if (root === null || (root.left === null && root.right === null)) return root;
@@ -32,4 +33,6 @@ Lesson learned in solving LeetCode problems:
          - if (root === null) return root;
             Runtime: 53 ms, beats 85.15%
 
-
+   - Math.max() vs ternary operator:
+      - num1 >= num2 ? num1 : num2; (faster)
+      - Math.max(num1, num2); (slower)
