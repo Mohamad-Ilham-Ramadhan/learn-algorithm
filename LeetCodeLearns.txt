@@ -36,3 +36,6 @@ Lesson learned in solving LeetCode problems:
    - Math.max() vs ternary operator:
       - num1 >= num2 ? num1 : num2; (faster)
       - Math.max(num1, num2); (slower)
+
+- Stuck problems:
+   - Subtree of another tree (easy): https://leetcode.com/problems/subtree-of-another-tree 
