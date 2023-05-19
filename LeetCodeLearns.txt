@@ -39,3 +39,31 @@ Lesson learned in solving LeetCode problems:
 
 - Stuck problems:
    - Subtree of another tree (easy): https://leetcode.com/problems/subtree-of-another-tree 
+
+- Indexing in the queue object so it behaves like an array:
+   class Queue {
+      constructor() {
+         this.queue = {};
+         this.head = 0; <----------- INDEX
+         this.tail = 0; <----------- INDEX
+      }
+      enqueue(val) {
+         this.queue[this.tail++] = val; <----------- INDEX
+      }
+      dequeue() {
+         const val = this.queue[this.head]; 
+         delete this.queue[this.head++]; <----------- INDEX
+         return val;
+      }
+      peak() {
+         return this.queue[this.head];
+      }
+      clear() {
+         this.head = 0;
+         this.tail = 0;
+         this.queue = {};
+      }
+      size() {
+         return this.tail - this.head;
+      }
+   }
