@@ -33,6 +33,9 @@
       #1
       - Runtime: 147 ms, beats 34.7%
       - Memory: 136 MB, beats 15.87%
+      #2
+      - Runtime: 128 ms, beats 50.79%
+      - Memory: 135.8 MB, beats 18.50%
 */
 
 class TreeNode {
