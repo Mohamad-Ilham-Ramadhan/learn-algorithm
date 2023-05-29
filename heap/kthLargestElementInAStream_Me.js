@@ -35,6 +35,8 @@
 
   Solution by myself:
     Not using heap. I still don't understand using heap know.
+    The last time I use heap, it's too slow and case time limit exceeded.
+    
 
   LeetCode submission:
     #1
