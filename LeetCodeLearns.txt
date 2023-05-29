@@ -67,3 +67,8 @@ Lesson learned in solving LeetCode problems:
          return this.tail - this.head;
       }
    }
+
+- Swapping two elements in an array:
+   - const arr = [1,2,3,4];
+   - [ arr[0], arr[3] ] = [ arr[3], arr[0] ];
+   - arr -> [4, 2, 3, 1]
