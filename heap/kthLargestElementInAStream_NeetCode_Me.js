@@ -38,12 +38,13 @@
     then the peek is the kth element
 
   LeetCode submission:
-    #1 My code after watching of half NeetCode's solution explanation
+    #1 My code after watching of half NeetCode's solution explanation (NeetCode's solution similar)
     - Runtime: 124 ms, beats 84.12%
     - Memory: 51.2 MB, beats 64.56%
 */
 
 
+// It turns out that NeetCode's implementation is pretty the same with mine. The difference is that Python have built-in heap.
 
 
 // My code after watching of half NeetCode's solution explanation
