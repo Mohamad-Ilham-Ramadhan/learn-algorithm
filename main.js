@@ -1,192 +1,129 @@
-
 /*
-  LeetCode: 703. Kth Largest Element in a Stream (easy)
+  Leetcode: 1046. Last Stone Weight (easy)
 
-  Design a class to find the `kth` largest element in a stream. Note that it is the `kth` largest element in the sorted order, not the `kth` distinct element.
+  You are given an array of integers `stones` where `stones[i]` is the weight of the `ith` stone.
 
-  Implement `KthLargest` class:
+  We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights `x` and `y` with `x <= y`. The result of this smash is:
 
-  `KthLargest(int k, int[] nums)` Initializes the object with the integer `k` and the stream of integers `nums`.
-  `int add(int val)` Appends the integer `val` to the stream and returns the element representing the `kth` largest element in the stream.
-  
+  If `x == y`, both stones are destroyed, and
+  If `x != y`, the stone of weight `x` is destroyed, and the stone of weight `y` has new weight `y - x`.
+  At the end of the game, there is at most one stone left.
+
+  Return the weight of the last remaining stone. If there are no stones left, return `0`.
 
   Example 1:
-    Input
-      ["KthLargest", "add", "add", "add", "add", "add"]
-      [[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]
-    Output
-      [null, 4, 5, 5, 8, 8]
-    Explanation
-      KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
-      kthLargest.add(3);   // return 4
-      kthLargest.add(5);   // return 5
-      kthLargest.add(10);  // return 5
-      kthLargest.add(9);   // return 8
-      kthLargest.add(4);   // return 8
+    Input: stones = [2,7,4,1,8,1]
+    Output: 1
+    Explanation: 
+      We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+      we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+      we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+      we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of the last stone.
+
+  Example 2:
+    Input: stones = [1]
+    Output: 1
   
 
   Constraints:
-    - 1 <= k <= 104
-    - 0 <= nums.length <= 104
-    - -104 <= nums[i] <= 104
-    - -104 <= val <= 104
-    - At most 104 calls will be made to add.
-    - It is guaranteed that there will be at least k elements in the array when you search for the kth element.
+    - 1 <= stones.length <= 30
+    - 1 <= stones[i] <= 1000
 
-  Solution by NeetCode:
-    using min heap and mantain heap size of k
-    then the peek is the kth element
+  Solution by myself: 
+    use maxheap to get the first and second greatest number 
+    while (heap.size > 1) 
+      if x == y then continue 
+      else insert the difference to the maxheap
+    return the heap[0] or zero if the heap is empty
 
   LeetCode submission:
-    #1 My code after watching of half NeetCode's solution explanation (NeetCode's solution similar)
-    - Runtime: 124 ms, beats 84.12%
-    - Memory: 51.2 MB, beats 64.56%
+    - Runtime: 57 ms, beats 78.21%;
+    - Memory: 44.6 MB, beats 9.12%
 */
-
-
-// It turns out that NeetCode's implementation is pretty the same with mine. The difference is that Python have built-in heap.
-
-
-// My code after watching of half NeetCode's solution explanation
-class MinHeap {
-   constructor() {
+class MaxHeap {
+  constructor() {
     this.heap = [];
   }
-
-  insert(value) {
-    this.heap.push(value);
+  peek() {
+    return this.heap[0];
+  }
+  insert(val) {
+    if (this.heap.length === 0) {
+      this.heap.push(val);
+      return;
+    }
+    this.heap.push(val);
     this.heapifyUp();
   }
-
-  extractMin() {
-    if (this.isEmpty()) {
-      return null;
+  heapifyUp() {
+    let currentIndex = this.heap.length - 1;
+    while ( currentIndex > 0 ) {
+      let maxIndex = currentIndex;
+      let parentIndex = Math.floor( (currentIndex - 1) / 2);
+      if ( parentIndex >= 0 && this.heap[parentIndex] < this.heap[currentIndex] ) {
+        maxIndex = parentIndex;
+      }
+      if (currentIndex === maxIndex) break;
+      [ this.heap[currentIndex], this.heap[parentIndex] ] = [ this.heap[parentIndex], this.heap[currentIndex] ];
+      currentIndex = maxIndex;
     }
-
-    const min = this.heap[0];
-    const last = this.heap.pop();
-
-    if (!this.isEmpty()) {
+  }
+  extractMax() {
+    if (this.size() === 0) return null;
+    let max = this.heap[0];
+    let last = this.heap.pop();
+    if (this.size() > 0) {
       this.heap[0] = last;
       this.heapifyDown();
     }
-
-    return min;
+    return max;
   }
-
-  heapifyUp() {
-    let currentIndex = this.heap.length - 1;
-
-    while (currentIndex > 0) {
-      const parentIndex = Math.floor((currentIndex - 1) / 2);
-
-      if (this.heap[currentIndex] >= this.heap[parentIndex]) {
-        break;
-      }
-
-      [this.heap[currentIndex], this.heap[parentIndex]] = [
-        this.heap[parentIndex],
-        this.heap[currentIndex],
-      ];
-      currentIndex = parentIndex;
-    }
-  }
-
   heapifyDown() {
     let currentIndex = 0;
-
     while (true) {
-      const leftChildIndex = 2 * currentIndex + 1;
-      const rightChildIndex = 2 * currentIndex + 2;
-      let minIndex = currentIndex;
-
-      if (
-        leftChildIndex < this.heap.length &&
-        this.heap[leftChildIndex] < this.heap[minIndex]
-      ) {
-        minIndex = leftChildIndex;
+      let maxIndex = currentIndex;
+      let leftIndex = 2 * currentIndex + 1;
+      let rightIndex = 2 * currentIndex + 2;
+      if (this.heap[maxIndex] < this.heap[leftIndex]) {
+        maxIndex = leftIndex;
       }
-
-      if (
-        rightChildIndex < this.heap.length &&
-        this.heap[rightChildIndex] < this.heap[minIndex]
-      ) {
-        minIndex = rightChildIndex;
+      if (this.heap[maxIndex] < this.heap[rightIndex]) {
+        maxIndex = rightIndex;
       }
-
-      if (minIndex === currentIndex) {
+      if (maxIndex === currentIndex) {
         break;
       }
-
-      [this.heap[currentIndex], this.heap[minIndex]] = [
-        this.heap[minIndex],
-        this.heap[currentIndex],
-      ];
-      currentIndex = minIndex;
+      [ this.heap[currentIndex], this.heap[maxIndex] ] = [ this.heap[maxIndex], this.heap[currentIndex] ];
+      currentIndex = maxIndex;
     }
   }
-
-  isEmpty() {
-    return this.heap.length === 0;
-  }
-
-  peek() {
-    return this.isEmpty() ? null : this.heap[0];
-  }
-
   size() {
     return this.heap.length;
   }
 }
-const mh = new MinHeap();
-// mh.insert(30);
-// mh.insert(50);
-// mh.insert(100);
-// mh.insert(40);
-// mh.insert(40);
-// mh.insert(15);
-// mh.insert(10);
-// // k = 6
-// console.log(mh.peek()); 
-// console.log(mh.extractMin());
-// console.log(mh.size());
-// console.log(mh.peek());
-
-class KL {
-  constructor(k, nums) {
-    this.heap = new MinHeap();
-    this.k = k;
-    for (let i = 0; i < nums.length; i++) {
-      this.heap.insert(nums[i]);
-    }
-    while (this.heap.size() > this.k) {
-      this.heap.extractMin();
+const mh = new MaxHeap();
+mh.insert(2);
+console.log('mh.heap', Object.assign([], mh.heap));
+mh.extractMax();
+console.log('mh.heap', Object.assign([], mh.heap));
+function lastStoneWeight(stones) {
+  const maxHeap = new MaxHeap();
+  for (let i = 0; i < stones.length; i++) {
+    const stone = stones[i];
+    maxHeap.insert(stone);
+  }
+  while (maxHeap.size() > 1) {
+    console.log(Object.assign([], maxHeap.heap));
+    let y = maxHeap.extractMax();
+    let x = maxHeap.extractMax();
+    if (y !== x) {
+      y = y - x;
+      maxHeap.insert(y);
     }
   }
-  add(val) {
-    this.heap.insert(val);
-    // console.log('heap after insert val', Object.assign({},this.heap.heap));
-    // this.heap.extractMin();
-    // return this.heap.peek();
-    while (this.heap.size() > this.k) {
-      this.heap.extractMin();
-    }
-    return this.heap.peek();
-  }
+  return maxHeap.heap[0] ? maxHeap.heap[0] : 0;
 }
-
-// const kl = new KL(3, [4,5,8,2]);
-// console.log('kl.heap', kl.heap);
-// console.log('add 3 -> ', kl.add(3), 'epxect :', 4); //
-// console.log('add 5 -> ', kl.add(5), 'epxect :', 5); //
-// console.log('add 10 -> ', kl.add(10), 'epxect :', 5); //
-// console.log('add 9 -> ', kl.add(9), 'epxect :', 8); //
-// console.log('add 4 -> ', kl.add(4), 'epxect :', 8); //
-
-const kl = new KL(2, [0]);
-console.log('kl.heap', kl.heap);
-console.log('add -1 -> ', kl.add(-1), 'epxect :', -1); //
-console.log('add 1 -> ', kl.add(1), 'epxect :', 0); //
-console.log('add -2 -> ', kl.add(-2), 'epxect :', 0); //
-console.log('add -4 -> ', kl.add(-4), 'epxect :', 0); //
-console.log('add 3 -> ', kl.add(3), 'epxect :', 1); //
+const stones1 = [2,7,4,1,8,1];
+const stones2 = [2];
+const stones3 = [2,2];
+console.log('RESULT: ', lastStoneWeight(stones3))
