@@ -30,11 +30,16 @@
     - 1 <= stones[i] <= 1000
 
   Solution by myself: 
-    use maxheap to get the first and second greatest number 
-    while (heap.size > 1) 
-      if x == y then continue 
-      else insert the difference to the maxheap
-    return the heap[0] or zero if the heap is empty
+   use maxheap to get the first and second greatest number 
+      while (heap.size > 1) 
+         if x == y then continue 
+         else insert the difference to the maxheap
+   return the heap[0] or zero if the heap is empty
+      Time complexity using max heap is: O(n log n) for first insertion + ( O(log n) * 3 ) for extracting x and y and insert the difference if exists;
+
+   use sort 
+      Time complexity: O(n log n) for first sort + O(n) for compare and insert the difference
+   
 
   LeetCode submission:
     #1 (max heap)
@@ -114,10 +119,12 @@ class MaxHeap {
  // use max heap
  function lastStoneWeight(stones) {
    const maxHeap = new MaxHeap();
+   // O(n log n)
    for (let i = 0; i < stones.length; i++) {
      const stone = stones[i];
      maxHeap.insert(stone);
    }
+   // O(log n) * 3
    while (maxHeap.size() > 1) {
      console.log(Object.assign([], maxHeap.heap));
      let y = maxHeap.extractMax();
@@ -136,7 +143,9 @@ class MaxHeap {
  
  // use sorting solution
  function lastStoneWeightSort(stones) {
+   // O(n log n)
    stones.sort( (a,b) => a - b);
+   // O(n)
    while (stones.length > 1) {
      console.log('stones', stones);
      let y = stones.pop();
