@@ -43,33 +43,33 @@
 */
 
 function combinationSum(candidates, target) {
-  let res = [];
-
-  function dfs(i, cur, total) {
-    if (total === target) {
-      res.push(cur.slice());
-      return;
-    }
-    if (i >= candidates.length || total > target) return;
-
-    cur.push(candidates[i]);
-    dfs(i, cur, total + candidates[i]);
-    cur.pop();
-    dfs(i + 1, cur, total);
-  }
-
-  dfs(0, [], 0);
-  return res;
-}
-
-const candidates1 = [2, 3, 6, 7];
-const target1 = 7; // [[2,2,3],[7]]
-const candidates2 = [2,3,5];
-const target2 = 8; // [[2,2,2,2],[2,3,3],[3,5]]
-const candidates3 = [2]; 
-const target3 = 1; // []
-const candidates4 = [2,3]; 
-const target4 = 2; // [[2]]
-const candidates5 = [8,7,4,3];
-const target5 = 11; // [[3,4,4], [3,8], [4,7]]
-console.log('RESULT: ', combinationSum(candidates5, target5));
+   let res = [];
+ 
+   function dfs(i, cur, total) {
+     if (total === target) {
+       res.push(cur.slice());
+       return;
+     }
+     if (i >= candidates.length || total > target) return;
+ 
+     cur.push(candidates[i]);
+     dfs(i, cur, total + candidates[i]);
+     cur.pop();
+     dfs(i + 1, cur, total);
+   }
+ 
+   dfs(0, [], 0);
+   return res;
+ }
+ 
+ const candidates1 = [2, 3, 6, 7];
+ const target1 = 7; // [[2,2,3],[7]]
+ const candidates2 = [2,3,5];
+ const target2 = 8; // [[2,2,2,2],[2,3,3],[3,5]]
+ const candidates3 = [2]; 
+ const target3 = 1; // []
+ const candidates4 = [2,3]; 
+ const target4 = 2; // [[2]]
+ const candidates5 = [8,7,4,3];
+ const target5 = 11; // [[3,4,4], [3,8], [4,7]]
+ console.log('RESULT: ', combinationSum(candidates5, target5));
