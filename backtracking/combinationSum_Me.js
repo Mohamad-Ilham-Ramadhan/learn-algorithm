@@ -59,72 +59,72 @@
 
 // #1 with sorting
 function combinationSum(candidates, target) {
-  candidates.sort( (a,b) => a - b);
-  let result = [];
-
-  function backtrack(sumArr, sum, index) {
-    for (let i = index; i < candidates.length; i++) {
-      const n = candidates[i];
-      if (sum + n === target) {
-        result.push(sumArr.concat(n));
-        return;
-      }
-      if (sum + n > target) return;
-      backtrack(sumArr.concat(n), sum + n, i);
-    }
-  }
-
-  for (let i = 0; i < candidates.length; i++) {
-    const n = candidates[i];
-    console.log('n', n);
-    if (n === target) {
-      result.push([n]);
-      return result;
-    }
-    if (n > target) return result;
-    backtrack([].concat(n), n, i);
-
-  }
-  return result;
-}
-
-// #2 without sorting
-function combinationSumWithout(candidates, target) {
-  let result = [];
-
-  function backtrack(sumArr, sum, index) {
-    for (let i = index; i < candidates.length; i++) {
-      const n = candidates[i];
-      if (sum + n === target) {
-        result.push(sumArr.concat(n));
-        return;
-      }
-      if (sum + n < target) {
-        backtrack(sumArr.concat(n), sum + n, i);
-      }
-    }
-  }
-
-  for (let i = 0; i < candidates.length; i++) {
-    const n = candidates[i];
-    console.log('n', n);
-    if (n === target) {
-      result.push([n]);
-    }
-    if (n < target) {
-      backtrack([].concat(n), n, i);
-    }
-  }
-  return result;
-}
-const candidates1 = [2, 3, 6, 7];
-const target1 = 7; // [[2,2,3],[7]]
-const candidates2 = [2,3,5];
-const target2 = 8; // [[2,2,2,2],[2,3,3],[3,5]]
-const candidates3 = [2]; 
-const target3 = 1; // []
-const candidates4 = [2,3]; 
-const target4 = 2; // [[2]]
-const candidates5 = [8,7,4,3];
-const target5 = 11; // [[3,4,4], [3,8], [4,7]]
-console.log('RESULT: ', combinationSumWithout(candidates4, target4));
+   candidates.sort( (a,b) => a - b);
+   let result = [];
+ 
+   function backtrack(sumArr, sum, index) {
+     for (let i = index; i < candidates.length; i++) {
+       const n = candidates[i];
+       if (sum + n === target) {
+         result.push(sumArr.concat(n));
+         return;
+       }
+       if (sum + n > target) return;
+       backtrack(sumArr.concat(n), sum + n, i);
+     }
+   }
+ 
+   for (let i = 0; i < candidates.length; i++) {
+     const n = candidates[i];
+     console.log('n', n);
+     if (n === target) {
+       result.push([n]);
+       return result;
+     }
+     if (n > target) return result;
+     backtrack([].concat(n), n, i);
+ 
+   }
+   return result;
+ }
+ 
+ // #2 without sorting
+ function combinationSumWithout(candidates, target) {
+   let result = [];
+ 
+   function backtrack(sumArr, sum, index) {
+     for (let i = index; i < candidates.length; i++) {
+       const n = candidates[i];
+       if (sum + n === target) {
+         result.push(sumArr.concat(n));
+         return;
+       }
+       if (sum + n < target) {
+         backtrack(sumArr.concat(n), sum + n, i);
+       }
+     }
+   }
+ 
+   for (let i = 0; i < candidates.length; i++) {
+     const n = candidates[i];
+     console.log('n', n);
+     if (n === target) {
+       result.push([n]);
+     }
+     if (n < target) {
+       backtrack([].concat(n), n, i);
+     }
+   }
+   return result;
+ }
+ const candidates1 = [2, 3, 6, 7];
+ const target1 = 7; // [[2,2,3],[7]]
+ const candidates2 = [2,3,5];
+ const target2 = 8; // [[2,2,2,2],[2,3,3],[3,5]]
+ const candidates3 = [2]; 
+ const target3 = 1; // []
+ const candidates4 = [2,3]; 
+ const target4 = 2; // [[2]]
+ const candidates5 = [8,7,4,3];
+ const target5 = 11; // [[3,4,4], [3,8], [4,7]]
+ console.log('RESULT: ', combinationSumWithout(candidates4, target4));
