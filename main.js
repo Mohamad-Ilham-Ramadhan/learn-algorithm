@@ -37,8 +37,12 @@
     return the heap[0] or zero if the heap is empty
 
   LeetCode submission:
+    #1 (max heap)
     - Runtime: 57 ms, beats 78.21%;
     - Memory: 44.6 MB, beats 9.12%
+    #2 (sorted array)
+    - Runtime: 68 ms, beats 31.61%
+    - Memory: 42 MB, beats 94.65%
 */
 class MaxHeap {
   constructor() {
@@ -123,7 +127,36 @@ function lastStoneWeight(stones) {
   }
   return maxHeap.heap[0] ? maxHeap.heap[0] : 0;
 }
-const stones1 = [2,7,4,1,8,1];
-const stones2 = [2];
-const stones3 = [2,2];
-console.log('RESULT: ', lastStoneWeight(stones3))
+const stones1 = [2,7,4,1,8,1]; // 1
+const stones2 = [2]; // 2
+const stones3 = [2,2]; // 0
+// console.log('RESULT: ', lastStoneWeight(stones3));
+
+// use sorting solution
+function lastStoneWeightSort(stones) {
+  stones.sort( (a,b) => a - b);
+  while (stones.length > 1) {
+    console.log('stones', stones);
+    let y = stones.pop();
+    let x = stones.pop();
+    if (y != x) {
+      y = y - x;
+      let inserted = false;
+      if (y <= stones[0]) {stones.splice(0, 0, y); inserted = true;}
+      else if (y >= stones[stones.length - 1]) {stones.push(y); inserted = true;}
+      if (!inserted) {
+        for (let i = 1; i < stones.length - 1; i++) {
+          const n = stones[i];
+          if (y <= n) {
+            stones.splice(i,0,y);
+            inserted = true;
+            break;
+          }
+        }
+      }
+      if (!inserted) stones.splice(stones.length - 2, 0, y);
+    }
+  }
+  return stones[0] ? stones[0] : 0;
+}
+console.log('RESULT sort: ', lastStoneWeightSort(stones3));
