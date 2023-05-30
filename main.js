@@ -1,75 +1,101 @@
 /*
-  leetcode: 39. Combination Sum (medium)
+  LeetCode: Word Search (medium)
 
-  Given an array of distinct integers `candidates` and a target integer `target`, return a list of all unique combinations of `candidates` where the chosen numbers sum to `target`. You may return the combinations in any order.
+  Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid.
 
-  The same number may be chosen from `candidates` an unlimited number of times. Two combinations are unique if the 
-  frequency
-  of at least one of the chosen numbers is different.
-
-  The test cases are generated such that the number of unique combinations that sum up to `target` is less than `150` combinations for the given input.
+  The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
 
   
 
   Example 1:
-    Input: candidates = [2,3,6,7], target = 7
-    Output: [[2,2,3],[7]]
-    Explanation:
-    2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
-    7 is a candidate, and 7 = 7.
-    These are the only two combinations.
+    [A] [B] [C]  E
+     S   F  [C]  S 
+     A  [D] [E]  E
+
+    Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+    Output: true
 
   Example 2:
-    Input: candidates = [2,3,5], target = 8
-    Output: [[2,2,2,2],[2,3,3],[3,5]]
+    A   B   C   E
+    S   F   C  [S]
+    A   D  [E] [E]
+
+    Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+    Output: true
 
   Example 3:
-    Input: candidates = [2], target = 1
-    Output: []
+    A   B   C   E
+    S   F   C   S
+    A   D   E   E
+
+    Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+    Output: false
   
 
   Constraints:
-    - 1 <= candidates.length <= 30
-    - 2 <= candidates[i] <= 40
-    - All elements of candidates are distinct.
-    - 1 <= target <= 40
+    - m == board.length
+    - n = board[i].length
+    - 1 <= m, n <= 6
+    - 1 <= word.length <= 15
+    - `board` and `word` consists of only lowercase and uppercase English letters.
 
-  Solution by NeetCode
+    Follow up: Could you use search pruning to make your solution faster with a larger board?
 
-  Leetcod submission:
-    #1
-    - Runtime: 74 ms, beats 74.97%
-    - Memory: 45 MB, beats 80.66%
+  Solution by myself (re-solving) 
+
+  LeetCode submission: 
+    Runtime: 2079 ms, beats 22.57%
+    Memory: 48.9 MB, beats 21.78%
 */
 
-function combinationSum(candidates, target) {
-  let res = [];
+function exist(board, word) {
+  function dfs(x, y, visited, str) {
+    const rowLength = board.length;
+    const columnLength = board[0].length;
+    console.log('str', str);
+    if (
+      (y < 0 || y >= rowLength) || 
+      (x < 0 || x >= columnLength) || 
+      (board[y][x] !== word[str.length]) || 
+      visited.has(`${x}${y}`)
+    ) {
+      console.log('FALSE');
+      return false}
+      // console.log(board[y][x], word[str.length]);
 
-  function dfs(i, cur, total) {
-    if (total === target) {
-      res.push(cur.slice());
-      return;
-    }
-    if (i >= candidates.length || total > target) return;
+    str = str + board[y][x];
+    // console.log('str after', str);
+    if (str === word) {
+      console.log('RETURN TRUE');
+      return true;
+    };
 
-    cur.push(candidates[i]);
-    dfs(i, cur, total + candidates[i]);
-    cur.pop();
-    dfs(i + 1, cur, total);
+    visited.add(`${x}${y}`);    
+    
+    let isExist =  (
+      dfs(x-1,y,visited,str) ||
+      dfs(x+1,y,visited,str) ||
+      dfs(x,y-1,visited,str) ||
+      dfs(x,y+1,visited,str) 
+    ); 
+    visited.delete(`${x}${y}`);
+    return isExist;
   }
-
-  dfs(0, [], 0);
-  return res;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      const c = board[i][j];
+      if (c == word[0]) {
+        if (dfs(j, i, new Set(), '')) return true;
+      }
+      
+    }
+  }
+  return false;
 }
-
-const candidates1 = [2, 3, 6, 7];
-const target1 = 7; // [[2,2,3],[7]]
-const candidates2 = [2,3,5];
-const target2 = 8; // [[2,2,2,2],[2,3,3],[3,5]]
-const candidates3 = [2]; 
-const target3 = 1; // []
-const candidates4 = [2,3]; 
-const target4 = 2; // [[2]]
-const candidates5 = [8,7,4,3];
-const target5 = 11; // [[3,4,4], [3,8], [4,7]]
-console.log('RESULT: ', combinationSum(candidates5, target5));
+const board1 = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]];
+const word1 = "ABCCED"; // expect: true
+const board2 = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]];
+const word2 = 'SEE'; // expect: true
+const board3 = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]];
+const word3 = 'ABCB'; // expect: false
+console.log('RESULT: ', exist(board3, word3))
