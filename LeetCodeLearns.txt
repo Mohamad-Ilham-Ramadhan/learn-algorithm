@@ -72,3 +72,10 @@ Lesson learned in solving LeetCode problems:
    - const arr = [1,2,3,4];
    - [ arr[0], arr[3] ] = [ arr[3], arr[0] ];
    - arr -> [4, 2, 3, 1]
+
+- Use negative numbers to mimic max heap if we only have min heap like in the Python language.
+   - max heap    min heap           negative min heap
+        8         4     --------->     -8
+      4   6     8   6                -4  -6
+      
+      - so we only need to use Math.absolute() to get the max number.
