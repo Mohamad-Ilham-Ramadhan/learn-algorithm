@@ -1,162 +1,145 @@
 /*
-  Leetcode: 1046. Last Stone Weight (easy)
+  leetcode: 973. K Closest Points to Origin (medium)
 
-  You are given an array of integers `stones` where `stones[i]` is the weight of the `ith` stone.
+  Given an array of `points` where `points[i] = [xi, yi]` represents a point on the X-Y plane and an integer `k`, return the `k` closest points to the origin `(0, 0)`.
 
-  We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights `x` and `y` with `x <= y`. The result of this smash is:
+  The distance between two points on the X-Y plane is the Euclidean distance (i.e., `√(x1 - x2)2 + (y1 - y2)2)`.
 
-  If `x == y`, both stones are destroyed, and
-  If `x != y`, the stone of weight `x` is destroyed, and the stone of weight `y` has new weight `y - x`.
-  At the end of the game, there is at most one stone left.
+  You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in).
 
-  Return the weight of the last remaining stone. If there are no stones left, return `0`.
+  
 
   Example 1:
-    Input: stones = [2,7,4,1,8,1]
-    Output: 1
-    Explanation: 
-      We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
-      we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
-      we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
-      we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of the last stone.
+                   5
+                   4
+                   3 .
+                   2    
+                   1
+    -5 -4 -3 -2 -1 0  1  2  3  4  5
+                   -1
+              .    -2
+                   -3
+                   -4
+                   -5
+    Input: points = [[1,3],[-2,2]], k = 1
+    Output: [[-2,2]]
+    Explanation:
+      - The distance between (1, 3) and the origin is sqrt(10).
+      - The distance between (-2, 2) and the origin is sqrt(8).
+      - Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
+      - We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
 
   Example 2:
-    Input: stones = [1]
-    Output: 1
+
+    Input: points = [[3,3],[5,-1],[-2,4]], k = 2
+    Output: [[3,3],[-2,4]]
+    Explanation: The answer [[-2,4],[3,3]] would also be accepted.
   
 
   Constraints:
-    - 1 <= stones.length <= 30
-    - 1 <= stones[i] <= 1000
+    - 1 <= k <= points.length <= 104
+    - -104 < xi, yi < 104
 
-  Solution by myself: 
-    use maxheap to get the first and second greatest number 
-    while (heap.size > 1) 
-      if x == y then continue 
-      else insert the difference to the maxheap
-    return the heap[0] or zero if the heap is empty
+  Solution by myself:
+    use max heap to store the points
+    size of the max heap is equal to k 
+    the max number become thresholder
+    if a points is smaller than the max number then extract the max and insert the points 
 
-  LeetCode submission:
-    #1 (max heap)
-    - Runtime: 57 ms, beats 78.21%;
-    - Memory: 44.6 MB, beats 9.12%
-    #2 (sorted array)
-    - Runtime: 68 ms, beats 31.61%
-    - Memory: 42 MB, beats 94.65%
+  LeetCode submission: 
+    #1 
+      - Runtime: 217 ms, beats 66.16%
+      - Memory: 63.1 MB, beats 23.93%
+    #2 
+      - Runtime: 230 ms, beats 53.78%
+      - Memory: 63.8 MB, beats 22.40%
 */
+
+// max heap designed only for this problem
 class MaxHeap {
   constructor() {
     this.heap = [];
   }
   peek() {
-    return this.heap[0];
-  }
-  insert(val) {
-    if (this.heap.length === 0) {
-      this.heap.push(val);
-      return;
-    }
-    this.heap.push(val);
-    this.heapifyUp();
+    return this.heap[0] ? this.heap[0] : null;
   }
   heapifyUp() {
     let currentIndex = this.heap.length - 1;
-    while ( currentIndex > 0 ) {
+    while (currentIndex > 0) {
+      let parrentIndex = Math.floor( (currentIndex - 1) / 2);
       let maxIndex = currentIndex;
-      let parentIndex = Math.floor( (currentIndex - 1) / 2);
-      if ( parentIndex >= 0 && this.heap[parentIndex] < this.heap[currentIndex] ) {
-        maxIndex = parentIndex;
+      if (this.heap[currentIndex]?.distance > this.heap[parrentIndex]?.distance) {
+        maxIndex = parrentIndex;
       }
-      if (currentIndex === maxIndex) break;
-      [ this.heap[currentIndex], this.heap[parentIndex] ] = [ this.heap[parentIndex], this.heap[currentIndex] ];
+      if (currentIndex === maxIndex) return;
+      [ this.heap[currentIndex], this.heap[parrentIndex] ] = [ this.heap[parrentIndex], this.heap[currentIndex] ];
       currentIndex = maxIndex;
     }
   }
-  extractMax() {
-    if (this.size() === 0) return null;
-    let max = this.heap[0];
-    let last = this.heap.pop();
-    if (this.size() > 0) {
-      this.heap[0] = last;
-      this.heapifyDown();
-    }
-    return max;
+  // { distance: float, point: [x,y]}
+  insert(val) {
+    if (this.heap.length === 0) { this.heap.push(val); return;}
+    this.heap.push(val);
+    this.heapifyUp(); 
   }
   heapifyDown() {
     let currentIndex = 0;
     while (true) {
-      let maxIndex = currentIndex;
       let leftIndex = 2 * currentIndex + 1;
       let rightIndex = 2 * currentIndex + 2;
-      if (this.heap[maxIndex] < this.heap[leftIndex]) {
-        maxIndex = leftIndex;
-      }
-      if (this.heap[maxIndex] < this.heap[rightIndex]) {
-        maxIndex = rightIndex;
-      }
-      if (maxIndex === currentIndex) {
-        break;
-      }
+      let maxIndex = currentIndex;
+
+      if ( this.heap[leftIndex]?.distance > this.heap[maxIndex]?.distance) maxIndex = leftIndex; 
+      if ( this.heap[rightIndex]?.distance > this.heap[maxIndex]?.distance) maxIndex = rightIndex; 
+
+      if (maxIndex === currentIndex) return;
+
       [ this.heap[currentIndex], this.heap[maxIndex] ] = [ this.heap[maxIndex], this.heap[currentIndex] ];
+      
       currentIndex = maxIndex;
     }
   }
-  size() {
-    return this.heap.length;
+  extractMax() {
+    const max = this.heap[0];
+    const last = this.heap.pop();
+    if (this.heap.length > 0) {
+      this.heap[0] = last;
+      this.heapifyDown();
+    }
+    return max ? max : null;
   }
 }
 const mh = new MaxHeap();
-mh.insert(2);
-console.log('mh.heap', Object.assign([], mh.heap));
-mh.extractMax();
-console.log('mh.heap', Object.assign([], mh.heap));
-function lastStoneWeight(stones) {
-  const maxHeap = new MaxHeap();
-  for (let i = 0; i < stones.length; i++) {
-    const stone = stones[i];
-    maxHeap.insert(stone);
-  }
-  while (maxHeap.size() > 1) {
-    console.log(Object.assign([], maxHeap.heap));
-    let y = maxHeap.extractMax();
-    let x = maxHeap.extractMax();
-    if (y !== x) {
-      y = y - x;
-      maxHeap.insert(y);
-    }
-  }
-  return maxHeap.heap[0] ? maxHeap.heap[0] : 0;
-}
-const stones1 = [2,7,4,1,8,1]; // 1
-const stones2 = [2]; // 2
-const stones3 = [2,2]; // 0
-// console.log('RESULT: ', lastStoneWeight(stones3));
 
-// use sorting solution
-function lastStoneWeightSort(stones) {
-  stones.sort( (a,b) => a - b);
-  while (stones.length > 1) {
-    console.log('stones', stones);
-    let y = stones.pop();
-    let x = stones.pop();
-    if (y != x) {
-      y = y - x;
-      let inserted = false;
-      if (y <= stones[0]) {stones.splice(0, 0, y); inserted = true;}
-      else if (y >= stones[stones.length - 1]) {stones.push(y); inserted = true;}
-      if (!inserted) {
-        for (let i = 1; i < stones.length - 1; i++) {
-          const n = stones[i];
-          if (y <= n) {
-            stones.splice(i,0,y);
-            inserted = true;
-            break;
-          }
-        }
-      }
-      if (!inserted) stones.splice(stones.length - 2, 0, y);
+function kClosest(points, k) {
+  // #2 [start]
+  if (points.length === k) {console.log('same'); return points;}
+  // #2 [end]
+  const mh = new MaxHeap();
+  for (let i = 0; i < points.length; i++) {
+    const point = points[i];
+    const distance = Math.sqrt( Math.pow(0 - point[0] , 2) + Math.pow(0 - point[1], 2) );
+    if (mh.heap.length < k) {
+      mh.insert({point, distance});
+      continue;
+    }
+    if (distance < mh.peek().distance) {
+      mh.extractMax();
+      mh.insert({point, distance});
     }
   }
-  return stones[0] ? stones[0] : 0;
+  let result = [];
+  for (let value of mh.heap) {
+    result.push(value.point);
+  }
+  return result;
 }
-console.log('RESULT sort: ', lastStoneWeightSort(stones3));
+const points1 = [[1,3],[-2,2]]; 
+const k1 = 1;
+const points2 = [[3,3], [5,-1], [-2,4]];
+const k2 = 2
+const points3 = [[3,5]];
+const k3 = 1;
+const points4 = [[1,2], [2,3], [3,4]];
+const k4 = 3
+console.log('RESULT: ', kClosest(points4, k4));
