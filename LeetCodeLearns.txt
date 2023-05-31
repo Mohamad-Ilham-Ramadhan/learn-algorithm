@@ -79,3 +79,19 @@ Lesson learned in solving LeetCode problems:
       4   6     8   6                -4  -6
       
       - so we only need to use Math.absolute() to get the max number.
+
+- When store 2D coordinate (x,y) in Set, use `${x},${y}` instead `${x}${y}` because if x = 1 and y = 11 -> '111' it's equal with x = 11 and y = 1 -> '111'
+
+- Use number instead of string when comparing or matching something because it's faster, for Example:
+   - when I use `${x},${y}` to store 2D visited coordinate which latter checked: if (visited.has(`${x},${y}`)), the runtime is:
+      #1
+      Runtime: 141 ms, beats 15.71%
+      #2
+      Runtime: 151 ms, beats 12.80%
+   - But when I use number instead of string: visited.has((y * colsLength) + x), the runtime is:
+      #1
+      Runtime: 93 ms, beats 41.46%
+      #2
+      Runtime: 81 ms, beats 66.89%
+
+   - Numbers almost two times faster.
