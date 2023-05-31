@@ -95,3 +95,22 @@ Lesson learned in solving LeetCode problems:
       Runtime: 81 ms, beats 66.89%
 
    - Numbers almost two times faster.
+
+- The best way to store visited coordinate is using object. Using numbers can cause conflict for example:
+   - (number conflicts):
+         [1,2]
+      [x][3,4] <--- x is before number 3
+
+      coordinate for number 2 is [0,1], the number is (0 * 2) + 1 = 1
+      coordinate for before number 3 is [1, -1], the number is (1 * 2) + -1 = 1
+
+   - (using object)
+      - store: 
+         if (visited[r] === undefined) visited[r] = {};
+         visited[r][c] = true;
+      
+      - checking/matching/has 
+         if (visited[r] && visited[r][c]) // match/has 
+      
+      - delete: 
+         delete visited[r][c];
