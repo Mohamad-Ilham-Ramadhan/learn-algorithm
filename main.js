@@ -32,62 +32,144 @@
     - 1 <= m, n <= 300
     - grid[i][j] is '0' or '1'.
   
-  Solution by myself:
-    using dfs
+  Solution by NeetCode:
+    using bfs
 
   Leetcode submission: 
-    #1 use string matching in the Set (`${x},${y}`)
-      #1
-      Runtime: 141 ms, beats 15.71%
-      Memory: 58.9 MB, beats 9.21%
-      #2
-      Runtime: 151 ms, beats 12.80%
-      Memory: 59 MB, beats 9%
-    #2 use number matching in the Set ((y * colsLength) + x)
-      #1
-      Runtime: 93 ms, beats 41.46%
-      Memory: 47.5 MB, beats 46.35%
-      #2
-      Runtime: 81 ms, beats 66.89%
-      Memory: 47.2 MB, beats 46.77%
+    #1
+    Runtime: 111 ms, 26.36%
+    Memory: 54.1 MB, 20.37%
+    #2 
+    Runtime: 122 ms, 21.60%
+    Memory: 54 MB, 20.58%
 */
 
-function numIslands(grid) {
-  const visited = new Set();
-  const rowsLength = grid.length;
-  const colsLength = grid[0].length;
-
-  function dfs(x, y) {
-    if (
-      (x < 0 || x >= colsLength) ||
-      (y < 0 || y >= rowsLength) ||
-      // ( visited.has(`${x},${y}`) ) ||
-      ( visited.has((y * colsLength) + x) ) ||
-      (grid[y][x] === '0')
-    ) return false;
-    // visited.add(`${x},${y}`)
-    visited.add((y * colsLength) + x);
-    
-    dfs(x-1, y);
-    dfs(x, y-1);
-    dfs(x+1, y);
-    dfs(x, y+1);
-
-    return true;
+// Needs deque for BFS. Since Javascript doesn't have deque out of the box, I created it.
+// if the items using array, add/remove the front will have time complexity O(n) because it needs to rearrange the indexes.
+// the items using object/hashmap so add/remove front time complexity is O(1).
+class Deque {
+  constructor() {
+    this.items = {};
+    this.frontIndex = 0;
+    this.endIndex = 1;
+    this.size = 0;
   }
 
-  let result = 0;
+  // Add an element to the front of the deque
+  addFront(element) {
+    this.items[this.frontIndex] = element;
+    // this.endIndex = this.frontIndex === 0 && this.endIndex === 0 ? 1 : this.endIndex;
+    this.frontIndex--;
+    this.size++;
+  }
 
-  for (let y = 0; y < rowsLength; y++) {
-    for (let x = 0; x < colsLength; x++) {
-      if (grid[y][x] === '1') {
-        if (dfs(x, y)) {
-          result++;
+  // Add an element to the rear of the deque
+  addRear(element) {
+    this.items[this.endIndex] = element;
+    // this.frontIndex = this.endIndex === 0 && this.frontIndex === 0 ? -1 : this.frontIndex;
+    this.endIndex++;
+    this.size++;
+  }
+
+  // Remove and return the element from the front of the deque
+  removeFront() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    const front = this.items[this.frontIndex + 1];
+    delete this.items[this.frontIndex + 1];
+    this.frontIndex++;
+    this.size--;
+    return front;
+  }
+
+  // Remove and return the element from the rear of the deque
+  removeRear() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    const end = this.items[this.endIndex - 1];
+    delete this.items[this.endIndex - 1];
+    this.endIndex--;
+    this.size--;
+    return end;  
+  }
+
+  // Return the element at the front of the deque without removing it
+  peekFront() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.items[this.frontIndex + 1];
+  }
+
+  // Return the element at the rear of the deque without removing it
+  peekRear() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.items[this.endIndex - 1];
+  }
+
+  // Check if the deque is empty
+  isEmpty() {
+    return this.size === 0;
+  }
+
+  // Return the size of the deque
+
+  // Clear the deque
+  clear() {
+    this.items = {};
+    this.frontIndex = 0;
+    this.endIndex = 0;
+    this.size = 0;
+  }
+}
+
+
+
+function numIslands(grid) {
+  if (grid.length === 0) return 0;
+
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const visit = new Set();
+  let islands = 0;
+
+  function bfs(r,c) {
+    q = new Deque();
+    visit.add((r * cols) + c);
+    q.addRear([r,c]);
+
+    while (q.size > 0) {
+      const [ row, col ] = q.removeFront();
+      const directions = [ [1,0], [-1,0], [0,1], [0,-1] ];
+      for (let [dr, dc] of directions) {
+        const r = row + dr; const c = col + dc;
+        if (
+          (r >= 0 && r < rows) && 
+          (c >= 0 && c < cols) && 
+          (grid[r][c] === '1') && 
+          (!visit.has( ( r * cols ) + c ))
+        ) {
+          q.addRear([r, c]);
+          visit.add(( r * cols ) + c);
         }
       }
     }
   }
-  return result;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (grid[r][c] === '1' && !visit.has((r * cols) + c)) {
+        bfs(r,c);
+        islands++;
+      }
+    }
+  }
+
+  return islands;
 }
 const grid1 = [
   ["1","1","1","1","0"],
@@ -129,7 +211,7 @@ const grid6 = [
   ["0","1","0","0","0","0","1","1","0","0","1","0","1","0","0","1","0","0","1","1"], // 1 // 57
   ["0","0","0","0","0","0","1","1","1","1","0","1","0","0","0","1","1","0","0","0"]  // 1 // 58
 ];// 58
-console.log('sum :', 3+4+2+2+0+4+4+1+2+5+3+4+4+3+2+6+4+3+1+1);
+// console.log('sum :', 3+4+2+2+0+4+4+1+2+5+3+4+4+3+2+6+4+3+1+1);
 const grid7 = [
   ['0','1','0'],
   ['1','1','1'],
@@ -140,4 +222,4 @@ const grid7 = [
   ['0','0','1'],
   ['1','0','1'],
 ]; // 2
-console.log('RESULT: ', numIslands(grid7));
+console.log('RESULT: ', numIslands(grid5));
