@@ -76,8 +76,20 @@
   
 
   LeetCode submission: 
-    Runtime: 64 ms, beats 48.9%
-    Memory: 44.2 MB, beats 23.21%
+   #1 my code
+      #1
+      Runtime: 64 ms, beats 48.9%
+      Memory: 44.2 MB, beats 23.21%
+      #2
+      Runtime: 63 ms, beats 54.35%
+      Memory: 43.6 MB, beats 80.86%
+   #2 with chatGPT's deepClone 
+      #1
+      Runtime: 66 ms, beats 37.51%
+      Memory: 43.6 MB, beats 80.86%
+      #2
+      Runtime: 55 ms, beats 89%
+      Memory: 43.9 MB, beats 42.20%
 */
 
 // Definition for a Node.
@@ -204,6 +216,40 @@ class Node {
    }
    return nodeMap[1];
  };
+
+ // chatGPT's deepClone 
+ function deepCloneWithCircularReferences(obj, cache = new WeakMap()) {
+   if (typeof obj !== 'object' || obj === null) {
+     return obj; // Return non-object types as-is
+   }
+   
+   if (cache.has(obj)) {
+     return cache.get(obj); // Return cached clone if circular reference exists
+   }
+   
+   let clone;
+   
+   if (Array.isArray(obj)) {
+     clone = []; // Create a new array
+   } else {
+     clone = {}; // Create a new object
+   }
+   
+   cache.set(obj, clone); // Cache the clone
+   
+   for (let key in obj) {
+     if (Object.prototype.hasOwnProperty.call(obj, key)) {
+       clone[key] = deepCloneWithCircularReferences(obj[key], cache); // Recursively clone object properties
+     }
+   }
+   
+   return clone;
+ }
+
+ function cloneGraphGPT(node) {
+   if (node === null) return null;
+   return deepCloneWithCircularReferences(node)
+ }
  let n4 = new  Node(4,[])
  let n3 = new  Node(3,[])
  let n2 = new  Node(2,[])
