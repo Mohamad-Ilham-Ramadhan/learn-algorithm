@@ -1,5 +1,5 @@
 /*
-  70. Climbing Stairs (medium)
+  70. Climbing Stairs (easy)
 
   You are climbing a staircase. It takes `n` steps to reach the top.
 
@@ -25,109 +25,32 @@
   Constraints:
     - 1 <= n <= 45
 
-  Solution by myself:
-    - using backtracking (combination) fail: time limit exceeded
-    - using dynamic programming (caching): store total combination from n1, n2 = n1 + n1, n3 = n2 + n1, n4 = n3 + n2, n5 = n4 + n3, ...
+  Solution by NeetCode:
+    top down approach
+    using only 2 vairable to store sub problem so, the space complexity is O(2) or O(1)
 
   LeetCode submission:
-    #1 cache using Object
-      #1
-      - Runtime: 63 ms, beats 24.57%
-      - Memory: 41.7 MB, beats 70.8%
-      #2
-      - Runtime: 63 ms, beats 24.57%
-      - Memory: 41.8 MB, beats 49.79%
-    #2 cache using Map
-      #1
-      - Runtime: 50 ms, beats 89.32%
-      - Memory: 42.1 MB, beats 29.25%
-      #2
-      - Runtime: 55 ms, beats 70.1%
-      - Memory: 41.8 MB, beats 60.35%
+    #1
+    - Runtime: 54 ms, beats 74.61%
+    - Memory: 41.3 MB, beats 91.43%
+
 
 */
 
 function climbStairs(n) {
-
-  // BACKTRACKING TEST: FAIL, TIME LIMIT EXCEEDED
-
-  // let result = 0;
-  // function dfs(sum) {
-  //     if (sum === n) result++;
-  //     if (sum > n) return;
-  //     dfs(sum + 1);
-  //     dfs(sum + 2)
-  // }
-  // dfs(1);
-  // dfs(2);
-  // return result;
-
-  /*
-    {
-      2: 2
-      3: 3
-    }
-    dp(4) = 2 + 3
-  */
-  let cache = {1: 1, 0: 1, '-1': 0};
-  // const cache = (new Map()).set(1,1).set(0,1).set(-1,0);
-  function dp(n) {
-    if (cache[n] !== undefined) return cache[n];
-    // if (cache.has(n)) return cache.get(n);
-    cache[n] = dp(n-2) + dp(n-1);
-    // cache.set(n, dp(n-2) + dp(n-1) );
-    return cache[n];
-    // return cache.get(n);
+  let one = 1; let two = 1;
+  for (let i = 0; i < n-1; i++) {
+    console.log('one', one);
+    const temp = one;
+    one = one + two;
+    two = temp;
   }
-  return dp(n);
+  return one;
 }
 const n1 = 2;
 const n2 = 3;
 const n3 = 44; // time limit exeeded
 
 const start = Date.now();
-console.log('RESULT: ', climbStairs(4));
+console.log('RESULT: ', climbStairs(n3));
 console.log('RUNTIME: ', Date.now() - start);
-
-/*
-  Observing the patterns:
-
-  1
-
-  1,1
-  2
-
-  1,1,1
-  2,1
-  1,2
-
-
-  1,1,1,1
-  2,1,1
-  1,2,1
-  1,1,2
-  2,2
-  
-  1,1,1,1,1
-  2,1,1,1
-  1,2,1,1
-  1,1,2,1
-  2,2,1
-  1,1,1,2
-  2,1,2
-  1,2,2
-  
-  1,1,1,1,1,1
-  2,1,1,1,1
-  1,2,1,1,1
-  1,1,2,1,1
-  2,2,1,1
-  1,1,1,2,1
-  2,1,2,1
-  1,2,2,1
-  1,1,1,1,2
-  2,1,1,2
-  1,2,1,2
-  1,1,2,2
-  2,2,2
-*/

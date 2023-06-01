@@ -1,5 +1,5 @@
 /*
-  70. Climbing Stairs (medium)
+  70. Climbing Stairs (easy)
 
   You are climbing a staircase. It takes `n` steps to reach the top.
 
