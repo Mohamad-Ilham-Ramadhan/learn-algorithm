@@ -114,3 +114,30 @@ Lesson learned in solving LeetCode problems:
       
       - delete: 
          delete visited[r][c];
+
+- Map is 20% faster than Object:
+   - using object for cache in dynamic programming
+      var climbStairs = function(n) {
+         let cache = {1: 1, 0: 1, '-1': 0};
+         function dp(n) {
+            if (cache[n] !== undefined) return cache[n];
+            cache[n] = dp(n-2) + dp(n-1);
+            return cache[n];
+         }
+         return dp(n);
+      };
+      - Runtime: 63 ms, beats 24.57%
+      - Memory: 41.7 MB, beats 70.8%
+   
+   - using Map for cache in dynamic programming
+      var climbStairs = function(n) {
+         const cache = (new Map()).set(1,1).set(0,1).set(-1,0);
+         function dp(n) {
+            if (cache.has(n)) return cache.get(n)
+            cache.set(n, dp(n-2) + dp(n-1) );
+            return cache.get(n);
+         }
+         return dp(n);
+      };
+      - Runtime: 50 ms, beats 89.32%
+      - Memory: 42.1 MB, beats 29.25%
