@@ -26,8 +26,9 @@
     - 1 <= n <= 45
 
   Solution by myself:
-    - using backtracking (combination) fail: time limit exceeded
-    - using dynamic programming (caching): store total combination from n1, n2 = n1 + n1, n3 = n2 + n1, n4 = n3 + n2, n5 = n4 + n3, ...
+   - using backtracking (combination) fail: time limit exceeded
+   - using dynamic programming (caching): store total combination from n1, n2 = n1 + n1, n3 = n2 + n1, n4 = n3 + n2, n5 = n4 + n3, ...
+   - I don't know what I use, top-down or bottom-up LOL. I haven't studied dynamic programming yet.
 
   LeetCode submission:
     #1 cache using Object
