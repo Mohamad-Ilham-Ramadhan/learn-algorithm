@@ -1,154 +1,133 @@
 /*
-  207. Course Schedule (medium)
+  70. Climbing Stairs (medium)
 
-  There are a total of `numCourses` courses you have to take, labeled from `0` to `numCourses - 1`. You are given an array `prerequisites` where `prerequisites[i] = [ai, bi]` indicates that you must take course `bi` first if you want to take course `ai`.
+  You are climbing a staircase. It takes `n` steps to reach the top.
 
-  For example, the pair `[0, 1]`, indicates that to take course `0` you have to first take course `1`.
-  Return `true` if you can finish all courses. Otherwise, return `false`.
+  Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?
 
-  
 
   Example 1:
-
-    Input: numCourses = 2, prerequisites = [[1,0]]
-    Output: true
-    Explanation: There are a total of 2 courses to take. 
-    To take course 1 you should have finished course 0. So it is possible.
+    Input: n = 2
+    Output: 2
+    Explanation: There are two ways to climb to the top.
+    1. 1 step + 1 step
+    2. 2 steps
 
   Example 2:
-
-    Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
-    Output: false
-    Explanation: There are a total of 2 courses to take. 
-    To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+    Input: n = 3
+    Output: 3
+    Explanation: There are three ways to climb to the top.
+    1. 1 step + 1 step + 1 step
+    2. 1 step + 2 steps
+    3. 2 steps + 1 step
   
 
   Constraints:
-    - 1 <= numCourses <= 2000
-    - 0 <= prerequisites.length <= 5000
-    - prerequisites[i].length == 2
-    - 0 <= ai, bi < numCourses
-    - All the pairs prerequisites[i] are unique.
-  
+    - 1 <= n <= 45
+
   Solution by myself:
-    using dfs to detect cycle 
-    if there is a cycle then false 
-    true
-  
+    - using backtracking (combination) fail: time limit exceeded
+    - using dynamic programming (caching): store total combination from n1, n2 = n1 + n1, n3 = n2 + n1, n4 = n3 + n2, n5 = n4 + n3, ...
+
   LeetCode submission:
-    #1 
-      - Runtime: 103 ms, beats 22.4%
-      - Memory: 51.2 MB, beats 14.58%
-    #2 (clear comments)
-      - Runtime: 92 ms, beats 26.84%
-      - Memory: 51.4 MB, beats 12.95%
-    
+    #1 cache using Object
+      #1
+      - Runtime: 63 ms, beats 24.57%
+      - Memory: 41.7 MB, beats 70.8%
+      #2
+      - Runtime: 63 ms, beats 24.57%
+      - Memory: 41.8 MB, beats 49.79%
+    #2 cache using Map
+      #1
+      - Runtime: 50 ms, beats 89.32%
+      - Memory: 42.1 MB, beats 29.25%
+      #2
+      - Runtime: 55 ms, beats 70.1%
+      - Memory: 41.8 MB, beats 60.35%
+
 */
+
+function climbStairs(n) {
+
+  // BACKTRACKING TEST: FAIL, TIME LIMIT EXCEEDED
+
+  // let result = 0;
+  // function dfs(sum) {
+  //     if (sum === n) result++;
+  //     if (sum > n) return;
+  //     dfs(sum + 1);
+  //     dfs(sum + 2)
+  // }
+  // dfs(1);
+  // dfs(2);
+  // return result;
+
+  /*
+    {
+      2: 2
+      3: 3
+    }
+    dp(4) = 2 + 3
+  */
+  let cache = {1: 1, 0: 1, '-1': 0};
+  // const cache = (new Map()).set(1,1).set(0,1).set(-1,0);
+  function dp(n) {
+    if (cache[n] !== undefined) return cache[n];
+    // if (cache.has(n)) return cache.get(n);
+    cache[n] = dp(n-2) + dp(n-1);
+    // cache.set(n, dp(n-2) + dp(n-1) );
+    return cache[n];
+    // return cache.get(n);
+  }
+  return dp(n);
+}
+const n1 = 2;
+const n2 = 3;
+const n3 = 44; // time limit exeeded
+
+const start = Date.now();
+console.log('RESULT: ', climbStairs(4));
+console.log('RUNTIME: ', Date.now() - start);
 
 /*
-I returned false for the following test case:
-5
-[[1,4],[2,4],[3,1],[3,2]]
+  Observing the patterns:
 
-and the result shows it should be true. Can someboly explain why there are only four courses (1,2,3 and 5) but we need to take 5?
+  1
 
-    learned {
-        4,
-        1
-        2
-        3
-        3
-    }
+  1,1
+  2
 
-    4->1->3
-    |->2__^
+  1,1,1
+  2,1
+  1,2
 
-    0-->1
 
-    3
-    [0,1][0,2][2,1]
-    1->0
-    v  ^
-    2__|
+  1,1,1,1
+  2,1,1
+  1,2,1
+  1,1,2
+  2,2
+  
+  1,1,1,1,1
+  2,1,1,1
+  1,2,1,1
+  1,1,2,1
+  2,2,1
+  1,1,1,2
+  2,1,2
+  1,2,2
+  
+  1,1,1,1,1,1
+  2,1,1,1,1
+  1,2,1,1,1
+  1,1,2,1,1
+  2,2,1,1
+  1,1,1,2,1
+  2,1,2,1
+  1,2,2,1
+  1,1,1,1,2
+  2,1,1,2
+  1,2,1,2
+  1,1,2,2
+  2,2,2
 */
-
-function canFinish(numCourses, prerequisites) {
-  // if there is a cyclic then it must be false;
-  let learned = new Set();
-  let totalLearn = 0;
-  let visited = new Set();
-  let list = {}; // adjency list
-  for (const [learn, required] of prerequisites) {
-    list[learn] = list[learn] ? list[learn] : {};
-    list[learn].require = list[learn].require ? list[learn].require.add(required) : (new Set()).add(required);
-    list[learn].adj = list[learn].adj ? list[learn].adj : new Set();
-
-    list[required] = list[required] ? list[required] : {};
-    list[required].require = list[required].require ? list[required].require : new Set();
-    list[required].adj = list[required].adj ? list[required].adj.add(learn) : (new Set()).add(learn);
-  }
-  console.log('list', list);
-  /*
-   [ [1,4],[2,4],[3,1],[3,2] ];
-    4->1->3
-    |->2__^
-  */
-  function dfs(learn) {
-    console.log('learn', learn);
-    let isCan = 0;
-    visited.add(learn);
-    for (let r of list[learn].require) {
-      console.log('r', r);
-      if (visited.has(r)) {
-        // there is a cyclic
-        console.log('THERE IS A CYCLIC');
-        return false;
-      }
-      if (!learned.has(r)) {
-        dfs(r);
-      }
-      if (learned.has(r)) {
-        isCan++;
-      }
-    }
-    visited.delete(learn);
-    // console.log('isCan', isCan);
-    // can learn current course
-    if (isCan === list[learn].require.size) {
-      console.log('learned', learn);
-      totalLearn++;
-      learned.add(learn);
-      return true;
-    }
-    return false;
-  }
-  for (const [learn, required] of prerequisites) {
-    console.log('============');
-    if (!dfs(learn)) {
-      return false;
-    } 
-  }
-  console.log('total learn', totalLearn);
-  // return totalLearn === numCourses ? true : false;
-  return true;
-};
-const numCourses1 = 2;
-const prerequisites1 = [[1,0]]; // expect: true
-
-const numCourses2 = 2;
-const prerequisites2 = [ [0,1], [1,0]]; // expect: false
-
-const numCourses3 = 5;
-const prerequisites3 = [ [1,4],[2,4],[3,1],[3,2] ]; // expect: true
-
-const numCourses4 = 3;
-const prerequisites4 = [[1,0]]; // expect: true
-
-const numCourses5 = 1;
-const prerequisites5 = []; // expect: true 
-
-const numCourses6 = 4;
-const prerequisites6 = [[0,3],[1,0],[2,1],[0,2]]; // expect: false
-
-
-console.log('RESULT :', canFinish(numCourses1, prerequisites1));
