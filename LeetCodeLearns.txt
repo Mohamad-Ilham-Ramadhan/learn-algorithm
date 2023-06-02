@@ -141,3 +141,5 @@ Lesson learned in solving LeetCode problems:
       };
       - Runtime: 50 ms, beats 89.32%
       - Memory: 42.1 MB, beats 29.25%
+
+- Dynamic programming can makes O(2||3||4...^n) to O(n)
