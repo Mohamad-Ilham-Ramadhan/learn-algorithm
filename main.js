@@ -1,232 +1,242 @@
 /*
-  Leetcode: 198. House Robber (medium)
+  leetcode: 213. House Robber II (medium)
 
-  You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+  You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
   Given an integer array `nums` representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
   
 
   Example 1:
+    Input: nums = [2,3,2]
+    Output: 3
+    Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+
+  Example 2:
     Input: nums = [1,2,3,1]
     Output: 4
     Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
     Total amount you can rob = 1 + 3 = 4.
 
-  Example 2:
-    Input: nums = [2,7,9,3,1]
-    Output: 12
-    Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
-    Total amount you can rob = 2 + 9 + 1 = 12.
+  Example 3:
+    Input: nums = [1,2,3]
+    Output: 3
   
 
   Constraints:
     - 1 <= nums.length <= 100
-    - 0 <= nums[i] <= 400
+    - 0 <= nums[i] <= 1000
 
-  Solution by myself:
-    Dynamic programing bottom-up approach (probably LOL. I still don't grasp the concept fully yet)
-
-  LeetCode submission:
-    #1 (using variable)
-      #1 (with comments)
-      - Runtime: 63 ms, beats 27.9%
-      - Memory: 41.4 MB, beats 91.80%
-      #2 (without comments)
-      - Runtime: 57 ms, beats 62.35%
-      - Memory: 42.4 MB, beats 16.45%
-      #3 (using ternary to compare 2 num instead Math.max)
-      - Runtime: 65 ms, beats 18.72%
-      - Memory: 42.1 MB, beats 42.28%
-
-    #2 (using map)
-      #1 (with comments)
-      - Runtime: 58 ms, beats 57.11%
-      - Memory: 41.8 MB, beats 62.35%
-      #2 (without comments)
-      - Runtime:  62 ms, beats 33.59%
-      - Memory: 42 MB, beats 42.28%
-      #3 (using ternary to compare 2 num instead Math.max)
-      - Runtime:  66 ms, beats 15.27%
-      - Memory: 42.4 MB, beats 16.45%
-
+  Leetcode submission:
+    (using maps)
+      #1
+        - Runtime: 57 ms, beats 68.35%
+        - Memory: 43.8 MB, beats 8.92%
+      #2
+        - Runtime: 74 ms, beats 5.5%
+        - Memory: 43.8 MB, beats 8.92%
+    (using variable)
+      #1
+        - Runtime: 71 ms, beats 7.74%
+        - memory: 41.8 MB, beats 76.79%
+      #2
+        - Runtime: 66 ms, beats 19.70%
+        - Memory: 42 MB, beats 57.58%
 */
-
-function rob(nums) {
-  // let lastOne = nums[0];
-  // let lastTwo = nums[1] ? nums[1] : 0;
-  // let lastThree = nums[2] ? nums[2] + lastOne  : 0;
-  // let lastOne = 0;
-  // let lastTwo = 0;
-  // let lastThree = 0;
-
-  let sumMap = (new Map()).set(-3, 0).set(-2, 0).set(-1, 0);
-  /*
-    === Progressive === 
-    [3,4,100,5,6,100,4,100,7,1,100,9,100]
-    3
-    4
-    
-    100 + 3 = 103
-    5 + 4 = 9
-
-    6 + 103 = 109
-    100 + 103 = 203
-
-    4 + 109 = 113
-    100 + 203 = 303
-
-    7 + 203 = 210
-    1 + 303 = 304
-
-    100 + 303 = 403
-    9 + 304 = 313
-
-    100 + 403 = 503 <- the greatest
-  */
- // lastThree = nums[i - 3] ? nums[i - 3] : 0;
- // lastTwo = nums[i - 2] ? nums[i - 2] : 0;
- // lastOne = nums[i - 1] ? nums[i - 1] : 0;
-  for (let i = 0; i < nums.length; i++) {
-    // console.log('i', i);
-    const n = nums[i];
-    sumMap.set(i, Math.max(sumMap.get(i-2) + n, sumMap.get(i-3) + n) );
-    // sumMap.set(i, sumMap.get(i-2) + n > sumMap.get(i-3) + n ? sumMap.get(i-2) + n : sumMap.get(i-3) + n)
-
-    // let tempOne = lastOne;
-    // lastOne = Math.max(lastTwo + n, lastThree + n);
-    // //  lastOne = lastTwo + n > lastThree + n ? lastTwo + n : lastThree + n;
-    // let tempTwo = lastTwo;
-    // lastTwo = tempOne;
-    // lastThree = tempTwo;
-  }
-  // console.log('sumMap: ', sumMap);
-  // console.log('lastOne', lastOne, 'lastTwo', lastTwo, 'lastThree', lastThree);
-  // return Math.max(lastOne, lastTwo, lastThree);
-  return Math.max(sumMap.get(nums.length - 1), sumMap.get(nums.length - 2), sumMap.get(nums.length - 3));
-};
-const nums1 = [1,2,3,1]; // expect 4
-const nums2 = [2,7,9,3,1]; // expect 12
-const nums3 = [2,1,1,2] // expect 4 = 2 + 2
-const nums4 = [3,4,100,5,6,100,4,100,7,1,100,9,100]; // expect 503
-const nums5 = [9,6];
-const nums6 = [8];
-const nums7 = [1,2,3]; // 4
-console.log('RESULT: ', rob(nums4));
 /*
-  [2,7,9,3,1]
-  1
-  3
-
-  9 + 1 = 10
-  7 + 3 = 10
-
-  2 + 10 = 12 <- the answer
-
-  [2,1,1,2]
-  2
-  1
-
-  1 + 1 = 2
-  2 + 2 = 4
-
-  [3,4,100,5,6,100,4,100,7,1,100,9,100]
-  100 = 100
-  9 = 9
-  100 + 100 = 200
-  1 + 9 = 10
-
-  7 + 200 = 207
-  100 + 200  = 300
-
-  4 + 207 = 211
-  100 + 300 = 400
-
-  6 + 300 = 306
-  5 + 400 = 405
-
-  100 + 400 = 500
-  4 + 405 = 409
-
-  3 + 500 = 503 <- the greatest, the answer
-
-  [2,9,5,6,100,4,5,100,7,8,100] 
-
-  100
-  8
-
-  7 + 100 = 107
-  100 + 100 = 200
-
-  5 + 107 = 112
-  4 + 200 = 204
-
-  100 + 200 = 300
-  6 + 204 = 210
-
-  5 + 300 = 305
-  9 + 300 = 309 => the answer
-
-  2 + 305 = 307
-
-
-
-  [2,3,5,6,100,4,5,100,7,8,100] -> 100,100,100 = 300
-
-  mulai dari 2
-
-  5 + 100 + 5 + 7 + 100 = 217
-  6 + 4 + 100 + 8 = 118
-
-  kita pilih 5 karena posibility totalnya lebih besar 
-
-  100 + 5 + 7 + 100 = 212 
-  4 + 100 + 8 = 112
-
-  kita pilih 100 
-  [2,5,100]
-
-  5 + 7 + 100 = 112
-  100 + 8 = 108
-
-  kita pilih 5
-  [2,5,100,5]
-
-  7
-  8
-
-  kita pilih 8 
-  [2,5,100,5,100] = 212
-
-  [2,9,5,6,100,4,5,100,7,8,100] 
-
-  mulai dari 9 
-  6 + 4 + 100 + 8 = 118
-  100 + 5 + 7 + 100 = 212
-
-  [9,100]
-
-
-  === Progressive === 
-  [3,4,100,5,6,100,4,100,7,1,100,9,100]
-
-  3
-  4
-  
-  100 + 3 = 103
-  5 + 4 = 9
-
-  6 + 103 = 109
-  100 + 103 = 203
-
-  4 + 109 = 113
-  100 + 203 = 303
-
-  7 + 203 = 210
-  1 + 303 = 304
-
-  100 + 303 = 403
-  9 + 304 = 313
-
-  100 + 403 = 503 <- the greatest
+  [3,4,100,5,6,100,4,100,7,1,100,9,100,4]
+  3 + 100 + 100 + 100 + 100 + 100 - 3;
+  4 + 5 + 100 + 100 + 100 + 100
 */
+
+// THIS SOLUTION IS NOT PASSED
+function rob(nums) {
+  if (nums.length === 1) return nums[0];
+  if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+  // rootIndex is 0 or 1, the first index number in the total sum
+  // if we include index 0 and last in the total sum then totalSum - Math.min(nums[0], nums[lastIndex])
+  // root index in the map is for track their rootIndex
+  let sumMap = (new Map()).set(-3, [0, 0]).set(-2, [0, 0]).set(-1, [0, 0]); // [rootIndex, sum]
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    let rootIndex = 0;
+    if (i === 0) {
+      rootIndex = 0;
+    } else if (i === 1) {
+      rootIndex = 1;
+    } else if (i < nums.length - 1) {
+      rootIndex = sumMap.get(i - 2)[1] + n >= sumMap.get(i - 3)[1] + n ? sumMap.get(i - 2)[0] : sumMap.get(i - 3)[0];
+      console.log('else', rootIndex);
+    }
+    // for rootIndex nums.length - 1, there is in the next, right before
+
+
+    // jika i = nums.length - 1
+    // pilih antara prev yang rootIndex nya 1 sama 0 yang 
+    // jika 0 maka setelah kalkulasi total - Math.min(nums[0], nums[length-1]) (let say: afterMin)
+    // Math.max(afterMin, prev yang rootIndex 1)
+    if (i === nums.length - 1) {
+      console.log('i === nums.length - 1');
+      // cari rootIndex === 1
+      let tempI2; // i - 2, i-2 + n
+      if (sumMap.get(i - 2)[0] === 0) {
+        tempI2 = (sumMap.get(i - 2)[1] + n) - Math.min(n, nums[0])
+      } else {
+        tempI2 = sumMap.get(i - 2)[1] + n;
+      }
+      console.log('i-2', sumMap.get(i - 2)[0], sumMap.get(i - 2)[1]);
+      // cari rootIndex === 1
+      let tempI3; // i - 3, i-3 + n
+      if (sumMap.get(i - 3)[0] === 0) {
+        tempI3 = (sumMap.get(i - 3)[1] + n) - Math.min(n, nums[0])
+      } else {
+        tempI3 = sumMap.get(i - 3)[1] + n;
+      }
+      // console.log('i-3',sumMap.get(i-3)[0], sumMap.get(i-3)[1]);
+      console.log('tempi2', tempI2);
+      console.log('tempi3', tempI3);
+      // maybe there will be a bug when tempI2 === tempI3 (yes there is a bug)
+      if (tempI2 > tempI3) {
+        rootIndex = sumMap.get(i - 2)[0]
+      } else {
+        rootIndex = sumMap.get(i - 3)[0]
+      }
+      sumMap.set(i, [rootIndex, Math.max(tempI2, tempI3)]);
+    } else {
+      sumMap.set(i, [rootIndex, Math.max(sumMap.get(i - 2)[1] + n, sumMap.get(i - 3)[1] + n)]);
+    }
+  }
+  console.log('sumMap before', new Map(sumMap));
+  // if (sumMap.get(nums.length - 1)[0] === 0) {
+  //   sumMap.set(nums.length - 1, [0, sumMap.get(nums.length - 1)[1] - Math.min(nums[0], nums[nums.length - 1])]);
+  // }
+  return Math.max(sumMap.get(nums.length - 1)[1], sumMap.get(nums.length - 2)[1], sumMap.get(nums.length - 3)[1]);
+
+}
+// const nums0 = [1, 7, 3, 7, 100]; // expect 107
+// const nums1 = [2, 3, 2];// expect: 3
+// const nums2 = [1, 2, 3, 1];// expect: 4
+// const nums3 = [1, 2, 3];// expect: 3
+// const nums4 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 100, 4]; // expect: 503
+// const nums5 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 4, 100]; // expect: 500
+// const nums6 = [1, 1, 1, 2]; // expect: 3
+// const nums7 = [2, 2, 4, 3, 2, 5]; // expect: 10
+// const nums8 = [2, 2, 5, 3, 2, 5]; // expect: 10 // check potential bug when tempI2 === tempI3
+// const nums9 = [2,1,2,6,1,8,10,10]; // expect: 25
+// console.log('RESULT: ', rob(nums9));
+
+
+// THIS ANSWER IS PASSED
+function rob2(nums) {
+  if (nums.length === 1) return nums[0];
+  if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+  let sumMap1 = (new Map()).set(-3, [0, 0]).set(-2, [0, 0]).set(-1, [0, 0]);
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    let rootIndex = 0;
+    if (i === 0) {
+      rootIndex = 0;
+    } else if (i === 1) {
+      rootIndex = 1;
+    } else {
+      rootIndex = sumMap1.get(i - 2)[1] + n >= sumMap1.get(i - 3)[1] + n ? sumMap1.get(i - 2)[0] : sumMap1.get(i - 3)[0];
+      console.log('else', rootIndex);
+    }
+    sumMap1.set(i, [rootIndex, Math.max(sumMap1.get(i - 2)[1] + n, sumMap1.get(i - 3)[1] + n)]);
+  }
+
+  if (sumMap1.get(nums.length - 1)[0] === 0) {
+    sumMap1.set(nums.length - 1, [0, sumMap1.get(nums.length - 1)[1] - Math.min(nums[0], nums[nums.length - 1])]);
+  }
+
+  let result1 = Math.max(sumMap1.get(nums.length - 1)[1], sumMap1.get(nums.length - 2)[1], sumMap1.get(nums.length - 3)[1]);
+
+
+  // ==================================
+  let sumMap2 = (new Map()).set(-3, 0).set(-2, 0).set(-1, 0);
+  let nums2 = nums.slice(1);
+  for (let i = 0; i < nums2.length; i++) {
+    const n = nums2[i];
+    sumMap2.set(i, Math.max(sumMap2.get(i - 2) + n, sumMap2.get(i - 3) + n));
+  }
+  let result2 = Math.max(sumMap2.get(nums2.length - 1), sumMap2.get(nums2.length - 2), sumMap2.get(nums2.length - 3));
+  console.log('sumMap 1 ', sumMap1)
+  console.log('sumMap 2 ', sumMap2)
+  console.log('result 1 ', result1, 'result 2 ', result2);
+  return Math.max(result1, result2);
+}
+
+// const nums0 = [1, 7, 3, 7, 100]; // expect 107
+// const nums1 = [2, 3, 2];// expect: 3
+// const nums2 = [1, 2, 3, 1];// expect: 4
+// const nums3 = [1, 2, 3];// expect: 3
+// const nums4 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 100, 4]; // expect: 503
+// const nums5 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 4, 100]; // expect: 500
+// const nums6 = [1, 1, 1, 2]; // expect: 3
+// const nums7 = [2, 2, 4, 3, 2, 5]; // expect: 10
+// const nums8 = [2, 2, 5, 3, 2, 5]; // expect: 10 // check potential bug when tempI2 === tempI3
+// const nums9 = [2, 1, 2, 6, 1, 8, 10, 10]; // expect: 25
+// console.log('RESULT: ', rob2(nums0));
+
+function rob2Variable(nums) {
+  if (nums.length === 1) return nums[0];
+  if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+  let lastThree = [0,0]; // [rootIndex, sum]
+  let lastTwo = [0,0]; // [rootIndex, sum]
+  let lastOne = [0,0]; // [rootIndex, sum]
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    let tempOne = lastOne;
+    // lastOne = Math.max(lastTwo + n, lastThree + n);
+    if (lastTwo[1] + n >= lastThree[1] + n) {
+      lastOne = [lastTwo[0], lastTwo[1] + n]
+    } else {
+      lastOne = [lastThree[0], lastThree[1] + n]
+    }
+    let tempTwo = lastTwo;
+    lastTwo = tempOne;
+    lastThree = tempTwo;
+  }
+  console.log('lastOne', lastOne, 'lastTwo', lastTwo, 'lastThree', lastThree);
+  
+  // if (sumMap1.get(nums.length - 1)[0] === 0) {
+  //   sumMap1.set(nums.length - 1, [0, sumMap1.get(nums.length - 1)[1] - Math.min(nums[0], nums[nums.length - 1])]);
+  // }
+  if (lastOne[0] === 0) {
+    lastOne = [0, lastOne[1] - Math.min(nums[0], nums[nums.length - 1])];
+  }
+  const result1 = Math.max(lastOne[1], lastTwo[1], lastThree[1]);
+
+  // ======================================
+
+  let lastThree2 = 0; // [rootIndex, sum]
+  let lastTwo2 = 0; // [rootIndex, sum]
+  let lastOne2 = 0; // [rootIndex, sum]
+  let nums2 = nums.slice(1);
+  for (let i = 0; i < nums2.length; i++) {
+    const n = nums2[i];
+    let tempOne = lastOne2;
+    lastOne2 = Math.max(lastTwo2 + n, lastThree2 + n);
+    let tempTwo = lastTwo2;
+    lastTwo2 = tempOne;
+    lastThree2 = tempTwo;
+  }
+  let result2 = Math.max(lastOne2, lastTwo2, lastThree2);
+  console.log('result1', result1, 'result2', result2);
+
+  return Math.max(result1, result2);
+}
+const nums0 = [1, 7, 3, 7, 100]; // expect 107
+const nums1 = [2, 3, 2];// expect: 3
+const nums2 = [1, 2, 3, 1];// expect: 4
+const nums3 = [1, 2, 3];// expect: 3
+const nums4 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 100, 4]; // expect: 503
+const nums5 = [3, 4, 100, 5, 6, 100, 4, 100, 7, 1, 100, 9, 4, 100]; // expect: 500
+const nums6 = [1, 1, 1, 2]; // expect: 3
+const nums7 = [2, 2, 4, 3, 2, 5]; // expect: 10
+const nums8 = [2, 2, 5, 3, 2, 5]; // expect: 10 // check potential bug when tempI2 === tempI3
+const nums9 = [2, 1, 2, 6, 1, 8, 10, 10]; // expect: 25
+console.log('RESULT: ', rob2Variable(nums0));
