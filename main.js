@@ -35,6 +35,9 @@
         if substr.length < result.length && j === s.length - 1 break
       Runtime: 445 ms, beats 37.15%
       Memory: 47.9 MB, beats 43.97%
+    #5 (newLongest function)
+      Runtime: 318 ms, beats 39.67%
+      Memory: 48.8 MB, beats 30.90%
       
 */
 
@@ -65,6 +68,7 @@ function longestPalindrome(s) {
   let i = 0;
   x = 0;
   while (i < s.length) {
+    x++;
     console.log(s.slice(i, j+1), i, j);
     const substr = s.slice(i, j+1);
     // #4 [start]
@@ -113,19 +117,140 @@ function longestPalindrome(s) {
     }
 
   }
+  console.log('x', x);
   return result;
 }
 const s1 = 'babad';
+/*
+  b yes
+  ba  no
+  bab yes 
+  baba no
+  babad no
+  aba yes
+*/
 const s2 = 'cbbd';
+/*
+  c yes
+  cb no
+  cbb no
+  cbbd no
+  bb yes
+*/
 const s3 = 'aacabdkacaa'; // aca
+/*
+  a yes
+  aa yes
+  aac no
+  aaca no
+  aacabd no
+  aacabdk no
+  aacabdka no
+  aacabdkac no
+  aacabdkaca no
+  aacabdkacaa no
+  acabkdacaa no
+  acabdkaca no
+  acabdkac no
+  acabdka no
+  acabdk no
+  acabd no
+  acab no
+  aca yes
+
+  aacabdkacaa
+  d yes
+  bdk no
+  acaa no
+  aca yes
+*/
 const c1 = 'aba';
 const c2 = 'bbxxbb';
 const c3 = 'lasdjfiejfifjababababababababababababasdfrasdfiejfiejfiejfiljfsdklfja;sldfjseifjisefjlsidjfisjf';
+const c4 = 'bbxxbbccccycccc';
 const s4 = "abacab"; // bacab
-const s5 = 'ac'; // a
-const start = Date.now();
-console.log('RESULT: ', longestPalindrome(c3));
-console.log('RUNTIME: ', Date.now() - start);
+/*
+  a yes
+
+  ab
+  b yes
+
+  aba yes
+  ba
+  a yes 
+
+  abac
+  bac
+  ac
+  c yes 
+
+  abaca
+  baca
+  aca yes 
+  ca
+  a yes
+
+  abacab
+  bacab yes
+  acab
+  cab
+  ab
+  b
+*/
+const s5 = 'ac'; // a or c
+const s6 = 'fdebasabemni'; // ebasabe
+const s7 = 'bb';
+/*
+  f yes
+
+  fd
+  d yes
+
+  fde
+  de
+  e yes
+
+  fdeb
+  deb
+  eb
+  b yes
+
+  fdeba
+  deba
+  eba
+  ba
+  a yes
+
+  fdebas
+  debas
+  ebas
+  bas
+  as
+  s yes
+
+  fdebasa
+  debasa
+  ebasa
+  basa
+  asa yes
+  no need
+
+  fdebasab
+  debasab
+  ebasab
+  basab yes
+  no need
+
+  fdebasabe
+  debasabe
+  ebasabe yes (7)
+  no need
+  fdebasabem
+  
+*/
+// const start = Date.now();
+// console.log('RESULT: ', longestPalindrome(s6));
+// console.log('RUNTIME: ', Date.now() - start);
 function isPalindrome(str) {
   let j = str.length - 1;
   for (let i = 0; i < Math.floor(str.length / 2); i++) {
@@ -141,4 +266,46 @@ function isPalindrome(str) {
   }
   return true;
 }
-// console.log('is palindrome: ', isPalindrome('a'));
+
+function newLongest(s) {
+  if (s.length === 1) return s;
+  console.log('full s', s);
+  let map = new Map(); // map of char : Set(indexes...)
+  // right go right 
+    // check palindrome from left to right
+    // store char : index in map
+  
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    map.set(c, map.get(c) ? map.get(c).add(i) : new Set([i]))
+  }
+  console.log('map', map);
+  // when right touch the last
+  // right go left
+    // del char, index from map
+    // if leftChar in map then palindrome check
+  let result = s[0];
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    console.log('c', c, map.get(c));
+    if (map.get(c)) {
+      const set = Array.from(map.get(c));
+      for (let j = set.length - 1; j > 0; j--) {
+        const nextIndex = set[j];
+        console.log('nextIndex', nextIndex);
+        const substr = s.slice(i, nextIndex + 1);
+        if (substr.length <= result.length) {console.log('below result'); break};
+        // console.log('substr', substr);
+        if (isPalindrome(substr)) {
+          console.log('substr', substr);
+          if (substr.length === s.length) return substr;
+          result = substr.length > result.length ? substr : result;
+          break;
+        }
+      }
+    }
+  }
+
+  return result;
+}
+console.log('new longest: ', newLongest(s6))
