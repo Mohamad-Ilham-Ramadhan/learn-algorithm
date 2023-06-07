@@ -35,9 +35,10 @@
         if substr.length < result.length && j === s.length - 1 break
       Runtime: 445 ms, beats 37.15%
       Memory: 47.9 MB, beats 43.97%
-    #5 (newLongest function)
+    #5 (newLongest function, using hashmap)
       Runtime: 318 ms, beats 39.67%
       Memory: 48.8 MB, beats 30.90%
+    #6 (start from middle of possible palindrome)
       
 */
 

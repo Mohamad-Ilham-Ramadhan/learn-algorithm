@@ -38,10 +38,12 @@
     #5 (newLongest function)
       Runtime: 318 ms, beats 39.67%
       Memory: 48.8 MB, beats 30.90%
+    #6 (start from middle of possible palindrome)
       
 */
 
 function longestPalindrome(s) {
+  return 'aba';
   if (s.length === 1) return s;
 
   function isPalindrome(str) {
@@ -122,47 +124,49 @@ function longestPalindrome(s) {
 }
 const s1 = 'babad';
 /*
-  b yes
-  ba  no
-  bab yes 
-  baba no
-  babad no
-  aba yes
+  b
+  ba
+
+  a
+  ba
+  ab
+  bab
+
+  b
+  ab
+  ba
+  aba
+
+  a
+  ba
+  ad
+  bad
+
+  d
+  ad
 */
 const s2 = 'cbbd';
 /*
-  c yes
-  cb no
-  cbb no
-  cbbd no
-  bb yes
+  c
+  cb
+  cbb
+  cbbd
+
+  b
+  cb
+  bb
+  bbd
+
+  b
+  bb
+  cbb
+  bd
+
+  d
+
 */
 const s3 = 'aacabdkacaa'; // aca
 /*
-  a yes
-  aa yes
-  aac no
-  aaca no
-  aacabd no
-  aacabdk no
-  aacabdka no
-  aacabdkac no
-  aacabdkaca no
-  aacabdkacaa no
-  acabkdacaa no
-  acabdkaca no
-  acabdkac no
-  acabdka no
-  acabdk no
-  acabd no
-  acab no
-  aca yes
-
-  aacabdkacaa
-  d yes
-  bdk no
-  acaa no
-  aca yes
 */
 const c1 = 'aba';
 const c2 = 'bbxxbb';
@@ -170,35 +174,49 @@ const c3 = 'lasdjfiejfifjababababababababababababasdfrasdfiejfiejfiejfiljfsdklfj
 const c4 = 'bbxxbbccccycccc';
 const s4 = "abacab"; // bacab
 /*
-  a yes
-
   ab
-  b yes
-
-  aba yes
-  ba
-  a yes 
-
-  abac
+  aba
   bac
-  ac
-  c yes 
+  bacab
 
-  abaca
-  baca
-  aca yes 
-  ca
-  a yes
-
-  abacab
-  bacab yes
-  acab
-  cab
+  a
   ab
-  b
+  aba yes
+  bac
+  abac
+
+  aca
 */
 const s5 = 'ac'; // a or c
 const s6 = 'fdebasabemni'; // ebasabe
+/*
+  fd
+  fde
+  deb
+  eba
+  bas
+  ebasabe
+
+  s yes
+  sa no
+  ab no
+  asa yes
+  sab no
+  basa no
+  asab no
+  basab yes
+  ebasab no
+  basabe no
+  ebasabe yes
+  debasabe no
+  ebasabem no
+  debasabem no
+  fdebasabem no
+  debasabemn no
+  fdebasabemn no
+  fdebasabemni no
+
+*/
 const s7 = 'bb';
 /*
   f yes
@@ -246,8 +264,9 @@ const s7 = 'bb';
   ebasabe yes (7)
   no need
   fdebasabem
-  
 */
+const s8 = 'zccxxxccui';
+
 // const start = Date.now();
 // console.log('RESULT: ', longestPalindrome(s6));
 // console.log('RUNTIME: ', Date.now() - start);
@@ -308,4 +327,135 @@ function newLongest(s) {
 
   return result;
 }
-console.log('new longest: ', newLongest(s6))
+// console.log('new longest: ', newLongest(s6))
+function startFromMiddle(s) {
+  if (s.length === 1) return s;
+
+  let result = s[0]
+  for (let i = 0; i < s.length; i++) {
+
+    const c = s[i];
+    
+    let l = i - 1;
+    let r = i + 1;
+    let x = 0;
+    if (s[i-1] === c) {
+        // l = i - 2;
+        result = s.slice(i-1,i+1).length > result.length ? s.slice(i-1,i+1) : result;
+    }
+
+    while (l >= -1 && r <= s.length) {
+      console.log('char', c, 'i', i, 'l',l, 'r', r);
+      console.log('result', result);
+      // if (x === 50) break;
+      // x++;
+      if (result.length === s.length) return result;
+        // if (l === -1) {
+        //   console.log('left -1');
+        //   // if (s[r] === c) {
+        //   if (s[r] === s[0] && c === s[i+1]) {
+        //     console.log('give more right');
+        //     // result = c+s[r];
+        //     result = s.slice(0,r+1).length > result.length ? s.slice(0,r+1):result;
+        //     r++;
+        //     continue;
+        //   }
+        //   break;
+        // }
+        // if (r === s.length) {
+        //   console.log('right -1');
+        //   // if (s[l] === c) {
+        //     if (s[l] === s[s.length-1] && c === [i-1]) {
+        //     console.log('give more left');
+        //     result = s.slice(l, i+1).length > result.length ? s.slice(l, i+1) : result;
+        //     l--;
+        //     continue;
+        //   }
+        //   break;
+        // }
+
+      // if (s[l] === s[r]) {
+      //   result = s.slice(l, r+1).length > result.length ? s.slice(l, r+1) : result;
+      //   l--;
+      //   r++;
+      // } else if ( s[l] === c && l+1 === i) {
+      //   console.log('mid and left', s.slice(l, i+1));
+      //   result = s.slice(l, i+1).length > result.length ? s.slice(l, i+1) : result;
+      //   // break;
+      //   l--;
+      // } else if (s[r] === c  && r-1 === i) {
+      //   console.log('mid and right', s.slice(i, r+1));
+      //   result = s.slice(i, r+1).length > result.length ? s.slice(i, r+1) : result;
+      //   // break;
+      //   // l = i
+      //   i = r;
+      //   r++;
+      // } else {
+      //   break;
+      // }
+
+      // if (s[l] === s[r]) {
+      //   console.log('both equal', s.slice(l, r+1));
+      //   result = s.slice(l, r+1).length > result.length ? s.slice(l, r+1) : result;
+      //   l--;
+      //   r++;
+      // } else if ( s[l] === s[r-1]) {
+      //   console.log('mid and left', s.slice(l, r-1));
+      //   result = s.slice(l, r-1).length > result.length ? s.slice(l, r-1) : result;
+      //   break;
+      //   l--;
+      //   r--;
+      //   i = Math.floor(l + r);
+      // } else if (s[r] === s[l+1]) {
+      //   console.log('mid and right', s.slice(l+1, r+1));
+      //   // if next s[i] is not palindrome with prev s[i] (example: ac or xa ...) then break (next substr is not palindrome)
+      //   if ( s[i] !== s[Math.floor( (l + r + 2) / 2)] ) break;
+      //   result = s.slice(l+1, r+1).length > result.length ? s.slice(l+1, r+1) : result;
+      //   console.log('char before', s[i]);
+      //   l++;
+      //   r++;
+      //   i = Math.floor((l + r) / 2);
+      //   console.log('char after', s[i], Math.floor((l + r) / 2));
+      // } else {
+      //   break;
+      // }
+
+      if (s[i-1] === c) {
+
+      }
+
+      if (s[l] === s[r]) {
+        console.log('both equal', s.slice(l, r+1));
+        result = s.slice(l, r+1).length > result.length ? s.slice(l, r+1) : result;
+        l--;
+        r++;
+      } else {
+        break;
+      }
+
+
+    }
+  }
+
+  return result
+}
+const s9 = 'astxtsxas'; // expect: stxts
+const s10 = 'aaaa'; // expect: aaaa, output: aaa
+const s11 = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // length = 47
+const s12 = 'aaabaaaa'; // expect: aaabaaa, output: aaabaaaa
+const s13 = 'xxxxccxxxxxx' // expect: xxxxccxxxx
+const s14 = 'xxxxxxccxxxx' // expect: xxxxccxxxx
+const s15 = 'xxxxxxcccxxxx' // expect: xxxxcccxxxx
+const s16 = 'xxxxxxcacxxxx' // expect: xxxxcacxxxx
+const s17 = 'caaaaa' // expect: aaaaa, output: aa
+const s18 = 'aaaac'; // expect: aaaa
+/*
+  caaaaa
+  ca
+  caa -> aa
+*/
+console.log('START FROM MIDDLE: ', startFromMiddle(s4));
+/*
+  c2 = 'bbxxbb'; mid must be 'xx'
+*/
+module.exports = startFromMiddle;

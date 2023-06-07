@@ -1,0 +1,25 @@
+{
+  "name": "learn-data-structure-algorithm",
+  "version": "1.0.0",
+  "description": "I'm learning algorithm and data-structure need testing framework",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest -- longestPalindromicSubstring.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohamad-Ilham-Ramadhan/learn-algorithm.git"
+  },
+  "author": "Mohamad Ilham Ramadhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohamad-Ilham-Ramadhan/learn-algorithm/issues"
+  },
+  "homepage": "https://github.com/Mohamad-Ilham-Ramadhan/learn-algorithm#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0"
+  }
+}
