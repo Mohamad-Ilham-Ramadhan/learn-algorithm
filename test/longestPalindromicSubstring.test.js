@@ -1,76 +1,76 @@
-const startFromMiddle = require('../main');
+const neetCodes = require('../main');
 
 test('babad', () => {
-   expect(startFromMiddle('babad')).toMatch(/^bab|aba$/);
+   expect(neetCodes('babad')).toMatch(/^bab|aba$/);
 })
 test('cbbd', () => {
-   expect(startFromMiddle('cbbd')).toMatch(/^bb$/);
+   expect(neetCodes('cbbd')).toMatch(/^bb$/);
 });
 test('aacabdkacaa', () => {
-   expect(startFromMiddle('aacabdkacaa')).toMatch(/^aca$/);
+   expect(neetCodes('aacabdkacaa')).toMatch(/^aca$/);
 })
 test('bbxxbb', () => {
-   expect(startFromMiddle('bbxxbb')).toMatch(/^bbxxbb$/);
+   expect(neetCodes('bbxxbb')).toMatch(/^bbxxbb$/);
 })
 test('lasdjfiejfifjababababababababababababasdfrasdfiejfiejfiejfiljfsdklfja;sldfjseifjisefjlsidjfisjf', () => {
-   expect(startFromMiddle('lasdjfiejfifjababababababababababababasdfrasdfiejfiejfiejfiljfsdklfja;sldfjseifjisefjlsidjfisjf')).toMatch(/^ababababababababababababa$/);
+   expect(neetCodes('lasdjfiejfifjababababababababababababasdfrasdfiejfiejfiejfiljfsdklfja;sldfjseifjisefjlsidjfisjf')).toMatch(/^ababababababababababababa$/);
 })
 test('abacab;sldfjseifjisefjlsidjfisjf', () => {
-   expect(startFromMiddle('abacab')).toMatch(/^bacab$/);
+   expect(neetCodes('abacab')).toMatch(/^bacab$/);
 })
 test('ac', () => {
-   expect(startFromMiddle('ac')).toMatch(/^a$/);
+   expect(neetCodes('ac')).toMatch(/^a$/);
 })
 test('fdebasabemni', () => {
-   expect(startFromMiddle('fdebasabemni')).toMatch(/^ebasabe$/);
+   expect(neetCodes('fdebasabemni')).toMatch(/^ebasabe$/);
 })
 test('bb', () => {
-   expect(startFromMiddle('bb')).toMatch(/^bb$/);
+   expect(neetCodes('bb')).toMatch(/^bb$/);
 })
 test('zccxxxccui', () => {
-   expect(startFromMiddle('zccxxxccui')).toMatch(/^ccxxxcc$/);
+   expect(neetCodes('zccxxxccui')).toMatch(/^ccxxxcc$/);
 })
 test('astxtsxas', () => {
-   expect(startFromMiddle('astxtsxas')).toMatch(/^stxts$/);
+   expect(neetCodes('astxtsxas')).toMatch(/^stxts$/);
 })
 test('aaaa', () => {
-   expect(startFromMiddle('aaaa')).toMatch(/^aaaa$/);
+   expect(neetCodes('aaaa')).toMatch(/^aaaa$/);
 })
 test('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', () => {
-   expect(startFromMiddle('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')).toMatch(/^xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx$/);
+   expect(neetCodes('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')).toMatch(/^xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx$/);
 })
 test('aaabaaaa', () => {
-   expect(startFromMiddle('aaabaaaa')).toMatch(/^aaabaaa$/);
+   expect(neetCodes('aaabaaaa')).toMatch(/^aaabaaa$/);
 })
 test('xxxxccxxxxxx', () => {
-   expect(startFromMiddle('xxxxccxxxxxx')).toMatch(/^xxxxccxxxx$/);
+   expect(neetCodes('xxxxccxxxxxx')).toMatch(/^xxxxccxxxx$/);
 })
 test('xxxxxxccxxxx', () => {
-   expect(startFromMiddle('xxxxxxccxxxx')).toMatch(/^xxxxccxxxx$/);
+   expect(neetCodes('xxxxxxccxxxx')).toMatch(/^xxxxccxxxx$/);
 })
 test('xxxxxxcccxxxx', () => {
-   expect(startFromMiddle('xxxxxxcccxxxx')).toMatch(/^xxxxcccxxxx$/);
+   expect(neetCodes('xxxxxxcccxxxx')).toMatch(/^xxxxcccxxxx$/);
 })
 test('xxxxxxcacxxxx', () => {
-   expect(startFromMiddle('xxxxxxcacxxxx')).toMatch(/^xxxxcacxxxx$/);
+   expect(neetCodes('xxxxxxcacxxxx')).toMatch(/^xxxxcacxxxx$/);
 })
 test('caaaaa', () => {
-   expect(startFromMiddle('caaaaa')).toMatch(/^aaaaa$/);
+   expect(neetCodes('caaaaa')).toMatch(/^aaaaa$/);
 })
 test('aaaac', () => {
-   expect(startFromMiddle('aaaac')).toMatch(/^aaaa$/);
+   expect(neetCodes('aaaac')).toMatch(/^aaaa$/);
 })
 test('zabcbazxxx', () => {
-   expect(startFromMiddle('zabcbazxxx')).toMatch(/^zabcbaz$/);
+   expect(neetCodes('zabcbazxxx')).toMatch(/^zabcbaz$/);
 })
 test('xxxazbcbza', () => {
-   expect(startFromMiddle('xxxazbcbza')).toMatch(/^azbcbza$/);
+   expect(neetCodes('xxxazbcbza')).toMatch(/^azbcbza$/);
 })
 test('abbcccbbbcaaccbababcbcabca', () => {
-   expect(startFromMiddle('abbcccbbbcaaccbababcbcabca')).toMatch(/^bbcccbb$/);
+   expect(neetCodes('abbcccbbbcaaccbababcbcabca')).toMatch(/^bbcccbb$/);
 })
 test('aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa', () => {
-   expect(startFromMiddle("aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa")).toMatch(/^aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa$/);
+   expect(neetCodes("aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa")).toMatch(/^aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa$/);
 })
 
 

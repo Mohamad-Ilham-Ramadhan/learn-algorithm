@@ -469,6 +469,36 @@ function startFromMiddle_SetOptimized(s) {
   }
   return result; 
 };
+
+function neetCodes(s) {
+  let res = '';
+  let resLen = 0;
+
+
+  for (let i = 0; i < s.length; i++) {
+
+    // odd length palindrome
+    let l = i; let r = i;
+    while (l >= 0 && r < s.length && s[l] == s[r]) {
+      if ((r - l + 1) > resLen) {
+        res = s.slice(l, r+1);
+        resLen = r - l + 1;
+      }
+      l--; r++;
+    }
+
+    // even length palindrome
+    l = i; r = i + 1;
+    while (l >= 0 && r < s.length && s[l] == s[r]) {
+      if ((r - l + 1) > resLen) {
+        res = s.slice(l, r+1);
+        resLen = r - l + 1;
+      }
+      l--; r++;
+    }
+  }
+  return res;
+}
 const s9 = 'astxtsxas'; // expect: stxts
 const s10 = 'aaaa'; // expect: aaaa, output: aaa
 const s11 = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // length = 47
@@ -490,7 +520,7 @@ const s22 = 'ccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbcccccccccc';
   caa -> aa
 */
 const start = Date.now()
-console.log('START FROM MIDDLE: ', startFromMiddle_SetOptimized(s22));
+console.log('START FROM MIDDLE: ', neetCodes(s21));
 console.log('runtime : ', Date.now() - start);
 /*
   c2 = 'bbxxbb'; mid must be 'xx'
