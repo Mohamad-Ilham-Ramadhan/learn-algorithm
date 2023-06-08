@@ -447,8 +447,8 @@ function startFromMiddle_SetOptimized(s) {
         set.add(s[l]).add(s[r])
         l--;
         r++;
-      } else if (s[r] === s[l + 1]) {
-        if (set.size === 1) {
+      } else if (s[r] === s[l + 1]) { // push next right char if it's same char with current palindrome
+        if (set.size === 1) { // if only 1 char variety in current substr/palindrome
           result = s.slice(l + 1, r + 1).length > result.length ? s.slice(l + 1, r + 1) : result;
           r++;
         } else { break; }
