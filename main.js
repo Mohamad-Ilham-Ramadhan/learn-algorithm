@@ -433,19 +433,29 @@ function startFromMiddle_SetOptimized(s) {
     let r = i + 1;
     let set = new Set(c); // if only one char then current result is all the same char
 
+    if (r === s.length) return result;
+
     if (s[l] !== c && c === s[r]) {
       result = s.slice(i, r + 1).length > result.length ? s.slice(i, r + 1) : result;
       set.add(s[r]);
       r++;
     }
-    while (l >= -1 && r <= s.length) {
+    // console.log('for');
+    while (l >= 0 && r <= s.length - 1) {
       if (result.length === s.length) return result;
 
+      if (i >= 20 && i <= 28) {
+        console.log('i', i, 'l', l, 'r', r)
+        console.log('result', result, 'substr', s.slice(l,r+1))
+      }
+      
+      // console.log('i', i, 'l', l, 'r', r);
 
       if (s[l] === s[r]) {
         result = s.slice(l, r + 1).length > result.length ? s.slice(l, r + 1) : result;
         set.add(s[l]).add(s[r])
-        l--;
+        // l--;
+        l = l > 0 ? l - 1 :  l;
         r++;
       } else if (s[r] === s[l + 1]) { // push next right char if it's same char with current palindrome
         if (set.size === 1) { // if only 1 char variety in current substr/palindrome
@@ -480,7 +490,7 @@ const s22 = 'ccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbcccccccccc';
   caa -> aa
 */
 const start = Date.now()
-console.log('START FROM MIDDLE: ', startFromMiddle_SetOptimized(s21));
+console.log('START FROM MIDDLE: ', startFromMiddle_SetOptimized(s22));
 console.log('runtime : ', Date.now() - start);
 /*
   c2 = 'bbxxbb'; mid must be 'xx'
