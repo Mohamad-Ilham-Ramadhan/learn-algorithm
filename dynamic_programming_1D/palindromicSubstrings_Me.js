@@ -1,5 +1,5 @@
 /*
-  Leetcode: 647. Palindromic Substrings
+  Leetcode: 647. Palindromic Substrings (medium)
 
   Given a string `s`, return the number of palindromic substrings in it.
 
@@ -23,7 +23,28 @@
     - 1 <= s.length <= 1000
     - s consists of lowercase English letters.
 
-  solution by myself
+  solution by myself:
+    #2 (usind dynamic programming)
+        pattern n = result of n - 1 + n
+        1(0 + 1) 3(2 + 1) 6(3 + 3) 10(6 + 4) 15(10 + 5) 21(15 + 6) 28(21 + 7) 36(28 + 8) 45(36 + 9)
+
+        for example 'aaaa'
+        n1 = 'a' = 0 + 1 = 1 -> 'a'
+        n2 = 'aa' = 1 + 2 = 3 -> 'a' + 'a', 'aa'
+        n3 = 'aaa' = 3 + 3 = 6 -> 'a' 'a' 'aa' + 'a'[2] 'aa'[1,2] 'aaa'[0,2]
+        n4 = 'aaaa' = 6 + 4 = 10 => 'a' 'a' 'aa' 'a' 'aa' 'aaa' + 'a'[3] 'aa'[2,3] 'aaa'[1,3] 'aaaa'[0,3]
+
+        and count found palindrome with char in the mid part and left/right side is different for example: 'xyyx', 'aba' not 'aaa' as one:
+          xaaxyy
+          found palindrome is xaax
+          x = 1
+          aa = 3
+          x = 1
+          yy = 3
+          xaax = 1
+
+          total = 9
+
 
   Leetcode submission:
     #1 (naive solution) O(n^3)
