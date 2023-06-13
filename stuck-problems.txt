@@ -1,0 +1,4 @@
+Tree:
+   - subtree of another tree (easy)
+1D dynamic programming:
+   - coin change (medium)

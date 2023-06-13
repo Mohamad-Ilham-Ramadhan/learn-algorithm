@@ -4,7 +4,7 @@
   "description": "I'm learning algorithm and data-structure need testing framework",
   "main": "main.js",
   "scripts": {
-    "test": "jest -- palindromicSubstrings.test.js"
+    "test": "jest -- coinChange.test.js"
   },
   "repository": {
     "type": "git",
