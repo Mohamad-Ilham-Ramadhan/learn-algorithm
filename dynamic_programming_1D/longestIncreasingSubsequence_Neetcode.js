@@ -34,26 +34,26 @@
 */
 
 function lengthOfLIS(nums) {
-  const LIS = [];
-  for (let i = 0; i < nums.length; i++) {
-    LIS[i] = 1;
+   const LIS = [];
+   for (let i = 0; i < nums.length; i++) {
+     LIS[i] = 1;
+   }
+ 
+   /*
+     for i in range(len(nums) - 1, -1, -1):
+     for j in range(i + 1, len(nums)):
+       if (nums[i] < nums[j]):
+         LIS[i] = max(LIS[i], 1 + LIS[j])
+ 
+   return max(LIS)
+   */ 
+  for (let i = nums.length - 1; i >= 0; i--) {
+     for (let j = i + 1; j < nums.length; j++) {
+       if (nums[i] < nums[j]) LIS[i] = Math.max(LIS[i], 1 + LIS[j])
+     }
   }
-
-  /*
-    for i in range(len(nums) - 1, -1, -1):
-    for j in range(i + 1, len(nums)):
-      if (nums[i] < nums[j]):
-        LIS[i] = max(LIS[i], 1 + LIS[j])
-
-  return max(LIS)
-  */ 
- for (let i = nums.length - 1; i >= 0; i--) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[i] < nums[j]) LIS[i] = Math.max(LIS[i], 1 + LIS[j])
-    }
+  return Math.max(...LIS);
  }
- return Math.max(...LIS);
-}
-const nums1 = [10,9,2,5,3,7,101,18];
-const nums2 = [0,1,0,3,2,3];
-console.log('RESULT : ', lengthOfLIS(nums2));
+ const nums1 = [10,9,2,5,3,7,101,18];
+ const nums2 = [0,1,0,3,2,3];
+ console.log('RESULT : ', lengthOfLIS(nums2));

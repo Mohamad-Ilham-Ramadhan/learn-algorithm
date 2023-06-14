@@ -52,23 +52,24 @@ function lengthOfLIS(nums) {
      0 -> 4
    */
    // attempt #1 [start]
-   // let result = -Infinity;
-   // let dp = [];
-   // for (let i = nums.length - 1; i >= 0; i--) {
-   //   const n1 = nums[i];
-   //   let max = 1;
-   //   for (let j = i+1; j < nums.length; j++) {
-   //     const n2 = nums[j];
-   //     if (n2 > n1) {
-   //       max = Math.max(max, dp[j]+1);
-   //     }
-   //   }
-   //   dp[i] = max;
-   //   result = Math.max(result, max);
-   // }
-   // console.log('dp', dp);
-   // return result;  
-   // attempt #1 [end]
+   let result = -Infinity;
+   let dp = [];
+   for (let i = nums.length - 1; i >= 0; i--) {
+     const n1 = nums[i];
+     let max = 1;
+     for (let j = i+1; j < nums.length; j++) {
+       const n2 = nums[j];
+       if (n2 > n1) {
+         max = Math.max(max, dp[j]+1);
+       }
+     }
+     dp[i] = max;
+     result = Math.max(result, max);
+    }
+    console.log('dp', dp);
+    return result;  
+    // attempt #1 [end]
+
 }
 const nums1 = [10, 9, 2, 5, 3, 7, 101, 18]; // expect: 4
 const nums2 = [0, 1, 0, 3, 2, 3]; // expect: 4
