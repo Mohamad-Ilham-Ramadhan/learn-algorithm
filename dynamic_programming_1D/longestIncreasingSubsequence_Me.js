@@ -29,6 +29,9 @@
     #1 O(n^2)
       Runtime: 354 ms, beats 9.56%
       Memory: 43.6 MB, beats 83.14%
+    #2 O(n log n) using patience sort
+      Runtime: 68 ms, beats 87.61%
+      Memory: 44.4 MB, beats 27.75%
 */
 
 function lengthOfLIS(nums) {
@@ -69,7 +72,31 @@ function lengthOfLIS(nums) {
     console.log('dp', dp);
     return result;  
     // attempt #1 [end]
+}
 
+// Solution by Stable Sort and simplified by my to just return piles.length, don't need to create a graph or pointer
+function lengthOfLISPatienceSort(nums) {
+  let piles = [[nums[0]]];
+  let x = 0;
+  for (let i = 1; i < nums.length; i++) {
+    x++;
+    const n = nums[i];
+    let isInserted = false;
+    for (let j = 0; j < piles.length; j++) {
+      x++;
+      const p = piles[j];
+      if (n <= p[p.length - 1]) {
+        p.push(n);
+        isInserted = true;
+        break;
+      }
+    }
+    if (!isInserted) {
+      piles.push([n]);
+    };
+  }
+  console.log('piles', piles, 'x', x);
+  return piles.length;
 }
 const nums1 = [10, 9, 2, 5, 3, 7, 101, 18]; // expect: 4
 const nums2 = [0, 1, 0, 3, 2, 3]; // expect: 4

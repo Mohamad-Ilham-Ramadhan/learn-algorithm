@@ -25,35 +25,49 @@
 
   Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
 
-  NeetCode solution
+  Solution by Stable Sort and simplified by me
 
   LeetCode submission: 
-    #1 O(n^2)
-      Runtime: 137 ms, beats 77.70%
-      Memory: 43.8 MB, beats 73.80%
+    #1 O(n log n)
+      Runtime: 68 ms, beats 87.61%
+      Memory: 44.4 MB, beats 27.75%
 */
 
 function lengthOfLIS(nums) {
-  const LIS = [];
-  for (let i = 0; i < nums.length; i++) {
-    LIS[i] = 1;
-  }
-
-  /*
-    for i in range(len(nums) - 1, -1, -1):
-    for j in range(i + 1, len(nums)):
-      if (nums[i] < nums[j]):
-        LIS[i] = max(LIS[i], 1 + LIS[j])
-
-  return max(LIS)
-  */ 
- for (let i = nums.length - 1; i >= 0; i--) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[i] < nums[j]) LIS[i] = Math.max(LIS[i], 1 + LIS[j])
+  let piles = [[nums[0]]];
+  let x = 0;
+  for (let i = 1; i < nums.length; i++) {
+    x++;
+    const n = nums[i];
+    let isInserted = false;
+    for (let j = 0; j < piles.length; j++) {
+      x++;
+      const p = piles[j];
+      if (n <= p[p.length - 1]) {
+        p.push(n);
+        isInserted = true;
+        break;
+      }
     }
- }
- return Math.max(...LIS);
+    if (!isInserted) {
+      piles.push([n]);
+    };
+  }
+  console.log('piles', piles, 'x', x);
+  return piles.length;
 }
+
+
+// Example usage:
+const arr = [9, 3, 7, 5, 2, 8, 1, 6, 4];
+// const sortedArr = patienceSort(arr);
+// console.log(sortedArr); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 const nums1 = [10,9,2,5,3,7,101,18];
 const nums2 = [0,1,0,3,2,3];
-console.log('RESULT : ', lengthOfLIS(nums2));
+const nums3 = [7,7,7,7,7,7,7];
+const nums4 = [5,7,5,9,1,2,5,8,3,11,6,4];
+const nums5 = [4,10,5,8,3,3,9,4,12,11];
+console.log('RESULT : ', patienceSort(nums5));
+// console.log('RESULT GPT: ', patienceSortGPT(cards));
+// console.log('RESULT : ', lengthOfLIS(nums2));
