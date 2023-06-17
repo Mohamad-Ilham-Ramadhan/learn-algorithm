@@ -1,73 +1,58 @@
 /*
-  300. Longest Increasing Subsequence (medium)
+  Leetcode: 139. Word Break (medium)
 
-  Given an integer array `nums`, return the length of the longest strictly increasing subsequence.
+  Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.
 
+  Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+  
 
   Example 1:
-    Input: nums = [10,9,2,5,3,7,101,18]
-    Output: 4
-    Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+    Input: s = "leetcode", wordDict = ["leet","code"]
+    Output: true
+    Explanation: Return true because "leetcode" can be segmented as "leet code".
 
   Example 2:
-    Input: nums = [0,1,0,3,2,3]
-    Output: 4
+    Input: s = "applepenapple", wordDict = ["apple","pen"]
+    Output: true
+    Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+    Note that you are allowed to reuse a dictionary word.
 
   Example 3:
-    Input: nums = [7,7,7,7,7,7,7]
-    Output: 1
+    Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+    Output: false
   
 
   Constraints:
-    - 1 <= nums.length <= 2500
-    - -104 <= nums[i] <= 104
-  
-
-  Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
-
-  Solution by Stable Sort and simplified by me
-
-  LeetCode submission: 
-    #1 O(n log n)
-      Runtime: 68 ms, beats 87.61%
-      Memory: 44.4 MB, beats 27.75%
+    - 1 <= s.length <= 300
+    - 1 <= wordDict.length <= 1000
+    - 1 <= wordDict[i].length <= 20
+    - s and wordDict[i] consist of only lowercase English letters.
+    - All the strings of wordDict are unique.
 */
-
-function lengthOfLIS(nums) {
-  let piles = [[nums[0]]];
-  let x = 0;
-  for (let i = 1; i < nums.length; i++) {
-    x++;
-    const n = nums[i];
-    let isInserted = false;
-    for (let j = 0; j < piles.length; j++) {
-      x++;
-      const p = piles[j];
-      if (n <= p[p.length - 1]) {
-        p.push(n);
-        isInserted = true;
-        break;
-      }
-    }
-    if (!isInserted) {
-      piles.push([n]);
-    };
+class TrieNode {
+  constructor() {
+    this.isEnd = false
+    this.children = {}
   }
-  console.log('piles', piles, 'x', x);
-  return piles.length;
 }
-
-
-// Example usage:
-const arr = [9, 3, 7, 5, 2, 8, 1, 6, 4];
-// const sortedArr = patienceSort(arr);
-// console.log(sortedArr); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-const nums1 = [10,9,2,5,3,7,101,18];
-const nums2 = [0,1,0,3,2,3];
-const nums3 = [7,7,7,7,7,7,7];
-const nums4 = [5,7,5,9,1,2,5,8,3,11,6,4];
-const nums5 = [4,10,5,8,3,3,9,4,12,11];
-console.log('RESULT : ', patienceSort(nums5));
-// console.log('RESULT GPT: ', patienceSortGPT(cards));
-// console.log('RESULT : ', lengthOfLIS(nums2));
+function wordBreak(s, wordDict) {
+  let trie = new TrieNode();
+  for (let i = 0; i < wordDict.length; i++) {
+    const w = wordDict[i]
+    let pointer = trie;
+    console.log('w', w)
+    for (const c of w) {
+      console.log('c', c, !(c in pointer.children))
+      if (! (c in pointer.children)) {
+        pointer.children[c] = new TrieNode()
+      }
+      pointer = pointer.children[c]
+    }
+    pointer.isEnd = true;
+  }
+  console.log('trie', trie);
+}
+const s1 = 'leetcode'; const wd1 = ['leet', 'code']; // expect: true
+const s2 = 'applepenapple'; const wd2 = ['apple', 'pen']; // expect: true
+console.log('RESULT: ', wordBreak(s2, wd2));
