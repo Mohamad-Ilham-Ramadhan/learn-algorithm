@@ -1,94 +1,5 @@
 import unittest
-
-
-class TrieNode:
-    def __init__(self):
-        self.isEnd = False
-        self.children = {}
-def wordBreak(s, wordDict):
-    # construct trie
-    trie = TrieNode()
-
-    for i in range(len(wordDict)):
-        w = wordDict[i]
-        pointer = trie
-        for c in w:
-            if c not in pointer.children:
-                pointer.children[c] = TrieNode()
-            pointer = pointer.children[c]
-        pointer.isEnd = True
-
-    store = [""]
-    si = 0
-    # store index
-    pointer = trie
-    for i in range(len(s)):
-        c = s[i]
-        # print('store', store)
-        # print('c', c)
-        # print('pointer', pointer.children)
-        if c in trie.children:
-            #   print('ROOT CHILDREN', pointer.isEnd, si - 1)
-            if pointer.isEnd:
-                # print('NEW or SPACE')
-                store.append(c)
-                si += 1
-                pointer = trie.children[c]
-            else:
-                if c in pointer.children:
-                    store[si] += c 
-                    pointer = pointer.children[c]
-                else: 
-                    return False
-
-        else:
-            #   print('NOT ROOT CHILDREN')
-            if c in pointer.children:
-                # print('ADD')
-                store[si] += c
-                pointer = pointer.children[c]
-            else:
-                # print('REJOIN', store[si])
-                # rejoin
-                store[si - 1] += store[si]
-                store.pop()
-                si -= 1
-                if si == -1:
-                    return False
-                # reset pointer
-                pointer = trie
-                for x in store[si]:
-                    if x not in pointer.children:
-                        return False
-                    else:
-                        pointer = pointer.children[x]
-
-                store[si] += c
-                # print('pointer.children', pointer.children)
-                pointer = pointer.children[c]
-    # check words
-    #   print('last pointer', pointer.isEnd)
-    #   print('store', store)
-
-    # last rejoin
-    if not pointer.isEnd:
-        store[si - 1] += store[si]
-        store.pop()
-        si -= 1
-        if si == -1:
-            return False
-        # reset pointer
-        pointer = trie
-        # print('store', store)
-        for x in store[si]:
-            if x not in pointer.children:
-                return False
-            else:
-                pointer = pointer.children[x]
-
-    return pointer.isEnd
-
-from coba import wordBreak4
+from coba import wordBreak
 
 s1 = "leetcode"
 wd1 = ["leet", "code"]
@@ -139,21 +50,21 @@ wd15 = ["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa",
 
 class TestCalc(unittest.TestCase):
     def test_xxx(self):
-        self.assertEqual(wordBreak4(s1, wd1), True)  # true
-        self.assertEqual(wordBreak4(s2, wd2), True)  # true
-        self.assertEqual(wordBreak4(x2, xd2), True)  # true
-        self.assertEqual(wordBreak4(s3, wd3), False)  # False
-        self.assertEqual(wordBreak4(s4, wd4), True)  # True
-        self.assertEqual(wordBreak4(s5, wd5), True)  # True
-        self.assertEqual(wordBreak4(s6, wd6), True)  # True
-        self.assertEqual(wordBreak4(s8, wd8), True)  # True
-        self.assertEqual(wordBreak4(s9, wd9), False)  # False
-        self.assertEqual(wordBreak4(s10, wd10), False)  # False
-        self.assertEqual(wordBreak4(s11, wd11), True)  # True
-        self.assertEqual(wordBreak4(s12, wd12), True)  # True
-        self.assertEqual(wordBreak4(s13, wd13), False)  # False
-        self.assertEqual(wordBreak4(s14, wd14), True)  # True
-        self.assertEqual(wordBreak4(s15, wd15), False)  # False
+        self.assertEqual(wordBreak(s1, wd1), True)  # true
+        self.assertEqual(wordBreak(s2, wd2), True)  # true
+        self.assertEqual(wordBreak(x2, xd2), True)  # true
+        self.assertEqual(wordBreak(s3, wd3), False)  # False
+        self.assertEqual(wordBreak(s4, wd4), True)  # True
+        self.assertEqual(wordBreak(s5, wd5), True)  # True
+        self.assertEqual(wordBreak(s6, wd6), True)  # True
+        self.assertEqual(wordBreak(s8, wd8), True)  # True
+        self.assertEqual(wordBreak(s9, wd9), False)  # False
+        self.assertEqual(wordBreak(s10, wd10), False)  # False
+        self.assertEqual(wordBreak(s11, wd11), True)  # True
+        self.assertEqual(wordBreak(s12, wd12), True)  # True
+        self.assertEqual(wordBreak(s13, wd13), False)  # False
+        self.assertEqual(wordBreak(s14, wd14), True)  # True
+        self.assertEqual(wordBreak(s15, wd15), False)  # False
 
 
 if __name__ == "__main__":

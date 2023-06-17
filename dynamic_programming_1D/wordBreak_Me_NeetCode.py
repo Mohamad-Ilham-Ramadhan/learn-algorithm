@@ -22,8 +22,6 @@
       Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
       Output: false
    
-   Solution by neetcode and code implementation by me:
-      implementing Neetcode's solution of dynamic programming
       
    Constraints:
       - 1 <= s.length <= 300
@@ -32,6 +30,9 @@
       - s and wordDict[i] consist of only lowercase English letters.
       - All the strings of wordDict are unique.
 
+   Solution by neetcode and code implementation by me:
+      implementing Neetcode's solution of dynamic programming
+      
    Leetcode submission: 
       Runtime: 44 ms, beats 87.29%
       Memory: 16.4 MB, beats 48.60%
@@ -42,7 +43,6 @@ def wordBreak4(s, wordDict):
   dp = [False for i in range(len(s) + 1)]
   dp[len(s)] = True
   # print('dp', len(dp), 's', len(s))
-  store = []
 
   for i in range(len(s) - 1, -1, -1): 
     char = s[i]
