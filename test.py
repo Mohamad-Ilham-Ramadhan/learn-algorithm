@@ -1,6 +1,6 @@
 import unittest
 import time
-from coba import maxProduct, maxProduct2
+from coba import maxProduct
 
 n1 = [2,3,-2,4] # expect: 6
 n2 = [-2,0,-1]  # expect: 0
@@ -24,17 +24,17 @@ class TestCalc(unittest.TestCase):
 
     def test_xxx(self):
         # time.sleep(1)
-        self.assertEqual(maxProduct2(n1), 6) 
-        self.assertEqual(maxProduct2(n2), 0) 
-        self.assertEqual(maxProduct2(n3), 16) 
-        self.assertEqual(maxProduct2(n4), 6300) 
-        self.assertEqual(maxProduct2(n5), 120) 
-        self.assertEqual(maxProduct2(n6), -3) 
-        self.assertEqual(maxProduct2(n7), 24) 
-        self.assertEqual(maxProduct2(n8), 2) 
-        self.assertEqual(maxProduct2(n9), 72) 
-        self.assertEqual(maxProduct2(n10), 648) 
-        self.assertEqual(maxProduct2(n11), 24) 
+        self.assertEqual(maxProduct(n1), 6) 
+        self.assertEqual(maxProduct(n2), 0) 
+        self.assertEqual(maxProduct(n3), 16) 
+        self.assertEqual(maxProduct(n4), 6300) 
+        self.assertEqual(maxProduct(n5), 120) 
+        self.assertEqual(maxProduct(n6), -3) 
+        self.assertEqual(maxProduct(n7), 24) 
+        self.assertEqual(maxProduct(n8), 2) 
+        self.assertEqual(maxProduct(n9), 72) 
+        self.assertEqual(maxProduct(n10), 648) 
+        self.assertEqual(maxProduct(n11), 24) 
         
 
 

@@ -25,8 +25,14 @@
 
     Solution by myself
         using bottom up dynamic programming
-        store the smallest negative number and biggest positive number in prev DP cache
+        store the smallest negative number and biggest positive number in prev DP cache (dp[i - 1])
+        remove 0 from dp[i]
         and check max() product in every iteration
+
+        Remember:
+            negative numbers,
+            0,
+            positive numbers
     
     leetcode submission:
         attempt #1
