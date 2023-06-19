@@ -1,6 +1,6 @@
 import unittest
 import time
-from coba import canJump
+from coba import canJump, canJump2
 
 n1 = [2,3,1,1,4] # true
 n2 = [3,2,1,0,4] # false
@@ -21,14 +21,14 @@ class TestCalc(unittest.TestCase):
         print('%s: %.3f' % (self.id(), t))
 
     def test_xxx(self):
-        self.assertEqual(canJump(n1), True) 
-        self.assertEqual(canJump(n2), False) 
-        self.assertEqual(canJump(n3), True) 
-        self.assertEqual(canJump(n4), True) 
-        self.assertEqual(canJump(n5), True) 
-        self.assertEqual(canJump(n6), True) 
-        self.assertEqual(canJump(n7), True) 
-        self.assertEqual(canJump(n8), True) 
+        self.assertEqual(canJump2(n1), True) 
+        self.assertEqual(canJump2(n2), False) 
+        self.assertEqual(canJump2(n3), True) 
+        self.assertEqual(canJump2(n4), True) 
+        self.assertEqual(canJump2(n5), True) 
+        self.assertEqual(canJump2(n6), True) 
+        self.assertEqual(canJump2(n7), True) 
+        self.assertEqual(canJump2(n8), True) 
 
 
 if __name__ == "__main__":

@@ -31,7 +31,7 @@
          runtime: 3999 ms, 11.27%
          memory: 18.3 MB, 5.88%
 '''
-# solution #1
+# solution #1 (maybe this solution is using brute force)
 def canJump(nums):
    visited = set()
    i = 0
