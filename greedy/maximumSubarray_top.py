@@ -56,7 +56,7 @@ def maxSubarray(nums):
             currSum = n
       else:
             currSum += n
-      print('n', n, 'currSum', currSum, 'maxSum', maxSum)
+      print('currSum', currSum, 'maxSum', maxSum)
       if currSum > maxSum:
             maxSum = currSum
    return maxSum
