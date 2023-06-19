@@ -30,15 +30,7 @@
 
    ===============================================================
    
-   Solution by myself:
-      base case is greedy[0] = [nums0] and result = nums[0]
-
-      loop over nums:
-         gd0 = max of ...greedy[0] + nums[i]
-         greedy[i] = [gd0, nums[i]]
-         result = max(result, gd0, n)
-      
-      return result
+   Solution by top submitted solution by others: 
 
    Leetcode submission:
       runtime: 640 ms, beats 98.65%
