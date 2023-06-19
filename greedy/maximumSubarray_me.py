@@ -48,10 +48,38 @@
       attempt #2 
          runtime: 913 ms, beats 5.1%
          memory: 30.6 MB, beats 78.17%
+      
+      attempt #3
+         runtime: 759 ms, beats 26.38%
+         memory: 30.9 MB, beats 59.40%
 
 '''
-# attempt #2
-def maxSubArray(nums):
+# attempt #3. Time complexity: O(n), space complexity: O(1)
+def maxSubarray3(nums):
+   if len(nums) == 0: return nums[0]
+
+   greedy = nums[0]
+   result = nums[0]
+
+   for i in range(1, len(nums)):
+       greedy = max(greedy + nums[i], nums[i])
+       result = max(result, greedy)
+
+   return result
+'''
+    [-2,1,-3,4,-1,2,1,-5,4]
+    [-2] [1] [-2] [4] [3] [5] [6] [1] [5]
+    ]
+    [-1, 1] [-2, -3] [2, 4] [3, -1] [5, 2] [6, 1] [1, -5] [5, 4]
+
+    [5,4,-1,7,8]
+    [5] [9, 4] [8, -1] [15, 7] [23, 8]
+
+    [-2, -4, -1, -3]
+    [-2] [-6, -4] [-5, -1] [-4, -3]
+'''
+# attempt #2. time complexity: O(n * 2), space complexity O(1)
+def maxSubArray2(nums):
     if len(nums) == 1: return nums[0]
 
     greedy = [nums[0]]
@@ -68,17 +96,9 @@ def maxSubArray(nums):
 
     return res
 
-'''
-    [-2,1,-3,4,-1,2,1,-5,4]
-    [-1, 1] [-2, -3] [2, 4] [3, -1] [5, 2] [6, 1] [1, -5] [5, 4]
 
-    [5,4,-1,7,8]
-    [5] [9, 4] [8, -1] [15, 7] [23, 8]
 
-    [-2, -4, -1, -3]
-    [-2] [-6, -4] [-5, -1] [-4, -3]
-'''
-# attempt #1
+# attempt #1 time complexity: O(n * 2), space complexity O(n * 2)
 def maxSubarray(nums): 
     if len(nums) == 1: return nums[0]
 

@@ -1,6 +1,6 @@
 import unittest
 import time
-from coba import maxSubarray
+from coba import maxSubarray3
 
 n1 = [-2,1,-3,4,-1,2,1,-5,4] # expect: 6
 n2 = [1] # expect: 1
@@ -19,11 +19,11 @@ class TestCalc(unittest.TestCase):
         print('%s: %.3f' % (self.id(), t))
 
     def test_xxx(self):
-        self.assertEqual(maxSubarray(n1), 6) 
-        self.assertEqual(maxSubarray(n2), 1) 
-        self.assertEqual(maxSubarray(n3), 23) 
-        self.assertEqual(maxSubarray(n4), -1) 
-        self.assertEqual(maxSubarray(n5), 103) 
+        self.assertEqual(maxSubarray3(n1), 6) 
+        self.assertEqual(maxSubarray3(n2), 1) 
+        self.assertEqual(maxSubarray3(n3), 23) 
+        self.assertEqual(maxSubarray3(n4), -1) 
+        self.assertEqual(maxSubarray3(n5), 103) 
         
 
 
