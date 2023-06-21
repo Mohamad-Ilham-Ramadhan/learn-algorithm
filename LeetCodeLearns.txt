@@ -143,3 +143,5 @@ Lesson learned in solving LeetCode problems:
       - Memory: 42.1 MB, beats 29.25%
 
 - Dynamic programming can makes O(2||3||4...^n) to O(n)
+
+- (Python3): Don't use this: var = [[0] * t2l] * t1l. To build base 2D matrix because all rows share same reference
