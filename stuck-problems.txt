@@ -1,5 +1,6 @@
 Tree:
    - subtree of another tree (easy)
+      - (success) without fail after come back completing Blind 75. Maybe because my intuition grow stronger.
 1D dynamic programming:
    - coin change (medium)
    - longest increasing subsequence (medium): [SOLVED O(n^2)] but cannot make up to O(n log n) as suggested.
