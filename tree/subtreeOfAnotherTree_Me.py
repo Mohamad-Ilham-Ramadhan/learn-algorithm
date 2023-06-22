@@ -43,6 +43,10 @@
       #1 
          runtime: 109 ms, beats 92.3%
          memory: 17.6 MB, beats 50.86
+      #2
+         runtime: 121 ms, beats 87.72%
+         memory: 17.7 MB, beats 23.25%
+
 """
 
 
@@ -72,6 +76,50 @@ def isSubtree(root, subRoot):
          else: 
             return False
       return (root1.val == root2.val) and dfsCheck(root1.left, root2.left) and dfsCheck(root1.right, root2.right)
+   # check every potential roots
+   while len(stack) > 0:
+      r = stack.pop() 
+      if dfsCheck(r, subRoot): return True
+   
+   return False
+
+# attempt #2. dfsCheck() using recursive to stop traversing when False 
+def isSubtree2(root, subRoot):
+   stack = [] # to store potential node/root
+   def dfs(root):
+      if root == None: return 
+      if root.val == subRoot.val:
+         stack.append(root)
+      dfs(root.left)
+      dfs(root.right)
+   dfs(root)
+   print('stack', stack)
+
+   def dfsCheck(root1, root2):
+      print('=== dfsCheck ===')
+      print('root1', root1.val, 'root2', root2.val)
+      stack = [[root1.left, root2.left], [root1.right, root2.right]]
+      while len(stack) > 0:
+         [n1, n2] = stack.pop()
+         print('n1', n1, 'n2', n2)
+         if (n1 == None or n2 == None):
+            print('ONE OF NONE')
+            if n1 == None and n2 == None:
+               print('SAME NONE')
+               continue
+            else: 
+               print('not SAME NONE return FALSE')
+               return False 
+         
+         if n1.val == n2.val:
+            print('SAME VAL')
+            stack.append([n1.left, n2.left])
+            stack.append([n1.right, n2.right])
+         else:
+            return False
+      print('TRUE')
+      return True
+
    # check every potential roots
    while len(stack) > 0:
       r = stack.pop() 
@@ -124,4 +172,4 @@ sr3 =       TreeNode(1,
                TreeNode(2),
                TreeNode(3),
             ) # True
-print('RESULT :', isSubtree(r3, sr3))
+print('RESULT :', isSubtree2(r3, sr3))
