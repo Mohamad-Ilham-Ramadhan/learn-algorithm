@@ -44,6 +44,10 @@
       #3 (hashmap progression, one loop only.)
          runtime: 135 ms, beats 81.11%
          memory: 17.4 MB, beats 17.63%
+      #4 (two pointers)
+         runtime: 134 ms, beats 84.13%
+         memory: 17.3 MB, beats 17.63%
+
 
 '''
 # attempt 1 using hasmap. O(n * 2)
@@ -91,6 +95,22 @@ def twoSum3(numbers, target):
       if d in map: 
          return [map[d] + 1, i + 1]
       map[n] = i 
+
+# attempt 4 after watched NeetCode explanation using two pointers
+def twoSum4(numbers, target):
+   l, r = 0, len(numbers) - 1
+
+   while ( not (l == r) or not (l + 1 == r - 1)): 
+      n1 = numbers[l]
+      n2 = numbers[r]
+      print(n1, n2)
+      sum = n1 + n2
+      if sum == target:
+         return [l + 1, r + 1]
+      if sum > target: 
+         r -= 1
+      elif sum < target: 
+         l += 1
 
 
 n1 = [2,7,11,15]; t1 = 9 # [1,2]
