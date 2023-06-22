@@ -100,7 +100,7 @@ def twoSum3(numbers, target):
 def twoSum4(numbers, target):
    l, r = 0, len(numbers) - 1
 
-   while ( not (l == r) or not (l + 1 == r - 1)): 
+   while True: 
       n1 = numbers[l]
       n2 = numbers[r]
       print(n1, n2)
