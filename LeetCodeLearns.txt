@@ -145,3 +145,5 @@ Lesson learned in solving LeetCode problems:
 - Dynamic programming can makes O(2||3||4...^n) to O(n)
 
 - (Python3): Don't use this: var = [[0] * t2l] * t1l. To build base 2D matrix because all rows share same reference
+
+- (Python3): int() function always truncates number toward zero.

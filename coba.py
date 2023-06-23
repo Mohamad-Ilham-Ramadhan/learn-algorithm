@@ -106,7 +106,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(evalRPN(t3), 22)
         self.assertEqual(evalRPN(t4), 18)
 
-if __name__ == "__main__":
-    unittest.main()
+# if __name__ == "__main__":
+#     unittest.main()
 
-# print(isinstance('18',str))
+print(int(-1.7), int(1.7))
