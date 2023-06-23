@@ -1,3 +1,5 @@
+Two pointer: 
+   - Trapping Rain Water (Hard) fail
 Tree:
    - subtree of another tree (easy)
       - (success) without fail after come back completing Blind 75. Maybe because my intuition grow stronger.
