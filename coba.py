@@ -30,6 +30,9 @@
       #1
          runtime: 1544 ms, beats 5.6%
          memory: 32.1 MB, beats 15.91%
+      #2
+         runtime: 1466 ms, beats 8.24%
+         memory: 30.2 MB, beats 91.22%
 
 '''
 
@@ -50,9 +53,15 @@ def dailyTemperatures(temperatures):
          t1 = temperatures[stack[j]]
          if t1 >= t2: 
             break
-         if (t2 > t1): 
+         # if (t2 > t1): 
+         #    x = stack.pop()
+         #    answer[x] = i - x 
+
+         # attempt 2
+         else: 
             x = stack.pop()
             answer[x] = i - x 
+
          
       stack.append(i)
    # print('z', z, len(temperatures))
