@@ -33,6 +33,10 @@
       #3 (hashmap power up and is statement order revamped)
          - runtime: 46 ms, beats 81.43%
          - memory: 16.6 MB, beats 60.94%
+      #4 
+         - runtime: 53 ms, beats 42.58%
+         - memory: 16.7 MB, beats 24.57%
+
 
 """
 
@@ -170,12 +174,42 @@ def solution3(n):
    return res
 
 
+def solution4(n):
+   mo = {1: '('}  # map of open parentheses
+   mc = {1: ')'}  # map of close parentheses
+
+   def dfs(s, o, c, operation):
+      if len(s) == n * 2:
+         res.append(s)
+         return
+      if operation == "o":
+         for i in range(1, (n - o) + 1):
+            if i in mo: 
+               dfs(s + mo[i], o + i, c, "c")
+               continue
+            if i - 1 in mo: 
+               mo[i] = mo[i-1] + '('
+               dfs(s + mo[i], o + i, c, "c")
+      else:
+         for i in range(1, (o - c) + 1):
+            if i in mc: 
+               dfs(s + mc[i], o, c + i, "o")
+               continue
+            if i - 1 in mc: 
+               mc[i] = mc[i-1] + ')'
+               dfs(s + mc[i], o, c + i, "o")
+
+   res = []
+   dfs("", 0, 0, "o")
+   return res
+
+
 
 n1 = 1
 n2 = 2
 n3 = 3
 n4 = 4
-print("RESULT : ", solution3(4))
+print("RESULT : ", solution4(4))
 
 """
    n = 4
