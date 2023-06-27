@@ -24,7 +24,7 @@
 
    ===============================================================
 
-   Solution by top answer
+   Solution by top answer/solution
 
    Leetcode submission:
       runtime: 1244 ms, beats 99.87%
