@@ -48,8 +48,9 @@
          runtime: 766 ms, beats 75.84%
          memory: 74.8 MB, beats 16.49%
 
-      
-
+      #2 array element is a tuple
+         runtime: 764 ms, beats 76.29%
+         memory: 73.9 MB, beats 75.29%
 '''
 
 '''
@@ -73,9 +74,15 @@ class TimeMap:
 
    def set(self, key: str, value: str, timestamp: int) -> None:
       if key in self.hm: 
-         self.hm[key].append([timestamp, value])
+         # self.hm[key].append([timestamp, value])
+
+         # attempt #2
+         self.hm[key].append( (timestamp, value) )
       else: 
-         self.hm[key] = [[timestamp, value]]
+         # self.hm[key] = [[timestamp, value]]
+
+         # attempt #2
+         self.hm[key] = [(timestamp, value)]
 
    def get(self, key: str, timestamp: int) -> str:
       if key not in self.hm:
