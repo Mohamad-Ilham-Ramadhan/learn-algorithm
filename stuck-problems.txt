@@ -2,7 +2,8 @@ Two pointer:
    - Trapping Rain Water (Hard) fail
 Binary Search: 
    - 875. Koko Eating Bananas (medium)
-
+   - 4. Median of Two Sorted Arrays (hard)
+      - I can answer in O(n+m) time complexity but cannot in O(log(n+m))
 Tree:
    - subtree of another tree (easy)
       - (success) without fail after come back completing Blind 75. Maybe because my intuition grow stronger.
