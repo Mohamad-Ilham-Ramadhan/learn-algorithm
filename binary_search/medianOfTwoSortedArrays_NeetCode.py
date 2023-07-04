@@ -38,10 +38,10 @@
 '''
 
 '''
+
    A=[4,5,6,12,13] B=[1,2,3,7,10,11]  # 6
 
 '''
-   
 
 def findMedianSortedArrays(nums1, nums2):
    A, B = nums1, nums2 
