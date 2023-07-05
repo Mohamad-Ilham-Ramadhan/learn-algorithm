@@ -38,6 +38,9 @@
       attempt #1
          runtime: 94 ms, beats 6.98%
          memory: 16.2 MB, beats 95.93%
+      attempt #2 
+         runtime: 90 ms, beats 14.78%
+         memory: 16.4 MB, beats 29.77%
 '''
 # Definition for singly-linked list.
 class ListNode:
@@ -71,6 +74,38 @@ def addTwoNumbers(l1, l2):
       print('val', val,'total', total)
    
    return res.next
+# 2
+def attempt2(l1, l2): 
+   cur1 = l1 
+   cur2 = l2 
+   res = ListNode(0)
+   cur = res 
+   total = '0'
+   while cur1 or cur2: 
+      val1 = 0
+      if cur1: 
+         val1 = cur1.val 
+         cur1 = cur1.next 
+      val2 = 0
+      if cur2: 
+         val2 = cur2.val 
+         cur2 = cur2.next 
+      if total == '': 
+         total = '0'
+      total = str(val1 + val2  + int(total))
+      print('total', total)
+      cur.next = ListNode(int(total[-1]))
+      total = total[:len(total)-1]
+      cur = cur.next
+   
+   # the total rest append to the list
+   print('last cur', cur.val)
+   while len(total): 
+      cur.next = ListNode(int(total[-1]))
+      total = total[:len(total)-1]
+      cur = cur.next
+   
+   return res.next
 '''
    [9,9,9]
    [9,9,9]
@@ -88,4 +123,4 @@ l21 = ListNode(5,ListNode(6,ListNode(4)))
 l12 = ListNode(9,ListNode(9,ListNode(9,ListNode(9,ListNode(9,ListNode(9,ListNode(9)))))))
 l22 = ListNode(9,ListNode(9,ListNode(9,ListNode(9))))
 
-print('RESULT :', addTwoNumbers(l12, l22)) 
+print('RESULT :', attempt2(l12, l22)) 
