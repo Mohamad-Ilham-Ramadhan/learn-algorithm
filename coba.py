@@ -60,3 +60,8 @@ n1 = [1,3,4,2,2]
 n2 = [2,2,2,2,2]
 
 print('RESULT :', findDuplicate(n1))
+
+'''
+   slow 3
+   fast 3
+'''
