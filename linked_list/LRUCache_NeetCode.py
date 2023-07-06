@@ -43,12 +43,11 @@
 
    ============================================
 
-   Solution by myself:
-      using doubly-linked list 
+   Solution by NeetCode
 
    leetcode submission: 
-      runtime: 830 ms, 57.55%
-      memory: 83.4 MB, 5.44%
+      runtime: 861 ms, 36.66%
+      memory: 78.5 MB, 49.32%
 '''
 class Node: 
    def __init__(self, key, val):

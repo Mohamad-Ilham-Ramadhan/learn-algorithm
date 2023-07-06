@@ -48,7 +48,7 @@
 
    leetcode submission: 
       runtime: 830 ms, 57.55%
-      memory: 83.4 MB, 5.44%
+      memory: 83.4 MB, 5.44% (big memory maybe because there are NodeList that not removed and stay in the other's prev/next)
 '''
 class List: 
    def __init__(self, key, val):
