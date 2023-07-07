@@ -21,12 +21,18 @@
       - 1 <= s1.length, s2.length <= 10^4
       - s1 and s2 consist of lowercase English letters.
 
+   Related Topics:
+      (Hash Table) (Two Pointers) (String) (Sliding Window)
+
+
    ======================================================= 
 
    Solution by myself: 
       #1
          using hashmap to store the count of a character 
-         sliding window 
+
+      #2 
+         using sliding window technique
    
    Leetcode submission:
       #1
@@ -35,6 +41,8 @@
       #2
          runtime: 79 ms, beats 84.26%
          memory: 16.4 MB, beats 88.95%
+
+   
 '''
 #1
 def checkInclusion(s1, s2):
