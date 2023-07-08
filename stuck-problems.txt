@@ -1,5 +1,4 @@
 Two pointer: 
-   - Trapping Rain Water (Hard) fail
 Slidin Window: 
 Binary Search: 
    - 875. Koko Eating Bananas (medium)
