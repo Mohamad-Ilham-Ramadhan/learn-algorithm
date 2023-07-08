@@ -66,7 +66,7 @@ def reverseKGroup(head, k):
          revNext = prev.next # 1
          revPrev = prev.next # 1 (for the next prev)
          revCur = revNext.next # 2
-         revNext.next = next # 1->3
+         revNext.next = next # 1->3 (join the reversed k-group to the next list: root->2->1 -> 3->4->5)
          # print('next', next.val, 'revNext.val', revNext.val, 'revCur', revCur.val, 'temp', revCur.next.val)
          while revCur and revCur != next: 
             # 1->2->3->4->5
