@@ -1,7 +1,6 @@
 Two pointer: 
    - Trapping Rain Water (Hard) fail
 Slidin Window: 
-   - 239. Sliding Window Maximum (hard)
 Binary Search: 
    - 875. Koko Eating Bananas (medium)
    - 4. Median of Two Sorted Arrays (hard)
