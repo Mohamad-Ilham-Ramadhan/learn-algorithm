@@ -85,7 +85,7 @@ h14 = [100000,0,99999,0,99998,0,99997,0,99996,0,99995,0,99994,0,99993,0,99992,0,
 
 import time
 startTime = time.time()
-print('RESULT :', solution2(h1))
+print('RESULT :', trap(h1))
 t = time.time() - startTime
 print('%s: %.3f' % ('Runtime: ', t))
 # 20
