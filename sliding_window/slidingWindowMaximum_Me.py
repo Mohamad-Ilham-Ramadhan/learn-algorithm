@@ -35,7 +35,7 @@
    =========================================================================
 
    Solution By myself
-      #3 Monotonic queue and binary search 
+      #3 Monotonic queue and binary search O(n log(k) )
          monotonic queue for holding the max value(queue[0])
          binary search for inserting a new value
    
@@ -163,7 +163,7 @@ def solution2(nums, k):
 
    return result
 
-# #3: monotonic queue and binary search 
+# #3: monotonic queue and binary search O(n log(k) )
 def solution3(nums, k):
    dq = [0] # indexes of nums max to .... min
    # initial queue
