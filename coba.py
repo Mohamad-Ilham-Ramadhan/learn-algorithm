@@ -26,8 +26,12 @@
       (Array) (Divide and conquer) (Sorting) (Heap (Priority Queue)) (Quickselect)
 
    Leetcode submission: 
-      runtime: 538 ms, beats 57.23%
-      memory: 30.1 MB, beats 30.38%
+      # heap
+         runtime: 538 ms, beats 57.23%
+         memory: 30.1 MB, beats 30.38%
+      # sort
+         runtime: 491 ms, beats 85.40%
+         memory: 29.5 MB, 79.37%
 '''
 # using heap: time O((n+k) log(n+k))
 from heapq import heapify, heappush, heappop
@@ -39,3 +43,8 @@ def findKthLargest(nums, k):
    for i in range(k-1):
       heappop(hp)
    return -hp[0]
+
+# using sort: time O(n logn)
+def solution2(nums, k):
+   nums.sort() 
+   return nums[-k]
