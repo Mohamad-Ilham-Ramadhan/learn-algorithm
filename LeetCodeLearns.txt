@@ -164,7 +164,7 @@ Lesson learned in solving LeetCode problems:
       hm = Counter(tasks)
       hm => {'A': 6, 'B': 1, 'C': 1, 'D': 1, 'E': 1, 'F': 1, 'G': 1}
 
-- (Python3): can transform 2D list into heap: 
+- (Python3): can transform 2D list into heap, list[i][0] is the sorted value: 
    list1 = [[1,1,1],[0,2,2],[-100,4,4],[3,3,3]]
    heapify(list1)
    while mh: 
