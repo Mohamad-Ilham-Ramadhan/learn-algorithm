@@ -55,6 +55,7 @@ class MedianFinder:
    def __init__(self):
       self.sl = [] # sorted list
 
+   # O(log n)
    def addNum(self, num: int) -> None:
       if len(self.sl):
          # binaryAdd 
@@ -70,11 +71,12 @@ class MedianFinder:
       else: 
          self.sl.append(num)
 
+   # O(1)
    def findMedian(self) -> float:
+      mid = self.len(self.sl) // 2
       if len(self.sl) % 2: # odd 
-         return float(self.sl[self.len(self.sl) // 2])
+         return float(self.sl[mid])
       else: # even 
-         mid = self.len(self.sl) // 2
          return (self.sl[mid - 1] + self.sl[mid]) / 2
 
 
