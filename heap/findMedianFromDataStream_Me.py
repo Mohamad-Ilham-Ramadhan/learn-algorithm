@@ -96,6 +96,7 @@ class MedianFinder2:
       self.minH = [] # the right part
       heapify(self.maxH); heapify(self.minH)
 
+   # O(log n) * 2
    def addNum(self, num: int) -> None:
       if len(self.maxH) == 0: heappush(self.maxH, -num); return;
 
@@ -111,11 +112,12 @@ class MedianFinder2:
             popped = heappop(self.minH)
             heappush(self.maxH, -popped)
 
+   # O(1)
    def findMedian(self) -> float:
-      if len(self.maxH) > len(self.minH): 
+      if len(self.maxH) > len(self.minH): # Odd
          return -float(self.maxH[0])
       else: 
-         return (-self.maxH[0] + self.minH[0]) / 2 
+         return (-self.maxH[0] + self.minH[0]) / 2 # Even
 # Your MedianFinder object will be instantiated and called as such:
 # obj = MedianFinder()
 # obj.addNum(num)
