@@ -46,6 +46,8 @@
 /* 
    My own solution not using backtracking because I don't have any idea.
 
+      Bit Manipulation
+
    LeetCode submition:
       Runtime: 61ms, beats 70%.
       Memory: 44.3MB, beats 30.5%
