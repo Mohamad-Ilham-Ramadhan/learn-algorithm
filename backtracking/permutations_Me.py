@@ -33,6 +33,9 @@
       #1
          runtime: 64 ms, beats 11,70%
          memory: 16.7 MB, beats 12.50% 
+      #2
+         runtime: 66 ms, beats 5.96%
+         memory: 16.4 MB, beats 73.14%
 
 '''
 
@@ -59,8 +62,12 @@ def solution2(nums):
    def dfs(s, arr): 
       if len(arr) == len(nums): permutations.append(arr)
 
-      for i in range(len(nums)): 
-         pass
+      for i in range(len(nums)):
+         if i not in s: 
+            dfs({*s, i}, [*arr,nums[i]])
+   
+   dfs({},[])
+   return permutations
    
 n1 = [1,2,3]
 print('RESULT :', permute(n1))
