@@ -1,9 +1,11 @@
 Two pointer: 
-Slidin Window: 
+Sliding Window: 
+   - 239. sliding window maximum (hard)
+      - passed but very slow runtime, cannot make O(n) time complexity.
 Binary Search: 
    - 875. Koko Eating Bananas (medium)
    - 4. Median of Two Sorted Arrays (hard)
-      - I can answer in O(n+m) time complexity but cannot in O(log(n+m))
+      - I can answer in O(n+m) by merge sort. time complexity but cannot in O(log(n+m))
 Linked list: 
    - 287. Find the Duplicate Number (medium)
       - cannot make space O(1), I solve using hash set which is O(n)

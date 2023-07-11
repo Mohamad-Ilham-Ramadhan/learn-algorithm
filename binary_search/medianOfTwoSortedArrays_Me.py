@@ -31,9 +31,10 @@
    ===============================================
 
    Solution by Myself: 
+      merge sort O(n+m)
 
    Leetcode submission: 
-      runtime: 91 ms, beats 14.96% 
+      runtime: 118 ms, beats 14.96% 
       memory: 16.8 MB, beats 10.92%
 '''
 
