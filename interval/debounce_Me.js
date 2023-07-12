@@ -78,25 +78,26 @@
 */
 
 function foo(fn, t) {
-  let timeThreshold = 0
-  let id = 0
-  return function(...args) {
-    let now = Date.now() // now in timestamp
-    if (now <= timeThreshold) {
-      // cancel the prev call
-      clearTimeout(id)
-    } 
-
-    timeThreshold = now + t 
-    id = setTimeout(() => {
-      fn(...args)
-    }, t)
-  }
-}
-function delay(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-var debounceLog = foo(console.log, 150) 
-delay(50).then(() => debounceLog([1,2]))
-delay(300).then(() => debounceLog([3,4]))
-delay(300).then(() => debounceLog([5,6]))
+   let timeThreshold = 0
+   let id = 0
+   return function(...args) {
+     let now = Date.now() // now in timestamp
+     if (now <= timeThreshold) {
+       // cancel the prev call
+       clearTimeout(id)
+     } 
+ 
+     timeThreshold = now + t 
+     id = setTimeout(() => {
+       fn(...args)
+     }, t)
+   }
+ }
+ function delay(time) {
+   return new Promise(resolve => setTimeout(resolve, time));
+ }
+ var debounceLog = foo(console.log, 150) 
+ delay(50).then(() => debounceLog([1,2]))
+ delay(300).then(() => debounceLog([3,4]))
+ delay(300).then(() => debounceLog([5,6]))
+ 
