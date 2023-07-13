@@ -47,6 +47,10 @@
       #1
          runtime: 71 ms, beats 71.96%
          memory: 16.4 MB, beats 66.5%
+
+      #2
+         runtime: 69 ms, beats 79.83%
+         memory: 16.5 MB, beats 66.5%
          
 '''
 # Time complexity: O(n), Space complexity: O(n)
@@ -62,6 +66,20 @@ def minCostClimbingStairs(cost):
    
    return min(dp[0], dp[1])
 
+# space complexity O(1)
+def solution2(cost): 
+   dp1 = cost[len(cost)-2]
+   dp2 = cost[len(cost)-1]
+
+   for i in range(len(cost)-3, -1, -1): 
+      n = cost[i]
+      temp = dp1
+      dp1 = n + min(dp1,dp2)
+      dp2 = temp
+      print(n, dp1, dp2)
+   
+   return min(dp1, dp2)
+
 c1 = [10,15,20]
 c2 = [1,100,1,1,1,100,1,1,100,1]
 c3 = [2,3,1,4,6,3,10,1,1,4,3,12] # 15
@@ -71,4 +89,4 @@ c5 = [3,9]
    10+15+4+7+3+3+4+4
    15+4+7+3+4+4
 '''
-print('RESULT :', minCostClimbingStairs(c5))
+print('RESULT :', solution2(c2))
