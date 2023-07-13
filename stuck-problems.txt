@@ -16,3 +16,5 @@ Tree:
    - coin change (medium)
    - longest increasing subsequence (medium): [SOLVED O(n^2)] but cannot make up to O(n log n) as suggested.
    - word break (medium): time limit exeeded
+graph: 
+   - Redundant connection (medium), time limit exceeded
