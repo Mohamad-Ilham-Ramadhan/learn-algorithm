@@ -57,40 +57,62 @@ public:
    ListNode *deleteDuplicates(ListNode *head)
    {
       auto ptr = head;
+      // while (ptr) {
+      //    if ((*ptr).next && (*ptr).val == (*(*ptr).next).val) {
+      //       (*ptr).next = (*(*ptr).next).next;
+      //       continue;
+      //    }
+      //    ptr = (*ptr).next;
+      // }
+
+      // Better way
       while (ptr) {
-         if ((*ptr).next && (*ptr).val == (*(*ptr).next).val) {
-            (*ptr).next = (*(*ptr).next).next;
+         if (ptr->next && ptr->val == ptr->next->val) {
+            ptr->next = ptr->next->next;
             continue;
          }
          ptr = (*ptr).next;
       }
+
       return head;
    }
 };
 
+struct Car {
+   string brand;
+   string color;
+};
 int main()
 {
-   ListNode h1; 
-   h1.val = 1;
-   ListNode h2(1);
-   h1.next = &h2;
-   ListNode h3(2);
-   h2.next = &h3;
-   ListNode h4(2);
-   h3.next = &h4; 
-   ListNode h5(3);
-   h4.next = &h5;
 
-   Solution s;
-   auto newHead = s.deleteDuplicates(&h1);
+   Car civic; 
+   civic.brand = "Honda Civic";
+   civic.color = "black";
+   Car* ptr = &civic;
+   cout << ptr->brand << "\n";
+   ptr->brand = "Tank baja";
+   cout << civic.brand <<"\n";
+   // ListNode h1; 
+   // h1.val = 1;
+   // ListNode h2(1);
+   // h1.next = &h2;
+   // ListNode h3(2);
+   // h2.next = &h3;
+   // ListNode h4(2);
+   // h3.next = &h4; 
+   // ListNode h5(3);
+   // h4.next = &h5;
 
-   cout << "Check fakta \n";
+   // Solution s;
+   // auto newHead = s.deleteDuplicates(&h1);
 
-   auto ptr = newHead;
-   while (ptr) {
-      ListNode n = *ptr;
-      cout << n.val << "\n";
-      ptr = n.next;
-   }
+   // cout << "Check fakta \n";
+
+   // auto ptr = newHead;
+   // while (ptr) {
+   //    ListNode n = *ptr;
+   //    cout << n.val << "\n";
+   //    ptr = n.next;
+   // }
    return 0;
 }

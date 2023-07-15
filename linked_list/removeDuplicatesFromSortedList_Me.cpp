@@ -57,9 +57,18 @@ public:
    ListNode *deleteDuplicates(ListNode *head)
    {
       auto ptr = head;
+      // while (ptr) {
+      //    if ((*ptr).next && (*ptr).val == (*(*ptr).next).val) {
+      //       (*ptr).next = (*(*ptr).next).next;
+      //       continue;
+      //    }
+      //    ptr = (*ptr).next;
+      // }
+
+      // Better way (->) can access member even as a pointer
       while (ptr) {
-         if ((*ptr).next && (*ptr).val == (*(*ptr).next).val) {
-            (*ptr).next = (*(*ptr).next).next;
+         if (ptr->next && ptr->val == ptr->next->val) {
+            ptr->next = ptr->next->next;
             continue;
          }
          ptr = (*ptr).next;
