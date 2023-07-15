@@ -26,7 +26,8 @@
       - The list is guaranteed to be sorted in ascending order.
 
    Related topics:
-
+      (linked list)
+      
    =======================================================================================
 
    Solution by myself
