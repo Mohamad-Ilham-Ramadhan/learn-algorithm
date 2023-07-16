@@ -45,7 +45,8 @@
       - words[i] contains only lowercase English letters.
 
    Related topics: 
-
+      (array) (hash table) (string) (simulation)
+      
    ==========================================================
 
    Solution by myself
