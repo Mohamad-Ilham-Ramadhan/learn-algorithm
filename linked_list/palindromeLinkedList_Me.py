@@ -35,9 +35,15 @@ palindrome
    Leetcode submission:
       #1 time O(n), space O(n)
       runtime: 927 ms, beats 10.54%
-      memory: beats 9.31%
+      memory: 49.52 MB,  beats 9.31%
 
 '''
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
 # 1
 def isPalindrome(head): 
    nums = []
