@@ -26,14 +26,27 @@
 
 
    Related topics:
+      (linked list) (two pointers) (stack) (recursion)
 
    =======================================================================
+
    Solution by myself:
+      #1
+         but firstly, we store all listnode value to an array/list
+         using two pointers to check is it a palindrome
+      #2
+         using two pointers (hare and turtle), the first is slow, the second is fast (it is two step next)
+         reverse the part two (mid to end) using slow as the first next value for part two
+         then check is it palindrome by using two pointer, the first is point to the head argument, and the second is the part two.next because part two is None initialy.
+
 
    Leetcode submission:
       #1 time O(n), space O(n)
-      runtime: 274 ms, beats 44.01%
-      memory: 128.23, beats 20.35%
+         runtime: 274 ms, beats 44.01%
+         memory: 128.23, beats 20.35%
+      #2 time O(n), space O(1)
+         runtime: 217 ms, beats 94.70%
+         memory: 114.15 MB, beats 76.12%
 */
 
 // Definition for singly-linked list.
@@ -56,29 +69,76 @@ public:
    bool isPalindrome(ListNode *head)
    {
       vector<int> nums;
-      ListNode* cur = head; 
-      while (cur) {
+      ListNode *cur = head;
+      while (cur)
+      {
          nums.push_back(cur->val);
          cur = cur->next;
       }
       int l;
-      int r; 
-      if (nums.size() % 2) { // odd
+      int r;
+      if (nums.size() % 2)
+      { // odd
          l = r = nums.size() / 2;
-      } else { // even
+      }
+      else
+      { // even
          r = nums.size() / 2;
          l = r - 1;
       }
-      while (l > -1 && r < nums.size()) {
-         if (nums[l] != nums[r]) return false; 
-         l--; r++;
+      while (l > -1 && r < nums.size())
+      {
+         if (nums[l] != nums[r])
+            return false;
+         l--;
+         r++;
+      }
+      return true;
+   }
+
+   // #2 time O(n * 1.5), space O(1)
+   bool solution2(ListNode *head)
+   {
+      ListNode *slow = head;
+      ListNode *fast = head->next;
+      while (fast)
+      {
+         slow = slow->next;
+         if (fast->next == NULL || fast->next->next == NULL)
+         {
+            break;
+         }
+         fast = fast->next->next;
+      }
+
+      // Reverse the part two
+      ListNode n(-666);
+      ListNode *partTwo = &n;
+      ListNode *next = slow;
+      while (next)
+      {
+         ListNode *temp = next->next;
+         next->next = partTwo->next;
+         partTwo->next = next;
+         next = temp;
+      }
+
+      ListNode *start = partTwo->next;
+      while (start)
+      {
+         if (head->val != start->val)
+         {
+            return false;
+         }
+         start = start->next;
+         head = head->next;
       }
       return true;
    }
 };
 
 int main()
-{  
+{
    // 1->2->2->1
    ListNode h1(1);
    ListNode h2(2);

@@ -26,6 +26,8 @@
 
 
    Related topics:
+      (linked list) (two pointers) (stack) (recursion)
+
 
    =======================================================================
    Solution by myself:
