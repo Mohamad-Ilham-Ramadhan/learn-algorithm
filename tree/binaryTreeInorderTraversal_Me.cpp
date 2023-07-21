@@ -40,6 +40,9 @@
       #1 (recursive)
          runtime: 3 ms, beats 44.65%
          memory: 8.34 MB, beats 52.76%
+      #2 (iterative)
+         runtime: 0 ms, beats 100%
+         memory: 8.49 MB, beats 24.72%
 */
 
 // Definition for singly-linked list.
@@ -57,6 +60,7 @@ struct TreeNode
    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// #1 recursively
 class Solution
 {
 private:
@@ -78,7 +82,55 @@ public:
    }
 };
 
+// #2 iteratively
+class Solution2
+{
+public:
+   vector<int> inorderTraversal(TreeNode *root)
+   {
+      vector<int> result = {};
+      if (root == NULL) return result;
+
+      set<TreeNode*> s;
+      vector<TreeNode*> stack;
+      stack.push_back(root);
+      while (stack.size()) {
+         if (s.count(stack.back())) {
+            TreeNode* right = stack.back()->right;
+            result.push_back(stack.back()->val);
+            stack.pop_back();
+            if (right != NULL && !s.count(right)) {
+               stack.push_back(right);
+            }
+            continue;
+         }
+
+         s.insert(stack.back());
+
+         if (stack.back()->left != NULL && !s.count(stack.back()->left)) {
+            stack.push_back(stack.back()->left);
+         }
+      }
+
+      return result;
+   }
+};
 int main()
 {
+   set<TreeNode*> s;
+   TreeNode r1(1);
+   TreeNode r2(2);
+   r1.left = &r2;
+   TreeNode r3(1);
+   s.insert(&r1);
+   vector<TreeNode*> stack;
+   stack.push_back(&r2);
+   stack.push_back(&r3);
+   if( s.count(&r3)) {
+      cout << "in set \n";
+   } else {
+      cout << "not in set \n" ;
+   }
+   cout << stack.back()->val;
    return 0;
 }
