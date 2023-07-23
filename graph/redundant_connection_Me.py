@@ -1,5 +1,5 @@
 '''
-   (graph) 684. Redundant Connection (medium)
+   (graph) leetcode: 684. Redundant Connection (medium)
 
    In this problem, a tree is an undirected graph that is connected and has no cycles.
 
@@ -42,11 +42,11 @@
 
    solution by myself 
       using union find with path compression
-      
+
    leetcode submission
       solution #2
          runtime: 65 ms, beats 87.07%
-         memory:  16.89 MB, beats 38%
+         memory:  16.89 MB, beats 69.38%
 '''
 
 # True algo (tested len(edges) == 1000 ) but time limit exceeded 
