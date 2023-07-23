@@ -36,12 +36,17 @@
       - The given graph is connected.
 
    Related Topics: 
+      (Depth-first search) (Breadth-first search) (Union find) (Graph)
 
    =================================================================== 
 
    solution by myself 
-
+      using union find with path compression
+      
    leetcode submission
+      solution #2
+         runtime: 65 ms, beats 87.07%
+         memory:  16.89 MB, beats 38%
 '''
 
 # True algo (tested len(edges) == 1000 ) but time limit exceeded 
@@ -87,6 +92,60 @@ def findRedundantConnection(edges):
       if (edge[0], edge[1]) in prospect: 
          return edge
       
+# using union find with path compression
+def solution2(edges): 
+   # create parent of every node, initially their parent is itself. 
+   n = 0 # max number of node
+   for [n1, n2] in edges: n = max(n, n1, n2)
+   parent = []
+   graph = {}
+   for i in range(n+1):
+      parent.append(i) 
+      graph[i] = []
+
+   # print('parent', parent)
+   # print('graph', graph)
+   # union find and union join
+   result = None
+   # e2 = [[1,2],[2,3],[3,4],[1,4],[1,5]] # [1,4]
+   for [n1, n2] in edges:
+      # print(parent,'\n')
+      parentN1, parentN2 = parent[n1], parent[n2]
+      # print('n1', n1, 'n2', n2, 'parentN1', parentN1, 'parentN2', parentN2, graph)
+      # there is a cycle
+      if parentN1 == parentN2: 
+         # print('CYCLE')
+         result = [n1, n2]
+         continue
+   
+      # if length of component1 is longer than component2 then join component2 into component1
+      '''
+         24: [20, 17, 3, 14, 6,20,8,23]
+   
+      '''
+      if (len(graph[parentN1])+1) > (len(graph[parentN2])+1): 
+         # print('parentN1 > parentN2')
+         graph[parentN1].append(parentN2)
+         for child in graph[parentN2]: 
+            graph[parentN1].append(child)
+            parent[child] = parentN1
+
+         # print('before', graph[parentN1])
+         graph[parentN2] = []
+         parent[parentN2] = parentN1
+         # print('after', graph[parentN1], parent[n2])
+         # print('parent after', parent, '\n')
+      else: 
+         graph[parentN2].append(parentN1)
+
+         for child in graph[parentN1]: 
+            graph[parentN2].append(child)
+            parent[child] = parentN2
+
+         graph[parentN1] = []
+         parent[parentN1] = parentN2
+	 
+   return result
 e1 = [[1,5],[1,4],[3,4],[2,3],[1,2]] # [1,2]
 '''
    [[1,5],[1,4],[3,4],[2,3],[1,2]] # [1,2]
