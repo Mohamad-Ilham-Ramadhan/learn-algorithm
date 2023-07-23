@@ -40,12 +40,12 @@
 
    ===================================================================
 
-   solution by myself
+   solution by NeetCode
       using union find with path compression
 
 leetcode submission
-      runtime: 8 ms, beats 73.40%
-      memory:  10.27 MB, beats 16.03%
+      runtime: 13 ms, beats 28.25%
+      memory:  9.16 MB, beats 31.92%
 */
 
 // Definition for singly-linked list.
