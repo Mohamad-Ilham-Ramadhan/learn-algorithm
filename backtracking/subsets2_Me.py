@@ -21,18 +21,23 @@
       - -10 <= nums[i] <= 10
 
    Related Topics: 
-
+      (Array) (Backtracking) (Bit Manipulation)
    ====================================================================================================
 
    Soluton by myself:
       backtracking
 
    Leetcode submission
-      runtime: 60 ms, beats 21.81%
-      memory: 16.6 MB, beats 61.55%
+      #1 
+         runtime: 60 ms, beats 21.81%
+         memory: 16.6 MB, beats 61.55%
+      #2 
+         runtime: 52 ms, beats 66.86%
+         memory: 16.16 MB, beats 62.27%
 
 '''
 def subsetsWithDup(nums): 
+   nums.sort()
    subsets = []
    def dfs(start, s): 
       subsets.append(s)
@@ -44,11 +49,32 @@ def subsetsWithDup(nums):
    dfs(0,[])
    return subsets
 
-nums = [1,2,2,1] # [[],[1],[1,2],[1,2,2],[2],[2,2]]
-'''
-   [1,1,2,2]
-   [1,1,2,2]
-   []
+# build subset with return value
+def solution2(nums): 
+   nums.sort() 
+   def dfs(start):
+      subset = []
+      s = set() # no duplicate num 
+      for i in range(start, len(nums)): 
+         n = nums[i]
+         if n in s: continue 
+         s.add(n)
+         res = dfs(i+1)
+         for j in res:
+            j.append(n)
+            subset.append(j)
+         subset.append([n])
+
+      return subset
+   result = dfs(0)
+   result.append([])
+   return result
+
+nums = [1,2,2,1] # [[],[1],[1,1],[1,1,2],[1,1,2,2],[1,2],[1,2,2],[2],[2,2]]
+n2 = [1,2,2,3] # [[],[1],[1,2],[1,2,2],[1,2,2,3],[1,2,3],[1,3],[2],[2,2],[2,2,3],[2,3],[3]]
+n3 = [1,2,2] # [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 '''
-print('RESULT :', subsetsWithDup(nums))
+'''
+# print('RESULT :', subsetsWithDup(nums))
+print('sol2', solution2(n3))
