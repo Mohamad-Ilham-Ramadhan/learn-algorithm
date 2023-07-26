@@ -42,8 +42,12 @@
       backtracking
    
    leetcode submission:
-      runtime: 68 ms, 81.69%
-      memory: 16.6 MB beats 20.3%
+      #1
+         runtime: 68 ms, beats 81.69%
+         memory: 16.6 MB beats 20.3%
+      #2 
+         runtime: 67 ms, beats 83.05%
+         memory: 16.42 MB, beats 54.30%
    
 '''
 def combinationSum2(candidates, target):
@@ -51,7 +55,7 @@ def combinationSum2(candidates, target):
 
    combinations = []
 
-   def dfs(i, combination, sum):
+   def backtrack(i, combination, sum):
       # print('i', i)
       if sum == target: 
          combinations.append(combination)
@@ -64,15 +68,50 @@ def combinationSum2(candidates, target):
          # print('j', j)
          if candidates[j] == last : continue 
          last = candidates[j]
-         dfs(j+1,[*combination, candidates[j]], sum+candidates[j] )
+         backtrack(j+1,[*combination, candidates[j]], sum+candidates[j] )
 
-   dfs(0,[],0)
+   backtrack(0,[],0)
    return combinations
+
+# build the combinations from return value
+def solution2(candidates, target):
+   candidates.sort() 
+
+   def backtrack(i, sum):
+      # print('i', i)
+      if sum == target: 
+         print('sum', sum)
+         return [[]]
+      if sum > target or i == len(candidates) or (sum + candidates[i]) > target: 
+         return False
+
+      last = 0
+      result = []
+      for j in range(i, len(candidates)): 
+         # print('j', j)
+         if candidates[j] == last : continue 
+         last = candidates[j]
+         combinations = backtrack(j+1, sum+candidates[j] )
+         print('i',i,  candidates[i], 'candidates[j]', candidates[j])
+         print('combinations', combinations)
+         if combinations == False: continue
+         for comb in combinations: 
+            comb.append(candidates[j])
+            result.append(comb)
+
+      return result 
+   
+   result = backtrack(0,0)
+   return result
+
 
 c1 = [10,1,2,7,6,1,5]; t1 = 8
 c2 = [2,5,2,1,2]; t2 = 5
-print('RESULT :', combinationSum2(c2, t2))
-'''Input: candidates = [10,1,2,7,6,1,5], target = 8
+print('RESULT :', solution2(c1, t1))
+'''
+   [[6]] -> [[6,1]] -> [[6,1,1]]
+   Input: candidates = [10,1,2,7,6,1,5], target = 8
+      [1,1,2,5,6,7,10]
       Output: 
       [
       [1,1,6],
