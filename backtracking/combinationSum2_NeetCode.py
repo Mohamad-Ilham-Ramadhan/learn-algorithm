@@ -71,7 +71,7 @@ def combinationSum2(candidates, target):
 
 c1 = [10,1,2,7,6,1,5]; t1 = 8
 c2 = [2,5,2,1,2]; t2 = 5
-print('RESULT :', solution2(c1, t1))
+print('RESULT :', combinationSum2(c1, t1))
 '''
    [[6]] -> [[6,1]] -> [[6,1,1]]
    Input: candidates = [10,1,2,7,6,1,5], target = 8
