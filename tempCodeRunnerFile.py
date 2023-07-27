@@ -1,2 +1,2 @@
-b, i+1) == False:
-            #     continue 
+fore remove', vert.copy(), 'j', j)
+                vert.remove(j)

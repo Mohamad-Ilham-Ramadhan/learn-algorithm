@@ -37,8 +37,12 @@
         backtracking
     
     leetcode submission: 
-        runtime: 168 ms, beats 10.97%
-        memory: 16.78 MB, beats 80.76%
+        #1 
+            runtime: 168 ms, beats 10.97%
+            memory: 16.78 MB, beats 80.76%
+        #2 (keep track occupied column using hashset)
+            runtime: 117 ms, beats 26.22%
+            memory: 19.23 MB, beats 19.23%
 '''
 def solveNQueens(n):
     res = []
@@ -104,7 +108,75 @@ def solveNQueens(n):
     backtrack([], 0)
     return res
 
+def solution2(n):
+    res = []
+    vert = set() # the column occupied by the queen
+    def backtrack(board, i): 
+        print('board', board, 'i', i)
+        if i == n: 
+            res.append(board.copy())
+            return True
 
+        s = ''
+        for j in range(n): 
+            print('i', i, 'j', j)
+            if j in vert: 
+                s += '.'
+                continue
+            s += 'Q'
+            board.append(s.ljust(n, '.'))
+
+            # can we place queen in this cell [START] ===========
+            isTrue = True
+            l = j-1 # left diagonal
+            r = j+1 # right diagonal
+            up = i-1
+            # check border top
+            b = j-1
+            for x in range(b, b+3):
+                if up < 0 or x < 0 or x == n: continue 
+                cell = board[up][x]
+                if cell == 'Q': 
+                    print('False, there is a Queen')
+                    isTrue = False
+
+            while up > -1: 
+                # check diagonal left 
+                if l > -1: 
+                    print('diagonal left', board[up][l])
+                    if board[up][l] == 'Q':
+                        isTrue = False
+                        break
+                # check up
+                print('up', board[up][i])
+                if board[up][j] == 'Q': 
+                    isTrue = False
+                    break
+                if r < n:
+                    print('diagonal right', board[up][r])
+                    if board[up][r] == 'Q':
+                        isTrue = False
+                        break
+                        
+                up -= 1
+                l -= 1
+                r += 1
+            # can we place queen in this cell [END] ===========
+            if isTrue:
+                vert.add(j)
+                backtrack(board, i+1)
+                print('vert before remove', vert.copy())
+                vert.remove(j)
+            
+            s = s[:-1]
+            board.pop() 
+            s += '.'
+
+        return False
+
+    
+    backtrack([], 0)
+    return res
 # str = '...Q'
 # print(str.ljust(4, '.'))
 print('RESULT :', solveNQueens(2))

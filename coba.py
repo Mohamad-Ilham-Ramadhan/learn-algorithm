@@ -42,6 +42,7 @@
 '''
 def solveNQueens(n):
     res = []
+    vert = set() # the column occupied by the queen
     def backtrack(board, i): 
         print('board', board, 'i', i)
         if i == n: 
@@ -51,6 +52,9 @@ def solveNQueens(n):
         s = ''
         for j in range(n): 
             print('i', i, 'j', j)
+            if j in vert: 
+                s += '.'
+                continue
             s += 'Q'
             board.append(s.ljust(n, '.'))
 
@@ -91,7 +95,11 @@ def solveNQueens(n):
                 r += 1
             # can we place queen in this cell [END] ===========
             if isTrue:
+                vert.add(j)
                 backtrack(board, i+1)
+                print('vert before remove', vert.copy())
+                vert.remove(j)
+            
             s = s[:-1]
             board.pop() 
             s += '.'
@@ -105,7 +113,7 @@ def solveNQueens(n):
 
 # str = '...Q'
 # print(str.ljust(4, '.'))
-print('RESULT :', solveNQueens(2))
+print('RESULT :', solveNQueens(4))
 
 
 '''
