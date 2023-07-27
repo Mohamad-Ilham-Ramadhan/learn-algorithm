@@ -39,11 +39,16 @@
     ================================================================================= 
 
     Solution by myself 
-
+        #4 pattern trick by Neetcode
+        
     Leetcode submission
         #3
-            runtime: 5344 ms, beats 8,65%
+            runtime: 5344 ms, beats 8.65%
             memory: 18.08 MB, beats 63.04%
+
+        #4 Build pattern trick
+            runtime: 143 ms, beats 84.59%
+            memory: 24.82 MB, beats 5.31%
 '''
 from collections import defaultdict
 def ladderLength(beginWord, endWord, wordList):
@@ -129,15 +134,12 @@ def solution3(beginWord, endWord, wordList):
 
     def wordMatch(w1, w2):
         count = 0
-        isTrue = True
         for i in range(len(w2)):
             if w1[i] != w2[i]:
                 count += 1
             if count > 1: 
-                isTrue = False
-                break
-        if isTrue: return True 
-        return False
+                return False
+        return True
     
     # bfs 
     q = deque()
@@ -150,12 +152,39 @@ def solution3(beginWord, endWord, wordList):
         # add adjacent word to the queue
         newList = wordList.copy()
         for w2 in wordList:
-            if w2 == w1: continue
             if wordMatch(w1, w2): 
                 q.append((w2, c+1))
                 newList.remove(w2)
         wordList = newList
     return 0
+# build pattern: 'hot'-> '*ot', 'h*t', 'ho*'
+# each pattern contains words: '*ot': ['hot', 'dot', 'lot']
+def solution4(beginWord, endWord, wordList):
+    pattern = defaultdict(list)
+    for w in wordList:
+        for i in range(len(w)):
+            p = w[:i] + '*' + w[i+1:]
+            pattern[p].append(w)
+    # print('pattern', pattern)
+    q = deque()
+    q.append((beginWord,1)) # (word, count)
+    visited = set()
+    while len(q):
+        w1, c = q.popleft()
+        if w1 in visited: continue
+        visited.add(w1)
+        for i in range(len(w1)):
+            p = w1[:i] + "*" + w1[i+1:]
+            if p in pattern: 
+                for w2 in pattern[p]:
+                    if w2 in visited: continue
+                    if w2 == endWord: return c + 1
+                    # print('w2', w2)
+                    q.append((w2, c+1)) 
+    
+    return 0
+
+    # print('pattern', pattern)
 
 b1 = 'hit'; e1 = 'cog'; wl1 = ["hot","dot","dog","lot","log","cog"] # 5
 b2 = 'hit'; e2 = 'cog'; wl2 = ['log', 'lot','cog', 'hot','dot','dog'] # 5
@@ -165,13 +194,16 @@ b4 = "sand"; e4 = 'acne'; wl4 = ["slit","bunk","wars","ping","viva","wynn","wows
 import time
 startTime = time.time()
 # print('RESULT: ', solution2(b1, e1, wl1))
-print('RESULT: ', solution3(b4, e4, wl4))
-# print('RESULT: ', ladderLength(b1, e1, wl1))
+# print('RESULT: ', solution3(b4, e4, wl4))
+# print('RESULT: ', ladderLength(b4, e4, wl4))
+print('RESULT: ', solution4(b4,e4,wl4))
 t = time.time() - startTime
 print('%s: %.3f' % ('runtime: ', t))
-l = ['a', 'b', 'c']
 ''''
     Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
-
+    hit-hot
+    dot-dog-lot-log-cog
+    dot-lot
+    dog-cog
     hit->hot->dot->dog->cog
 '''

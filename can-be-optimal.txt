@@ -1,4 +1,2 @@
 - Backtracking
    - 131. Palindrome Partitioning (medium) : using dynamic programming for check the palindrome
-- Graph 
-   - 127. Word Ladder (hard) : my solution takes 5 seconds and only beats 8% but I don't know how to improve it.
