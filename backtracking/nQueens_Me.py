@@ -30,7 +30,7 @@
         -1 <= n <= 9
     
     Related topics:
-
+        (Array) (Backtracking)
     ==========================================================================
 
     Solution by myself

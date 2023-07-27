@@ -1,0 +1,5 @@
+Leetcode questions that must re-solved because I learn new solution that more fast than mine.
+Why this approach is because I have to build intuition around the better solution.
+
+   - (backtracking) leetcode: 51. N-Queens (hard)
+      - save placed queen's diagonals in hashset
