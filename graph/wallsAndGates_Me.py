@@ -1,5 +1,5 @@
 '''
-    (graph) leetcode (premium), lintcode: 663. Walls and gates (medium)
+    (graph) leetcode (premium) 286, lintcode: 663. Walls and gates (medium)
 
     You are given a m x n 2D grid initialized with these three possible values.
 
@@ -41,6 +41,9 @@
         [Facebook, Google, OpenAI]
 
     ======================================================================
+
+    Solution by myself
+        breadth-first search
 
     Lintcode submission:
         runtime: 572 ms
