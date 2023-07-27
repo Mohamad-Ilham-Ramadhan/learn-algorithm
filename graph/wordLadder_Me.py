@@ -39,7 +39,8 @@
     ================================================================================= 
 
     Solution by myself 
-
+      Breadth first-search and hashset
+      
     Leetcode submission
         #3
             runtime: 5344 ms, beats 8,65%
