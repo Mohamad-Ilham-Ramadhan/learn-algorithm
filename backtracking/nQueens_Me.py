@@ -37,7 +37,7 @@
         backtracking
     
     leetcode submission: 
-        runtime: 171 ms, beats 10.70%
+        runtime: 168 ms, beats 10.97%
         memory: 16.78 MB, beats 80.76%
 '''
 def solveNQueens(n):
@@ -67,28 +67,30 @@ def solveNQueens(n):
                 if cell == 'Q': 
                     print('False, there is a Queen')
                     isTrue = False
-
-            while up > -1: 
-                # check diagonal left 
-                if l > -1: 
-                    print('diagonal left', board[up][l])
-                    if board[up][l] == 'Q':
-                        isTrue = False
-                        break
-                # check up
-                print('up', board[up][i])
-                if board[up][j] == 'Q': 
-                    isTrue = False
                     break
-                if r < n:
-                    print('diagonal right', board[up][r])
-                    if board[up][r] == 'Q':
-                        isTrue = False
-                        break
-                        
-                up -= 1
-                l -= 1
-                r += 1
+            
+            if isTrue:
+               while up > -1: 
+                  # check diagonal left 
+                  if l > -1: 
+                     print('diagonal left', board[up][l])
+                     if board[up][l] == 'Q':
+                           isTrue = False
+                           break
+                  # check up
+                  print('up', board[up][i])
+                  if board[up][j] == 'Q': 
+                     isTrue = False
+                     break
+                  if r < n:
+                     print('diagonal right', board[up][r])
+                     if board[up][r] == 'Q':
+                           isTrue = False
+                           break
+                           
+                  up -= 1
+                  l -= 1
+                  r += 1
             # can we place queen in this cell [END] ===========
             if isTrue:
                 backtrack(board, i+1)
