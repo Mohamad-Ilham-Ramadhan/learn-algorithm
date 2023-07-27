@@ -1,2 +1,1 @@
-fore remove', vert.copy(), 'j', j)
-                vert.remove(j)
+1,1,2
