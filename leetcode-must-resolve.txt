@@ -2,4 +2,12 @@ Leetcode questions that must re-solved because I learn new solution that more fa
 Why this approach is because I have to build intuition around the better solution.
 
    - (backtracking) leetcode: 51. N-Queens (hard)
-      - save placed queen's diagonals in hashset
+      - save placed queen's diagonals in hashset 
+
+   - (Graph) leetcode: 127. word ladder (hard)
+      - create pattern for optimal finding neighbor words
+         {
+            '*ot': ['lot', 'dot', 'hot']
+            'd*g': ['dog']
+            '*og' : ['dog', 'cog']
+         }
