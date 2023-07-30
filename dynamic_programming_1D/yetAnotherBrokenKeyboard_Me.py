@@ -110,4 +110,12 @@ for c in s:
    i = 0
 res += dp[i]
 print(res)
-   
+
+# x = 10 # string's length
+# substrNums = [0] * (x+1)
+# for i in range(x):
+#    substrNums[i+1] = substrNums[i] + (i+1)
+# print('substrNums', substrNums, (x*(x+1)) / 2)
+'''
+substrNums [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55] 55.0
+'''

@@ -94,38 +94,22 @@ for i in range(n):
       mask[index] = int(price)
 
 def solve(mask):
-   x = 0
    ans = float('inf')
    for i in range(1,8): # i = bit
-      x += 1
       if i == 7: 
-         # print('try i', mask[i])
          ans = min(ans, mask[i])
       for j in range(i+1, 8):
-         x += 1
-         # print(mask[i], mask[j], (i | j), ans)
          if (i | j) == 7:
-            # print('try j', mask[i] + mask[j])
             ans = min(ans, mask[i] + mask[j])
             continue
          for k in range(j+1, 8):
-            x += 1
             if(i | j | k) == 7:
-               # print('try k', i,j,k, mask[i] + mask[j] + mask[k])
                ans = min(ans, mask[i] + mask[j] + mask[k])
 
    print(ans if ans < float('inf') else -1)
 
 solve(mask)
 
-# all input to maks for testing
-inf = float('inf')
-mask1 = [0, 4,6,inf,5,inf,inf,16] # index as bit and value as price
-mask2 = [0,inf,inf,10,inf,inf,inf,inf]
-mask3 = [0,4,5,inf,inf,11,9,inf]
-mask4 = [0,100,180,inf,inf,160,150,355]
-mask5 = [0,inf,inf,5,inf,inf,11,inf]
-mask6 = [0,3,4,2,16,7,9,1]
 
 # Colin Galen Solution
 # n = int(input())

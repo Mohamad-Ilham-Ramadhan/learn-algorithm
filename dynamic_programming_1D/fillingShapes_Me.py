@@ -35,6 +35,10 @@
    In the first example, there are 4 possible cases of filling.
 
    In the second example, you cannot fill the shapes in 3 x 1 tiles.
+
+   ===================================================================
+
+   runtime: 77ms, memory: 0kb
 '''
 n = int(input())
 

@@ -16,4 +16,8 @@ Tree:
    - coin change (medium)
    - longest increasing subsequence (medium): [SOLVED O(n^2)] but cannot make up to O(n log n) as suggested.
    - word break (medium): time limit exeeded
+   - 416. Partition Equal Subset Sum (medium): don't come with intuition.
+2D dynamic programming: 
+   - 309. Best Time to Buy and Sell Stock with Cooldown: how to DP this?
+   
 graph: 
