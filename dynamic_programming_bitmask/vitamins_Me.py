@@ -1,5 +1,5 @@
 '''
-   (1D dynamic programming) codeforces C. Vitamins (1200)
+   (bitmask dynamic programming) codeforces C. Vitamins (1200)
 
    time limit per test2 seconds
    memory limit per test256 megabytes
