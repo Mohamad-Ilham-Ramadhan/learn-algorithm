@@ -18,48 +18,39 @@ using namespace std;
 
 int main()
 {
-   // if ( 1 & (1 << 0) ) {
-   //    cout << "true\n";
-   // } else {
-   //    cout << "false\n";
-   // }
+   typedef long long ll;
+   // vector<int> a;
+   // vector<int> b;
+   int a[3000];
+   int b[3000];
+   ll n;
+   ll k;
+   ll p;
+   cin >> n >> k >> p;
 
-   // if (1 & 0) {
-   //    cout << "true\n";
-   // } else {
-   //    cout << "false\n";
-   // }
-   // cout << (1 << 8);
-
-   // int n = 5;
-   // string s = bitset< 32 >(n).to_string();
-   // cout << "bnary: " << s;
-
-   int n;
-   cin >> n;
-
-   vector<int>a(n);
-   for (int i = 0; i < n; i++) cin >> a[i];
-
-   for (int mask = 0; mask < (1 << n); mask++) {
-      // cout << "mask : " << mask << "\n";
-      int sum = 0;
-      for (int i = 0; i < n; i++ ) {
-         if (mask & (1 << i) ) {
-            sum += a[i];
-         } else {
-            sum -= a[i];
-         }
-         // cout << "sum: " << sum << "\n";
-      }
-      string s = bitset< 32 >(mask).to_string();
-      // cout << "binary mask: " << s;
-      if (sum % 360 == 0) {
-         cout << "YES";
-         return 0;
-      }
+   for  (ll i = 0; i < n; i++) {
+      // ll x;
+      // cin >> x;
+      // a.push_back(x);
+      cin >> a[i];
    }
-   cout << "NO";
+   sort(a, a+n);
+   for  (ll i = 0; i < k; i++) {
+      // ll x;
+      // cin >> x;
+      // b.push_back(x);
+      cin >> b[i];
+   }
+   sort(b, b + k);
+
+   const ll inf = 1e17;
+
+   for (ll i = 0; i < n; i++) {
+      cout << "person: " << a[i] << "\n";
+   }
+   for (ll i = 0; i < k; i++) {
+      cout << "key: " << b[i] << "\n";
+   }
    return 0;
 }
 
