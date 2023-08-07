@@ -11,3 +11,8 @@ Why this approach is because I have to build intuition around the better solutio
             'd*g': ['dog']
             '*og' : ['dog', 'cog']
          }
+
+Codeforces:
+   vitamins
+   lecture sleep
+   office key
