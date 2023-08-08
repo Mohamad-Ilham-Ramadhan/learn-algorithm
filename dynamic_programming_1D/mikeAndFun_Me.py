@@ -6,7 +6,7 @@
 ===========================================================
 
     submission:
-        runtime: _ ms, memory: _ KB
+        runtime: 218 ms, memory: 10000 KB
 '''
 
 '''
