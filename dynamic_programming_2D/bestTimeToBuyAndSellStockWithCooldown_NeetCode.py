@@ -53,5 +53,24 @@ def maxProfit(prices):
         return dp[(i, buying)]
     
     return dfs(0, True)
+'''
+   [4,6,0,2,9,1,10] => 11
 
+   dp {
+      (0, True): 11
+      (1, False): 15
+      (1, True): 11
+      (2, False): 11
+      (2, True): 9
+      (3 False): 11
+      (3, True): 9
+      (4, False): 1
+      (4, True): 9
+      (5, False): 1
+      (5, True): 9
+      (6, False): 10
+      (6, True): 0
+      (7, True): 0
+   }
+'''
 print('RESULT: ', maxProfit([4,6,0,2,9,1,10]))
