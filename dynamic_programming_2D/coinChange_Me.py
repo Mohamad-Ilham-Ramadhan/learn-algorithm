@@ -17,8 +17,30 @@
       #3 
          runtime: 2283 ms, beats 5.01%
          memory: 20.56 MB, beats 26.04%
-
+      #4
+         runtime: 1921 ms, beats 9.92%
+         memory: 26.32 MB, beats 26.32%
+      #5 
+         runtime: 1466 ms, beats 28.93%
+         memory: 18.64 MB, beats 27.51%
 '''
+
+# solution #4, #5
+def coinChangeFaster(coins, amount):
+   # in solution #4 infinity uses float('inf')
+   inf = 1e10
+   dp = [[inf] * (amount + 1)]
+   for i in range(1, (len(coins) + 1)):
+         dp.append([0])
+         for j in range(1, amount + 1):
+            c = coins[i-1]
+            m = inf
+            if j - c >= 0: 
+               m = dp[i][j-c] + 1
+
+            m = min(m, dp[i-1][j])
+            dp[i].append(m)
+   return -1 if dp[len(coins)][amount] == inf else dp[len(coins)][amount]
 
 def coinChange(coins, amount):
     coins.sort()
@@ -70,12 +92,16 @@ print('RESULT: ', coinChange([1,3,4], 14))
     [1,3,4] a = 14 3,4,3,4
     44411 wrong
 
-        0   1  2  3  4  5  6  7  8  9  10 11 12  13  14
+         0   1  2  3  4  5  6  7  8  9  10 11 12 13 14
 
-    0   -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1  -1 -1  -1  -1 
-    1   0   1  2  3  3  5  6  7  8  9  10 11 12  13  14
-    3   0   1  2  1  2  3  2  3  4  3  4  5  4    5  6
-    4   0   1  2  1  1  2  2  2  2  3  3  3  3   4   4
+    0    -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1  -1 -1 -1 -1 
+    1    0   1  2  3  3  5  6  7  8  9  10 11 12 13 14
+    3    0   1  2  1  2  3  2  3  4  3  4  5  4   5 6
+    4    0   1  2  1  1  2  2  2  2  3  3  3  3  4  4
+
+    1    0   1  2  3  4  5  6  7  8  9  10 11 12 13 14
+    3    0  -1 -1  1 -1 -1  2 -1 -1  3 -1 -1  4  -1 (6)
+    4    0  -1 -1 -1  1 -1 -1 -1  2 -1 -1 -1  3  -1 ()
     []
 
 '''

@@ -169,3 +169,5 @@ Lesson learned in solving LeetCode problems:
    heapify(list1)
    while mh: 
       print('item', heappop(mh)) -> [-100,4,4] [0,2,2] [1,1,1] [3,3,3]
+
+- (Pyton3): 1e10 is faster than float('inf') when you need to use Infinity
