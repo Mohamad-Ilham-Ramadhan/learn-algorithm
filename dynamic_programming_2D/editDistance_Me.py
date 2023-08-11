@@ -8,9 +8,12 @@
     ======================================
 
         submission: 
-            My Solution 
-            runtime: 143 ms, beats 58.13 %
-            memory: 22.13 MB, beats 11.44 %
+            #1
+                runtime: 143 ms, beats 58.13%
+                memory: 22.13 MB, beats 11.44%
+            #2
+                runtime: 127 ms, beats 68.88%
+                memory: 20.14 MB, beats 21.24%
 '''
 
 '''
@@ -31,6 +34,7 @@
     if different then min(bottom, right, bottom-right) + 1
     if same then bottom-right
 '''
+# solution 1
 def minDistance(word1, word2):
     pass 
     dp = []
@@ -54,7 +58,32 @@ def minDistance(word1, word2):
     return dp[0][0]
 
 w1 = 'ursa'; w2 = 'dokusan'
-print('RESULT: ', minDistance(w1, w2))
+# print('RESULT: ', minDistance(w1, w2))
+
+'''
+    w1 = horse w2 = ros # 3
+
+        0 h o r s e
+
+    0   0 1 2 3 4 5
+    r   1 1 2 2 3 4
+    o   2 2 1 2 3 4
+    s   3 3 2 2 2 3
+'''
+# solution 2
+def minDistance2(word1, word2):
+    dp = [[]]
+    dp[0] = [i for i in range(len(word1)+1)]
+    for i in range(1, len(word2) + 1): 
+        dp.append([i])
+        for j in range(1, len(word1) + 1):
+            # w1Index= i - 1, 
+            if word1[j-1] == word2[i-1]:
+                dp[i].append(dp[i-1][j-1])
+            else: 
+                dp[i].append( min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j]) + 1)
+    return dp[len(word2)][len(word1)]
+minDistance2('horse', 'ros')
 
 '''
     [   [4, 3, 2, 1, 0],
@@ -68,13 +97,6 @@ print('RESULT: ', minDistance(w1, w2))
 '''
 
 '''
-    w1 = horse w2 = ros # 3
-
-        e s r o h
-
-    s   1 1 2 3 4
-    o   1 1 2 2 3
-    r   1 1 2 2 3
 
     w1 = dokusan w2 = ursa # 5
         n a s u k o d
