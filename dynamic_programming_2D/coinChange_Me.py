@@ -12,14 +12,18 @@
          runtime: 4723 ms, beats 5.01%
          memory: 20.51 MB, beats 26.04%
       #2
-         runtime: 3769 mb, beats 5.01%
+         runtime: 3769 ms, beats 5.01%
          memory: 20.40 MB, beats 26.32%
+      #3 
+         runtime: 2283 ms, beats 5.01%
+         memory: 20.56 MB, beats 26.04%
 
 '''
 
 def coinChange(coins, amount):
     coins.sort()
-    dp = [[-1] * (amount + 1)]
+   #  dp = [[-1] * (amount + 1)] # solution #1, #2
+    dp = [[float('inf')] * (amount + 1)] # solution #3
     for i in range(1, (len(coins) + 1)):
         dp.append([0])
         for j in range(1, amount + 1):
@@ -27,9 +31,14 @@ def coinChange(coins, amount):
             m = float('inf')
             if j - c >= 0: 
                m = min(m, dp[i][j-c] + 1)
-            for k in range(i-1, 0, -1):
-               if k == i-3: break # soluition 2
-               m = min(m, dp[k][j])
+
+            # solution #3
+            m = min(m, dp[i-1][j])
+
+            # solution #1, #2
+            # for k in range(i-1, 0, -1):
+            #    if k == i-3: break # soluition #2
+            #    m = min(m, dp[k][j])
             dp[i].append(m)
     print('dp after', dp)
     return -1 if dp[len(coins)][amount] == float('inf') else dp[len(coins)][amount]
