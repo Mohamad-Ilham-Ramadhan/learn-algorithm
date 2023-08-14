@@ -1,5 +1,5 @@
 '''
-    (2D dynamic programming) Leetcode: 5. 516. Longest Palindromic Subsequence (medium)
+    (2D dynamic programming) Leetcode: 516. Longest Palindromic Subsequence (medium)
 
     Link: https://leetcode.com/problems/longest-palindromic-subsequence/
 
