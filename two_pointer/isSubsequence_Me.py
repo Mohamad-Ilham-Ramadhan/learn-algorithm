@@ -1,5 +1,5 @@
 """
-	(1D dynamic programming) Leetcode: 392. Is Subsequence (easy)
+	(two pointers) Leetcode: 392. Is Subsequence (easy)
 
 	Link: https://leetcode.com/problems/is-subsequence/
     
