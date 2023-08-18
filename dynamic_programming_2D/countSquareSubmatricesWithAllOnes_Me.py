@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/count-square-submatrices-with-all-ones/
     
-	Tags: Dynamic Programming,
+	Tags: Array, Dynamic Programming, Matrix
 
 	Constraints:
 		- 1 <= arr.length <= 300
