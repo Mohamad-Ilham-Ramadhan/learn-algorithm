@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/target-sum/
     
-	Tags: Dynamic Programming
+	Tags: Array, Dynamic Programming, Backtracking
 
 	Constraints:
 		- 1 <= nums.length <= 20

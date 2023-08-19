@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/coin-change-ii
     
-	Tags: Dynamic Programming,
+	Tags: Array, Dynamic Programming
 
 	Constraints:
 		- 1 <= coins.length <= 300
