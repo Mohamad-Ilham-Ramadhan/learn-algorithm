@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/interleaving-string/
     
-	Tags: Dynamic Programming
+	Tags: String, Dynamic Programming
 
 	Constraints:
 		- 0 <= s1.length, s2.length <= 100
