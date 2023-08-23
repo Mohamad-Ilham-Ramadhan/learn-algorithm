@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
     
-	Tags: String, Dynamic Programming
+	Tags: Array, Dynamic Programming, Depth-first search, breadth-first search, graph, topological sort, memoization, matrix
 
 	Constraints:
 		- m == matrix.length
