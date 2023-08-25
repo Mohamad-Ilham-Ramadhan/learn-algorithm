@@ -150,7 +150,7 @@ s10 = 'aab'; p10 = 'b.*' #  False
 s11 = 'a'; p11 = '.*' # True
 s12 = 'ab'; p12 = '.*..c*' # True
 s13 = 'a'; p13 = '..*' # True
-# print('RESULT: ', isMatch(s4, p4))
+print('RESULT: ', isMatch(s5, p5))
 import unittest
 import time
 class TestCalc(unittest.TestCase):
