@@ -12,7 +12,6 @@ Why this approach is because I have to build intuition around the better solutio
             '*og' : ['dog', 'cog']
          }
    - (2D dynamic programming): 
-      - 309. Best Time to Buy and Sell Stock with Cooldown (medium)
       - 516. Longest Palindromic Subsequence (medium)
       - 97. Interleaving String (medium)
 
