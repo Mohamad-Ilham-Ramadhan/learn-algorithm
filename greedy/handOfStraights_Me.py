@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/hand-of-straights/
     
-	Tags:  Array, Greedy
+	Tags:  Array, Hash Table, Greedy, Sorting
 
 	Constraints:
         - 1 <= hand.length <= 10^4
@@ -12,8 +12,8 @@
 	======================================================================
 
 	Submissions: 
-		runtime: _ ms, beats 99.50%
-		memory: 22.13 MB, beats 49.75%
+		runtime: 189 ms, beats 44.46%
+		memory: 18.14 MB, beats 47.47%
 """
 def isNStraightHand(hand, groupSize):
     if len(hand) % groupSize > 0: return False
