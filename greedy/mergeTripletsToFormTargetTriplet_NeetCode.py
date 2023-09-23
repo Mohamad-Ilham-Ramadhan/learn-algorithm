@@ -15,7 +15,7 @@
 		runtime: 1756 ms, beats 80.16%
 		memory: 61.52 MB, beats 61.05%
 """
-
+# NeetCode's solution
 def mergeTriplets(triplets, target):
     good = set()
 
