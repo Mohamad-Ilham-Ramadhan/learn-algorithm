@@ -3,7 +3,7 @@
 
 	Link: https://leetcode.com/problems/valid-parenthesis-string/
     
-	Tags: String, Greedy
+	Tags: String, Dynamic Programming, Stack, Greedy
 
 	Constraints:
         - 1 <= s.length <= 100
