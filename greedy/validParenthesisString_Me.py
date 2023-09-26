@@ -15,7 +15,6 @@
 		memory: 16.19 MB, beats 89.13%
 """
 
-# NeetCode's solution 
 def checkValidString(s):
     if s[0] == ')': return False
 
