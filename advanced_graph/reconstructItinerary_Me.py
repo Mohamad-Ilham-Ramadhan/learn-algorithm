@@ -1,5 +1,5 @@
 """
-	(Advanced Graph) leetcode: 332. Reconstruct itinerary  (medium)
+	(Advanced Graph) leetcode: 332. Reconstruct itinerary (hard)
 
 	Link: https://leetcode.com/problems/reconstruct-itinerary/
     
@@ -16,8 +16,8 @@
 
 	Submissions: 
         # eulerian path (Hierholzer's algorithm)
-		runtime: 84 ms, beats 65.38%
-		memory: 16.89 MB, beats 53.03%
+            runtime: 84 ms, beats 65.38%
+            memory: 16.89 MB, beats 53.03%
 """
 # fail
 def findItinerary(tickets):
