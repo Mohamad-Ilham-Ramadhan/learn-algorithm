@@ -74,4 +74,4 @@ graph {
     (5, 2): [[10, (3, 10)], [7, (0, 0)], [4, (7, 0)], [3, (2, 2)]], 
     (7, 0): [[14, (3, 10)], [7, (0, 0)], [7, (2, 2)], [4, (5, 2)]]}
 '''
-print('RESULT: ', minCostConnectPoints(p3))
+print('RESULT: ', minCostConnectPoints(p2))
