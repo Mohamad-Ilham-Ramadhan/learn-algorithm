@@ -14,9 +14,14 @@ Why this approach is because I have to build intuition around the better solutio
    - (2D dynamic programming): 
       - 516. Longest Palindromic Subsequence (medium)
       - 312. Burst Ballons (hard)
+
+   - (advanced graph):
+      - 778. Swim in rising water (hard)
+
 Codeforces:
    Colin Galen dynamic programming mashup: https://codeforces.com/contests/302977
       - vitamins
       - lecture sleep
       - office key
       - three display
+   
